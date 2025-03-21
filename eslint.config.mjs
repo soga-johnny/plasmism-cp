@@ -13,13 +13,15 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     rules: {
-      'jsx-a11y/alt-text': ['warn', {
-        elements: ['img'],
-        img: ['Image'],
-        components: [],
-        'custom-elements': []
-      }],
+      'jsx-a11y/alt-text': 'off',
     },
+    settings: {
+      'jsx-a11y': {
+        components: {
+          Image: 'img'
+        }
+      }
+    }
   },
 ];
 

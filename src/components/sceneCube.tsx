@@ -3,9 +3,9 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, RoundedBox, Environment } from '@react-three/drei'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
-import { Suspense, useEffect, useRef } from 'react'
+import { Suspense, useRef } from 'react'
 import { useScroll, motion } from 'framer-motion'
-import { MeshPhysicalMaterial, Mesh, Vector3, CubeTextureLoader, Color } from 'three'
+import { MeshPhysicalMaterial, Mesh, Color } from 'three'
 
 function Cube() {
   const meshRef = useRef<Mesh>(null)
