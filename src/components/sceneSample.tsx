@@ -102,7 +102,7 @@ export default function SceneSample(){
             <directionalLight position={[10, 10, 5]} intensity={3} />
             
             {/* パララックス画像1 */}
-            <group scale={[1.8, 0.55, 1]} position={[0, -2, -1]} aria-label="パララックス画像1">
+            <group scale={[1.8, 0.55, 1]} position={[0, -2, -1]}>
               <Image
                 ref={image1Ref}
                 url="/image1-1.png"
@@ -119,7 +119,7 @@ export default function SceneSample(){
             </group>
 
             {/* パララックス画像2 */}
-            <group scale={[0.6, 0.8, 1]} position={[3, -6, -1]} aria-label="パララックス画像2">
+            <group scale={[0.6, 0.8, 1]} position={[3, -6, -1]}>
               <Image
                 ref={image2Ref}
                 url="/layer-2.webp"
