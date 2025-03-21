@@ -3,17 +3,16 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, RoundedBox, Environment } from '@react-three/drei'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
-import { Suspense, useRef, useMemo, memo } from 'react'
+import { Suspense, useEffect, useRef } from 'react'
 import { useScroll, motion } from 'framer-motion'
-import { MeshPhysicalMaterial, Mesh, Color } from 'three'
+import { MeshPhysicalMaterial, Mesh, Vector3, CubeTextureLoader, Color } from 'three'
 
-// Cubeコンポーネントをメモ化
-const Cube = memo(function Cube() {
+function Cube() {
   const meshRef = useRef<Mesh>(null)
   const { scrollYProgress } = useScroll()
-  
-  // 反射マテリアルをuseMemoで作成して再計算を防止
-  const reflectiveMaterial = useMemo(() => new MeshPhysicalMaterial({
+
+  // 反射マテリアルの作成
+  const reflectiveMaterial = new MeshPhysicalMaterial({
     color: 0x413236,  // ベースカラーを茶色に設定
     transmission: 1,
     roughness: 0.05,  // より滑らかに
@@ -33,16 +32,7 @@ const Cube = memo(function Cube() {
     sheenColor: 0x3366ff,  // 青みがかった光沢色
     attenuationColor: new Color(0xff9999),  // ピンク系の減衰色
     attenuationDistance: 0.5
-  }), [])
-
-  // カラー値を再利用するためにメモ化
-  const colors = useMemo(() => ({
-    baseColor: new Color(0x413236),
-    targetColor: new Color(0xFFFFFF),
-    emissiveColor: new Color(0xffffff),
-    attenuationBaseColor: new Color(0xff9999),
-    attenuationTargetColor: new Color(0xffffff)
-  }), [])
+  })
 
   useFrame((state, delta) => {
     if (meshRef.current) {
@@ -59,27 +49,24 @@ const Cube = memo(function Cube() {
       const material = meshRef.current.material as MeshPhysicalMaterial
       const t = Math.min(progress * 10, 1)
       
-      // 値の計算を最小限に
-      if (t > 0 || state.clock.elapsedTime < 1) {  // 初回やスクロール時だけ更新
-        // マテリアルのプロパティを補間
-        material.color.copy(colors.baseColor).lerp(colors.targetColor, t)
-        material.transmission = 0.4 + t
-        material.metalness = 1 - t
-        material.roughness = 0.05 * (1 - t) + 0.01 * t
-        material.opacity = 0.1 * t
-        material.envMapIntensity = 4.5 - (t * 2)
-        material.reflectivity = 1 - (0.2 * t)
-        material.ior = 2.0 + (t * 1)
-        material.thickness = 0.2 + (t * 0.4)
-        material.depthWrite = t > 0.1
-        material.depthTest = t > 0.3
-        material.side = t > 0.5 ? 2 : 0
-        material.toneMapped = t > 0.5 ? false : true
-        material.attenuationColor.copy(colors.attenuationBaseColor).lerp(colors.attenuationTargetColor, t)
-        material.attenuationDistance = 0.5 + (t * 0.5)
-        material.specularIntensity = 1.5 + (t * 1.5)
-        material.emissive.copy(colors.emissiveColor).multiplyScalar(t * 0.01)
-      }
+      // マテリアルのプロパティを補間
+      material.color = new Color(0x413236).lerp(new Color(0xFFFFFF), t)  // 色を補間
+      material.transmission = 0.4 + t
+      material.metalness = 1 - t
+      material.roughness = 0.05 * (1 - t) + 0.01 * t  // より滑らかな状態から開始
+      material.opacity = 0.1 * t
+      material.envMapIntensity = 4.5 - (t * 2)  // より強い環境マップから開始
+      material.reflectivity = 1 - (0.2 * t)
+      material.ior = 2.0 + (t * 1)  // より高い屈折率から開始
+      material.thickness = 0.2 + (t * 0.4)
+      material.depthWrite = t > 0.1
+      material.depthTest = t > 0.3
+      material.side = t > 0.5 ? 2 : 0
+      material.toneMapped = t > 0.5 ? false : true
+      material.attenuationColor = new Color(0xff9999).lerp(new Color(0xffffff), t)
+      material.attenuationDistance = 0.5 + (t * 0.5)
+      material.specularIntensity = 1.5 + (t * 1.5)  // より強い鏡面反射効果
+      material.emissive = new Color(0xffffff).multiplyScalar(t * 0.01)  // よりソフトな発光
 
       // スケールに応じた回転速度の変化（1.5倍の時は遅く、1.0倍の時は速く）
       const rotationMultiplier = 1.5 - (Math.min(progress * 10, 1) * 0.5)
@@ -89,19 +76,16 @@ const Cube = memo(function Cube() {
       meshRef.current.rotation.y += delta * baseRotationSpeed * rotationMultiplier
       meshRef.current.rotation.z += delta * baseRotationSpeed * 0.5 * rotationMultiplier
 
-      // スクロール値が変化した場合のみ追加の回転計算を行う
-      if (t > 0 && t < 1) {
-        // スクロールに応じた追加の回転（初回のみ）
-        const initialProgress = Math.min(progress, 0.1) * 3  // 初回の10%のスクロールまでに制限
-        const scrollRotationX = Math.sin(initialProgress * Math.PI / 2) * 0.2
-        const scrollRotationY = initialProgress * Math.PI
-        const scrollRotationZ = Math.sin(initialProgress * Math.PI) * 0.1
+      // スクロールに応じた追加の回転（初回のみ）
+      const initialProgress = Math.min(progress, 0.1) * 3  // 初回の10%のスクロールまでに制限
+      const scrollRotationX = Math.sin(initialProgress * Math.PI / 2) * 0.2
+      const scrollRotationY = initialProgress * Math.PI
+      const scrollRotationZ = Math.sin(initialProgress * Math.PI) * 0.1
 
-        // スクロール回転を適用
-        meshRef.current.rotation.x += scrollRotationX * delta * 2
-        meshRef.current.rotation.y += scrollRotationY * delta * 2
-        meshRef.current.rotation.z += scrollRotationZ * delta * 2
-      }
+      // スクロール回転を適用
+      meshRef.current.rotation.x += scrollRotationX * delta * 2
+      meshRef.current.rotation.y += scrollRotationY * delta * 2
+      meshRef.current.rotation.z += scrollRotationZ * delta * 2
     }
   })
 
@@ -112,7 +96,7 @@ const Cube = memo(function Cube() {
       </RoundedBox>
     </group>
   )
-})
+}
 
 export default function SceneCube() {
   return (
@@ -129,15 +113,13 @@ export default function SceneCube() {
       <Canvas 
         camera={{ position: [0, 0, 8], fov: 50 }}
         style={{ background: 'transparent' }}
-        dpr={[1, 2]} // デバイスピクセル比を制限して過剰なレンダリングを防止
-        performance={{ min: 0.5 }} // パフォーマンスモードを有効化
       >
         <Suspense fallback={null}>
           <ambientLight intensity={2} />
           <directionalLight position={[10, 10, 5]} intensity={3} />
           <Environment preset="city" />
           <Cube />
-          <OrbitControls enableZoom={false} enablePan={false} />
+          <OrbitControls enableZoom={false} />
           <EffectComposer>
             <Bloom 
               intensity={0.4}
