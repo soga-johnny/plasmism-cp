@@ -1,10 +1,26 @@
+"use client"
+
 // import Image from "next/image";
 // import StickyScenes from '@/components/StickyScenes'
 import SceneSample from '@/components/sceneSample'
 import SceneCube from '@/components/sceneCube'
 import ScrollingTitle from '@/components/ScrollingTitle'
 import { Button } from '@/components/ui/button'
+import { memo } from 'react'
 // import { motion } from 'framer-motion'
+
+// SceneSampleをラップする最適化コンポーネント
+const MemoizedSceneSample = memo(SceneSample);
+// 複数のSceneSampleを効率的にレンダリングするコンポーネント
+const SceneSampleContainer = memo(function SceneSampleContainer() {
+  return (
+    <>
+      <MemoizedSceneSample />
+      <MemoizedSceneSample />
+      <MemoizedSceneSample />
+    </>
+  );
+});
 
 export default function Home() {
   return (
@@ -29,9 +45,7 @@ export default function Home() {
         </div>
         <ScrollingTitle />
         <div className="sticky top-0">
-          <SceneSample />
-          <SceneSample />
-          <SceneSample />
+          <SceneSampleContainer />
         </div>
       </div>
     </main>
