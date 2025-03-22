@@ -58,7 +58,7 @@ function Cube() {
       const baseRotationSpeed = 0.3
       
       // スケールの制御（レスポンシブ対応）
-      const initialScale = isMobile ? 1.2 : 1.6  // モバイルでは小さめの初期スケール
+      const initialScale = isMobile ? 1.3 : 1.6  // モバイルでは小さめの初期スケール
       const finalScale = isMobile ? 0.8 : 1.0    // モバイルでは小さめの最終スケール
       const scale = initialScale - (Math.min(progress * 7, 1) * (initialScale - finalScale))
       meshRef.current.scale.set(scale, scale, scale)
