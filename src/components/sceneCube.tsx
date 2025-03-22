@@ -142,12 +142,14 @@ export default function SceneCube() {
   // カメラ位置の調整
   const [cameraPosition, setCameraPosition] = useState<[number, number, number]>([0, 0, 8])
   const [cameraFov, setCameraFov] = useState(50)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     const updateCamera = () => {
-      const isMobile = window.innerWidth <= 768
-      setCameraPosition([0, 0, isMobile ? 9 : 8])
-      setCameraFov(isMobile ? 45 : 50)
+      const mobile = window.innerWidth <= 768
+      setIsMobile(mobile)
+      setCameraPosition([0, 0, mobile ? 9 : 8])
+      setCameraFov(mobile ? 45 : 50)
     }
     
     updateCamera()
@@ -189,7 +191,7 @@ export default function SceneCube() {
           <directionalLight position={[10, 10, 5]} intensity={3} />
           <Environment preset="city" />
           <Cube />
-          <OrbitControls enableZoom={false} />
+          {!isMobile && <OrbitControls enableZoom={false} />}
           <EffectComposer>
             <Bloom 
               intensity={0.4}
