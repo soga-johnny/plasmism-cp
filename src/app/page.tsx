@@ -1,6 +1,6 @@
 "use client"
 
-// import Image from "next/image";
+import Image from "next/image";
 // import StickyScenes from '@/components/StickyScenes'
 import SceneSample from '@/components/sceneSample'
 import SceneCube from '@/components/sceneCube'
@@ -105,9 +105,9 @@ export default function Home() {
               主な支援企業
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-              <img src="/image2-1.png" alt="企業1" className="w-full max-w-[320px] mx-auto" />
-              <img src="/image2-2.png" alt="企業2" className="w-full max-w-[320px] mx-auto" />
-              <img src="/image2-3.png" alt="企業3" className="w-full max-w-[320px] mx-auto" />
+              <Image src="/image2-1.png" alt="企業1" width={320} height={200} className="w-full max-w-[320px] mx-auto" />
+              <Image src="/image2-2.png" alt="企業2" width={320} height={200} className="w-full max-w-[320px] mx-auto" />
+              <Image src="/image2-3.png" alt="企業3" width={320} height={200} className="w-full max-w-[320px] mx-auto" />
             </div>
           </div>
         </div>
@@ -122,7 +122,7 @@ export default function Home() {
             <p className="text-lg md:text-xl font-light leading-relaxed">
             上流から下流まで携わることで、認識のズレをなくし、お客さまの負担を軽減いたします。
             </p>
-            <img src="/image3-1.png" alt="仕事の進め方" className="w-full max-w-[320px] mx-auto" />
+            <Image src="/image3-1.png" alt="仕事の進め方" width={320} height={200} className="w-full max-w-[320px] mx-auto" />
           </div>
         </div>
         <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8">
@@ -175,56 +175,7 @@ export default function Home() {
             <p className="text-lg md:text-xl font-light leading-relaxed">
             プラズミズムは、最適解の設計・実装・検証・改善をコンピューターと情報表現でデザインする会社です。
             </p>
-         
-          <div>
-            <h3>Lean Designer</h3>
-            <p>ピンポイントのプロジェクト課題に必要な分だけ、スペシャリストのデザイナーに発注できるサービスです。</p>
-            <img src="/image4-1.png" alt="Lean Designer" className="w-full max-w-[320px] mx-auto" />
-          </div>
-          <div>
-            <h3>Containeer</h3>
-            <p>(考える)</p>
-            <img src="/image4-1.png" alt="Lean Designer" className="w-full max-w-[320px] mx-auto" />
-          </div>
-          </div>
-
-          <div className="max-w-[800px]">
-            <h2 className="text-3xl md:text-5xl font-light mb-8">
-              サービス
-            </h2>
-            <p className="text-lg md:text-xl font-light leading-relaxed">
-            プラズミズムは、最適解の設計・実装・検証・改善をコンピューターと情報表現でデザインする会社です。
-            </p>
-         
-          <div>
-            <h3>UIUXデザイン</h3>
-            <p>ユーザーの行動分析に基づく直感的なインターフェース設計で、視覚的魅力と使いやすさを両立し、最適な顧客体験を実現します。</p>
-            <img src="/image4-1.png" alt="Lean Designer" className="w-full max-w-[320px] mx-auto" />
-          </div>
-          <div>
-            <h3>コーポレートブランディング</h3>
-            <p>企業価値を明確に表現する一貫性のあるブランドアイデンティティを構築し、市場での認知度向上と差別化を戦略的にサポートします。</p>
-            <img src="/image4-1.png" alt="Lean Designer" className="w-full max-w-[320px] mx-auto" />
-          </div>
-          <div>
-            <h3>クラウドインフラ</h3>
-            <p>安全性と拡張性を兼ね備えた最適なクラウド環境を提供し、コスト効率とパフォーマンスのバランスで事業成長を支えます。</p>
-            <img src="/image4-1.png" alt="Lean Designer" className="w-full max-w-[320px] mx-auto" />
-          </div>
-          </div>
-        </div>
-      </section>
-
-      <section ref={featuresRef} className="z-20 py-20 md:py-32">
-        <div className="w-full max-w-[1440px] mx-auto mb-32 px-4 md:px-8">
-          <div className="max-w-[800px]">
-            <h2 className="text-3xl md:text-5xl font-light mb-8">
-              実績
-            </h2>
-            <p className="text-lg md:text-xl font-light leading-relaxed">
-            プラズミズムは、最適解の設計・実装・検証・改善をコンピューターと情報表現でデザインする会社です。
-            </p>
-            <img src="/image3-1.png" alt="仕事の進め方" className="w-full max-w-[320px] mx-auto" />
+            <Image src="/image3-1.png" alt="仕事の進め方" width={320} height={200} className="w-full max-w-[320px] mx-auto" />
           </div>
         </div>
         <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8">
@@ -233,18 +184,18 @@ export default function Home() {
           <div>
             <h3>NAMINORI</h3>
             <p>説明が入ります説明が入ります説明が入ります説明が入ります。</p>
-            <img src="/image4-1.png" alt="Lean Designer" className="w-full max-w-[320px] mx-auto" />
+            <Image src="/image4-1.png" alt="Lean Designer" width={320} height={200} className="w-full max-w-[320px] mx-auto" />
           </div>
           <div>
             <h3>NAMINORI</h3>
             <p>説明が入ります説明が入ります説明が入ります説明が入ります。</p>
-            <img src="/image4-1.png" alt="Lean Designer" className="w-full max-w-[320px] mx-auto" />
+            <Image src="/image4-1.png" alt="Lean Designer" width={320} height={200} className="w-full max-w-[320px] mx-auto" />
           </div>
           <div>
           <div>
             <h3>NAMINORI</h3>
             <p>説明が入ります説明が入ります説明が入ります説明が入ります。</p>
-            <img src="/image4-1.png" alt="Lean Designer" className="w-full max-w-[320px] mx-auto" />
+            <Image src="/image4-1.png" alt="Lean Designer" width={320} height={200} className="w-full max-w-[320px] mx-auto" />
           </div>
           </div>
           <div className="mt-12">

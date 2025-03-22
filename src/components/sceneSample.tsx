@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useScroll } from 'framer-motion'
+import Image from 'next/image'
 
 export default function SceneSample(){
   const bgRef = useRef<HTMLDivElement>(null)
@@ -19,7 +20,6 @@ export default function SceneSample(){
 
   // レスポンシブパラメータの計算
   const isMobile = windowSize.width <= 768
-  const isSmallMobile = windowSize.width <= 375
 
   useEffect(() => {
     setIsMounted(true)
@@ -51,7 +51,7 @@ export default function SceneSample(){
         layer2Ref.current.style.transform = `translateY(${-latest * 700}px)`;
       }
       if (textRef.current) {
-        textRef.current.style.transform = `translateY(${-latest * 6000}px)`;
+        textRef.current.style.transform = `translateY(${-latest * 18000}px)`;
       }
       if (bgRef.current) {
         const bgSize = isMobile ? 
@@ -81,7 +81,7 @@ export default function SceneSample(){
     },
     text: {
       left: '8%',
-      top: '180%',
+      top: '260%',
       fontSize: '36px',
       maxWidth: '780px',
     }
@@ -101,7 +101,7 @@ export default function SceneSample(){
     },
     text: {
       left: '20%',
-      top: '130%',
+      top: '200%',
       fontSize: '56px',
       maxWidth: '1000px',
     }
@@ -111,7 +111,7 @@ export default function SceneSample(){
   const currentStyles = isMobile ? mobileStyles : desktopStyles;
 
   return (
-    <div className="w-full h-[3500px] relative sticky top-0 rounded-4xl overflow-hidden">
+    <div className="w-full md:h-[2200px] h-[2200px] relative sticky top-0 rounded-4xl overflow-hidden">
       <div 
         ref={bgRef}
         className="relative w-full h-screen"
@@ -136,9 +136,11 @@ export default function SceneSample(){
                 transition: 'transform 0.1s ease-out',
               }}
             >
-              <img 
+              <Image
                 src="/image1-1.png" 
                 alt="Layer 1"
+                width={1000}
+                height={600}
                 className="w-full h-auto"
                 style={{ mixBlendMode: 'multiply' }}
               />
@@ -156,9 +158,11 @@ export default function SceneSample(){
                 transition: 'transform 0.1s ease-out',
               }}
             >
-              <img 
+              <Image
                 src="/layer-2.webp" 
                 alt="Layer 2"
+                width={1000}
+                height={600}
                 className="w-full h-auto"
                 style={{ mixBlendMode: 'multiply' }}
               />

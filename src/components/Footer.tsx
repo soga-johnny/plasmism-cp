@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 // パンくずリストの設定
@@ -42,10 +43,10 @@ export default function Footer() {
   
   return (
     <footer className="text-white font-extralight py-12">
-      <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8">
+      <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12">
         {/* パンくずリスト */}
         <div className="border-y border-white/7 py-6 my-8">
-          <div className="flex items-center space-x-2 text-sm text-gray-400">
+          <div className="flex items-center space-x-2 text-sm">
             {breadcrumbs.map((breadcrumb, index) => (
               <div key={breadcrumb.path} className="flex items-center">
                 {index > 0 && <span className="mx-2">/</span>}
@@ -67,7 +68,7 @@ export default function Footer() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
-            <div className="bg-white/4 rounded-2xl p-20">
+            <div className="bg-white/4 rounded-3xl md:p-20 p-12 border border-white/6">
                 <h3 className="text-4xl mb-6 font-thin text-center border-b border-white pb-1">お問い合わせ・ご相談</h3>
               <p className="text-sm mb-6 text-gray-300">
                 UI/UXデザイン、ブランディング、クラウドインフラなど、あらゆるデジタル課題に対応。
@@ -82,7 +83,7 @@ export default function Footer() {
               </div>
             </div>
             
-            <div className="bg-white/4 rounded-2xl p-20">
+            <div className="bg-white/4 rounded-3xl md:p-20 p-12 border border-white/6">
               <h3 className="text-4xl mb-6 font-thin text-center border-b border-white pb-1">会社資料ダウンロード</h3>
               <p className="text-sm mb-6 text-gray-300">
                 サービス内容、実績事例、アプローチをまとめた資料をご用意。
@@ -117,17 +118,28 @@ export default function Footer() {
         </div>
         
         <div className="text-center pt-12">
-          <p className="mb-6 text-3xl font-thin">
+          <p className="mb-6 md:text-3xl text-md font-thin">
             想像もできなかった豊かさを、いつどの瞬間であっても、噛み締めて実感できる、そんな会社。
           </p>
           <div className="mb-20">
-            <img src="/logo.svg" alt="Plasmism" className="w-full mx-auto" />
+            <Link
+              href="/"
+              className="mr-4"
+            >
+              <Image 
+                src="/logo.svg" 
+                alt="Plasmism" 
+                width={100}
+                height={20}
+                className="h-auto w-full"
+              />
+            </Link>
           </div>
           <div className="flex justify-between items-center">
             <div className="text-xs font-extralight">
               <Link href="/privacy" className="hover:text-white">プライバシーポリシー</Link>
             </div>
-            <div className="text-xs font-thin text-gray-400">©2024 Plasmism Inc.</div>
+            <div className="text-xs font-thin text-white/50">©2024 Plasmism Inc.</div>
           </div>
         </div>
       </div>

@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
-import { Button } from './ui/button'
 
 export default function Header() {
   const [isMobile, setIsMobile] = useState(false)
@@ -54,11 +54,17 @@ export default function Header() {
   
   // PCヘッダー
   const DesktopHeader = () => (
-    <header className="fixed top-0 left-0 right-0 text-white py-4 z-50">
+    <header className="fixed top-0 left-0 right-0 text-white py-4 z-40">
       <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8 flex items-center justify-between">
         <div className="flex items-center">
           <Link href="/" >
-            <img src="/logo.svg" alt="Plasmism" className="h-5" />
+            <Image 
+              src="/logo.svg" 
+              alt="Plasmism" 
+              width={100}
+              height={20}
+              className="h-5 w-auto" 
+            />
           </Link>
         </div>
         <div className="flex items-center">
@@ -101,11 +107,11 @@ export default function Header() {
         }`}
       >
         {/* 背景 */}
-        <div className="absolute inset-0 bg-gray-900/40 backdrop-blur-sm" onClick={() => setIsMenuOpen(false)} />
+        <div className="absolute inset-0 bg-gray-900/40 backdrop-blur-xs" onClick={() => setIsMenuOpen(false)} />
         
         {/* メニューコンテンツ - アニメーション付き */}
         <div 
-          className={`absolute right-4 left-4 top-4 bottom-4 bg-[#1C1819] rounded-lg overflow-hidden transition-all duration-500 ease-in-out ${
+          className={`absolute right-4 left-4 top-4 bottom-0 bg-[#1C1819] rounded-lg overflow-hidden transition-all duration-500 ease-in-out ${
             isMenuOpen 
               ? 'opacity-100 translate-y-0' 
               : 'opacity-0 -translate-y-8'
@@ -114,81 +120,87 @@ export default function Header() {
           {/* ロゴ */}
           <div className="px-8 pt-8">
             <Link href="/" onClick={() => setIsMenuOpen(false)}>
-              <img src="/logo.svg" alt="Plasmism" className="h-5" />
+              <Image 
+                src="/logo.svg" 
+                alt="Plasmism" 
+                width={100}
+                height={20}
+                className="h-5 w-auto" 
+              />
             </Link>
           </div>
           
           {/* メニュー項目 */}
           <nav className="flex-1 flex flex-col justify-start mt-16">
-            <ul className="text-left space-y-0 border-t border-gray-700">
-              <li className="border-b border-gray-700">
+            <ul className="text-left space-y-0 border-t border-white/7">
+              <li className="border-b border-white/7">
                 <Link 
                   href="/" 
-                  className="block py-4 px-8 text-lg font-light hover:bg-gray-900 transition-colors duration-200"
+                  className="block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   ホーム
                 </Link>
               </li>
-              <li className="border-b border-gray-700 flex justify-between items-center">
+              <li className="border-b border-white/7 flex justify-between items-center">
                 <Link 
                   href="/services" 
-                  className="block py-4 px-8 text-lg font-light w-full hover:bg-gray-900 transition-colors duration-200 flex justify-between"
+                  className="block py-4 px-8 text-lg font-extralight w-full hover:bg-gray-900 transition-colors duration-200 flex justify-between"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   サービス
                   <span className="text-xl">+</span>
                 </Link>
               </li>
-              <li className="border-b border-gray-700">
+              <li className="border-b border-white/7">
                 <Link 
                   href="/products" 
-                  className="block py-4 px-8 text-lg font-light hover:bg-gray-900 transition-colors duration-200"
+                  className="block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   プロダクト
                 </Link>
               </li>
-              <li className="border-b border-gray-700">
+              <li className="border-b border-white/7">
                 <Link 
                   href="/achievements" 
-                  className="block py-4 px-8 text-lg font-light hover:bg-gray-900 transition-colors duration-200"
+                  className="block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   事例紹介
                 </Link>
               </li>
-              <li className="border-b border-gray-700">
+              <li className="border-b border-white/7">
                 <Link 
                   href="/blog" 
-                  className="block py-4 px-8 text-lg font-light hover:bg-gray-900 transition-colors duration-200"
+                  className="block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   ブログ
                 </Link>
               </li>
-              <li className="border-b border-gray-700">
+              <li className="border-b border-white/7">
                 <Link 
                   href="/events" 
-                  className="block py-4 px-8 text-lg font-light hover:bg-gray-900 transition-colors duration-200"
+                  className="block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   イベント
                 </Link>
               </li>
-              <li className="border-b border-gray-700">
+              <li className="border-b border-white/7">
                 <Link 
                   href="/company" 
-                  className="block py-4 px-8 text-lg font-light hover:bg-gray-900 transition-colors duration-200"
+                  className="block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   会社概要
                 </Link>
               </li>
-              <li className="border-b border-gray-700">
+              <li className="border-b border-white/7">
                 <Link 
                   href="/recruit" 
-                  className="block py-4 px-8 text-lg font-light hover:bg-gray-900 transition-colors duration-200"
+                  className="block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   採用情報
@@ -199,7 +211,7 @@ export default function Header() {
             <div className="mt-6 px-8 space-y-4">
               <Link 
                 href="/news" 
-                className="flex items-center text-lg font-light hover:opacity-70 transition-opacity"
+                className="flex items-center text-lg font-extralight hover:opacity-70 transition-opacity"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <span className="mr-2">
@@ -212,7 +224,7 @@ export default function Header() {
               
               <Link 
                 href="/download" 
-                className="flex items-center text-lg font-light hover:opacity-70 transition-opacity"
+                className="flex items-center text-lg font-extralight hover:opacity-70 transition-opacity"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <span className="mr-2">
@@ -225,7 +237,7 @@ export default function Header() {
               
               <Link 
                 href="/contact" 
-                className="flex items-center text-lg font-light hover:opacity-70 transition-opacity"
+                className="flex items-center text-lg font-extralight hover:opacity-70 transition-opacity"
                 onClick={() => setIsMenuOpen(false)}
               >
                 <span className="mr-2">
@@ -240,7 +252,7 @@ export default function Header() {
             <div className="mt-auto mb-4 px-8 py-4">
               <Link 
                 href="/privacy" 
-                className="text-sm font-light hover:opacity-70 transition-opacity"
+                className="text-sm font-extralight hover:opacity-70 transition-opacity"
                 onClick={() => setIsMenuOpen(false)}
               >
                 プライバシーポリシー
@@ -251,7 +263,7 @@ export default function Header() {
           {/* 閉じるボタン */}
           <div className="p-4 fixed bottom-4 left-4 right-4">
             <button 
-              className="flex items-center justify-center w-full py-4 text-white bg-transparent border border-white rounded-md transition-colors duration-300 hover:bg-white hover:text-black"
+              className="flex items-center justify-center w-full py-4 text-white bg-transparent border border-white rounded-md transition-colors duration-300 hover:bg-white hover:text-black font-extralight"
               onClick={() => setIsMenuOpen(false)}
             >
               <span className="mr-2">
@@ -268,26 +280,25 @@ export default function Header() {
       {/* 下部固定メニュー */}
       <header className="fixed bottom-0 w-2/3 right-2 z-40 flex bg-white overflow-hidden rounded-tl-lg rounded-tr-lg">
         <button 
-          className="flex-1 flex flex-col items-center justify-center py-1 bg-white text-black border-r border-gray-200"
+          className="flex-1 flex flex-col items-center justify-center py-3 bg-white text-black border-r border-gray-200"
           onClick={() => setIsMenuOpen(true)}
         >
-          <div className="mb-2 flex flex-col items-center">
-            <div className={`w-6 h-0.5 bg-black mb-1.5 transition-all duration-300 ${isMenuOpen ? 'transform rotate-45 translate-y-2' : ''}`}></div>
-            <div className={`w-6 h-0.5 bg-black mb-1.5 transition-all duration-300 ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}></div>
-            <div className={`w-6 h-0.5 bg-black transition-all duration-300 ${isMenuOpen ? 'transform -rotate-45 -translate-y-2' : ''}`}></div>
+          <div className="flex flex-col items-center">
+            <div className={`w-12 h-0.5 bg-black my-1 transition-all duration-300 ${isMenuOpen ? 'transform rotate-45 translate-y-2' : ''}`}></div>
+            <div className={`w-12 h-0.5 bg-black mb-1 transition-all duration-300 ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}></div>
           </div>
-          <span className="text-[0.8rem]">メニュー</span>
+          <span className="text-xs">メニュー</span>
         </button>
         <Link 
           href="/contact" 
-          className="flex-1 flex flex-col items-center justify-center py-1 bg-[#c22626] text-white"
+          className="flex-1 flex items-center justify-center gap-2 py-1 bg-[#c22626] text-white "
         >
-          <div className="mb-2">
+                    <span className="text-xs">お問合わせ</span>
+          <div className="mb-1">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" fill="white"/>
             </svg>
           </div>
-          <span className="text-[0.8rem]">お問合せ</span>
         </Link>
       </header>
     </>
