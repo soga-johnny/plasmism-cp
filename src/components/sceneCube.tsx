@@ -3,17 +3,32 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { OrbitControls, RoundedBox, Environment } from '@react-three/drei'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
-import { Suspense, useRef } from 'react'
+import { Suspense, useRef, useEffect, useState } from 'react'
 import { useScroll, motion } from 'framer-motion'
 import { MeshPhysicalMaterial, Mesh, Color } from 'three'
 
 function Cube() {
   const meshRef = useRef<Mesh>(null)
   const { scrollYProgress } = useScroll()
+  const [viewport, setViewport] = useState({ width: 0, height: 0 })
+
+  // ビューポートサイズの取得
+  useEffect(() => {
+    const updateViewport = () => {
+      setViewport({
+        width: window.innerWidth,
+        height: window.innerHeight
+      })
+    }
+    
+    updateViewport()
+    window.addEventListener('resize', updateViewport)
+    return () => window.removeEventListener('resize', updateViewport)
+  }, [])
 
   // 反射マテリアルの作成
   const reflectiveMaterial = new MeshPhysicalMaterial({
-    color: 0x413236,  // ベースカラーを茶色に設定
+    color: 0x976974,  // ベースカラーを茶色に設定
     transmission: 1,
     roughness: 0.05,  // より滑らかに
     metalness: 1.0,
@@ -37,20 +52,45 @@ function Cube() {
   useFrame((state, delta) => {
     if (meshRef.current) {
       const progress = scrollYProgress.get()
+      const isMobile = viewport.width <= 768
       
       // 基本の回転速度（常に一定の回転を維持）
       const baseRotationSpeed = 0.3
-
-      // スケールの制御（1.5から1.0に変化）
-      const scale = 1.5 - (Math.min(progress * 10, 1) * 0.5)
+      
+      // スケールの制御（レスポンシブ対応）
+      let initialScale = isMobile ? 1.2 : 1.6  // モバイルでは小さめの初期スケール
+      let finalScale = isMobile ? 0.8 : 1.0    // モバイルでは小さめの最終スケール
+      const scale = initialScale - (Math.min(progress * 7, 1) * (initialScale - finalScale))
       meshRef.current.scale.set(scale, scale, scale)
-
+      
+      // PCでのスケールに応じた右方向への移動
+      if (!isMobile) {
+        const rightShiftMultiplier = 5
+        const rightShift = (initialScale - scale) * rightShiftMultiplier
+        meshRef.current.position.x = rightShift
+      } else {
+        // モバイルではx軸を常に中央に
+        meshRef.current.position.x = 0
+      }
+      
+      // y軸の位置調整
+      if (isMobile) {
+        // モバイルでは初期状態から少し上寄り、スクロールに応じてさらに上に移動
+        // progress値が0の時は0.5（少し上）、最大スクロール時に1.5（上寄り）
+        const baseY = 0.5 // 初期位置を少し上に
+        const yPosition = baseY + (Math.min(progress * 10, 1) * 1.0) // スクロールで1.0上に移動
+        meshRef.current.position.y = yPosition
+      } else {
+        // PCでは従来通り
+        meshRef.current.position.y = 0
+      }
+      
       // マテリアルの補間
       const material = meshRef.current.material as MeshPhysicalMaterial
       const t = Math.min(progress * 10, 1)
       
       // マテリアルのプロパティを補間
-      material.color = new Color(0x413236).lerp(new Color(0xFFFFFF), t)  // 色を補間
+      material.color = new Color(0x976974).lerp(new Color(0xFFFFFF), t)  // 色を補間
       material.transmission = 0.4 + t
       material.metalness = 1 - t
       material.roughness = 0.05 * (1 - t) + 0.01 * t  // より滑らかな状態から開始
@@ -99,19 +139,49 @@ function Cube() {
 }
 
 export default function SceneCube() {
+  // カメラ位置の調整
+  const [cameraPosition, setCameraPosition] = useState<[number, number, number]>([0, 0, 8])
+  const [cameraFov, setCameraFov] = useState(50)
+
+  useEffect(() => {
+    const updateCamera = () => {
+      const isMobile = window.innerWidth <= 768
+      setCameraPosition([0, 0, isMobile ? 9 : 8])
+      setCameraFov(isMobile ? 45 : 50)
+    }
+    
+    updateCamera()
+    window.addEventListener('resize', updateCamera)
+    return () => window.removeEventListener('resize', updateCamera)
+  }, [])
+
   return (
     <motion.div 
       className="w-full h-screen absolute top-0 z-10"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      initial={{ 
+        opacity: 0,
+        y: -2000 
+      }}
+      animate={{ 
+        opacity: 1,
+        y: 0
+      }}
       transition={{ 
-        duration: 4, 
+        duration: 4,
         ease: "easeOut",
-        delay: 2.2
+        delay: 3,
+        opacity: {
+          duration: 4,
+          ease: "easeOut",
+        },
+        y: {
+          duration: 3,
+          ease: "easeOut",
+        }
       }}
     >
       <Canvas 
-        camera={{ position: [0, 0, 8], fov: 50 }}
+        camera={{ position: cameraPosition, fov: cameraFov }}
         style={{ background: 'transparent' }}
       >
         <Suspense fallback={null}>

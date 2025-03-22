@@ -10,16 +10,16 @@ export default function ScrollingTitle() {
     offset: ["start end", "end start"]
   })
 
-  const x = useTransform(scrollYProgress, [0, 1], ["60%", "0%"])
+  const x = useTransform(scrollYProgress, [0, 1], ["220%", "120%"])
 
   return (
     <div ref={containerRef} className="h-[60px] relative overflow-hidden">
-      <motion.h1 
+      <motion.p 
         style={{ x }}
-        className="absolute whitespace-nowrap text-4xl text-white/80 font-light font-inter tracking-wider"
+        className="absolute whitespace-nowrap text-4xl text-white/80 font-thin font-inter tracking-wider"
       >
-       OUR VISION
-      </motion.h1>
+       ●Vision
+      </motion.p>
     </div>
   )
 } 
