@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Header() {
   const [isMobile, setIsMobile] = useState(false)
@@ -101,192 +102,230 @@ export default function Header() {
   const MobileHeader = () => (
     <>
       {/* モバイルメニュー - アニメーション付き */}
-      <div 
-        className={`fixed inset-0 z-[80] transition-opacity duration-300 ease-in-out ${
-          isMenuOpen 
-            ? 'opacity-100 pointer-events-auto' 
-            : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        {/* 背景 */}
-        <div className="absolute inset-0 bg-gray-900/40 backdrop-blur-xs" onClick={() => setIsMenuOpen(false)} />
-        
-        {/* メニューコンテンツ - アニメーション付き */}
-        <div 
-          className={`absolute right-4 left-4 top-4 bottom-0 bg-[#1C1819] rounded-t-lg overflow-hidden transition-all duration-500 ease-in-out ${
-            isMenuOpen 
-              ? 'opacity-100 translate-y-0' 
-              : 'opacity-0 -translate-y-8'
-          }`}
-        >
-          {/* ロゴ */}
-          <div className="px-8 pt-4">
-            <Link href="/" onClick={() => setIsMenuOpen(false)}>
-              <Image 
-                src="/logo.svg" 
-                alt="Plasmism" 
-                width={100}
-                height={20}
-                className="h-3 w-auto" 
-              />
-            </Link>
-          </div>
-          
-          {/* メニュー項目 */}
-          <nav className="flex-1 flex flex-col justify-start mt-4">
-            <ul className="text-left space-y-0 border-t border-white/7">
-              <li className="border-b border-white/7">
-                <Link 
-                  href="/" 
-                  className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/' ? 'line-through font-normal' : ''}`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  トップ
-                </Link>
-              </li>
-              <li className="border-b border-white/7">
-                <Link 
-                  href="/about" 
-                  className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/about' ? 'line-through font-normal' : ''}`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  私たちについて
-                </Link>
-              </li>
-              <li className="border-b border-white/7">
-                <Link 
-                  href="/feature" 
-                  className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/feature' ? 'line-through font-normal' : ''}`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  特徴
-                </Link>
-              </li>
-              <li className="border-b border-white/7">
-                <Link 
-                  href="/products" 
-                  className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/products' ? 'line-through font-normal' : ''}`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  プロダクト
-                </Link>
-              </li>
-              <li className="border-b border-white/7">
-                <Link 
-                  href="/services" 
-                  className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/services' ? 'line-through font-normal' : ''}`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  サービス
-                </Link>
-              </li>
-              <li className="border-b border-white/7">
-                <Link 
-                  href="/achievements" 
-                  className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/achievements' ? 'line-through font-normal' : ''}`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  実績
-                </Link>
-              </li>
-              <li className="border-b border-white/7">
-                <Link 
-                  href="/recruit" 
-                  className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/recruit' ? 'line-through font-normal' : ''}`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  採用
-                </Link>
-              </li>
-              <li className="border-b border-white/7">
-                <Link 
-                  href="/company" 
-                  className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/company' ? 'line-through font-normal' : ''}`}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  会社案内
-                </Link>
-              </li>
-            </ul>
-            
-            <div className="mt-6 px-8 space-y-4">
-              {/* <Link 
-                href="/news" 
-                className="flex items-center text-lg font-extralight hover:opacity-70 transition-opacity"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <span className="mr-2">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 19L19 12L12 5V19Z" fill="currentColor"/>
-                  </svg>
-                </span>
-                お知らせ
-              </Link>
-               */}
-              <Link 
-                href="/download" 
-                className="flex items-center text-md font-extralight hover:opacity-70 transition-opacity"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <span className="mr-2">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor"/>
-                  </svg>
-                </span>
-                資料ダウンロード
-              </Link>
-              
-              <Link 
-                href="/contact" 
-                className="flex items-center text-md font-extralight hover:opacity-70 transition-opacity"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                <span className="mr-2">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" fill="currentColor"/>
-                  </svg>
-                </span>
-                お問い合わせ
-              </Link>
-            </div>
-            
-            <div className="mt-auto mb-4 px-8 py-4">
-              <Link 
-                href="/privacy" 
-                className="text-sm font-extralight hover:opacity-70 transition-opacity"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                プライバシーポリシー
-              </Link>
-            </div>
-          </nav>
-          
-          {/* 閉じるボタン */}
-          <div className="p-4 fixed bottom-1 left-1 right-1">
-            <button 
-              className="flex items-center justify-center w-full py-4 text-white bg-white/2 border border-white/9 rounded-md transition-colors duration-300 hover:bg-white hover:text-black font-extralight"
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div 
+            className="fixed inset-0 z-[80]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* 背景 */}
+            <motion.div 
+              className="absolute inset-0 bg-black/20 backdrop-blur-sm"
               onClick={() => setIsMenuOpen(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+            />
+            
+            {/* メニューコンテンツ - アニメーション付き */}
+            <motion.div 
+              className="absolute right-4 left-4 bottom-0 h-[97vh] top-auto bottom-0 bg-[#1C1819] rounded-t-lg overflow-hidden"
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: "100%", opacity: 0 }}
+              transition={{ 
+                type: "spring", 
+                damping: 30, 
+                stiffness: 300,
+                duration: 0.5
+              }}
             >
-              <span className="mr-2">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" fill="currentColor"/>
-                </svg>
-              </span>
-              閉じる
-            </button>
-          </div>
-        </div>
-      </div>
+              {/* ロゴ */}
+              <div className="px-8 pt-4">
+                <Link href="/" onClick={() => setIsMenuOpen(false)}>
+                  <Image 
+                    src="/logo.svg" 
+                    alt="Plasmism" 
+                    width={100}
+                    height={20}
+                    className="h-3 w-auto" 
+                  />
+                </Link>
+              </div>
+              
+              {/* メニュー項目 */}
+              <nav className="flex-1 flex flex-col justify-start mt-4">
+                <ul className="text-left space-y-0 border-t border-white/7">
+                  <li className="border-b border-white/7">
+                    <Link 
+                      href="/" 
+                      className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/' ? 'line-through font-normal' : ''}`}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      トップ
+                    </Link>
+                  </li>
+                  <li className="border-b border-white/7">
+                    <Link 
+                      href="/about" 
+                      className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/about' ? 'line-through font-normal' : ''}`}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      私たちについて
+                    </Link>
+                  </li>
+                  <li className="border-b border-white/7">
+                    <Link 
+                      href="/feature" 
+                      className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/feature' ? 'line-through font-normal' : ''}`}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      特徴
+                    </Link>
+                  </li>
+                  <li className="border-b border-white/7">
+                    <Link 
+                      href="/products" 
+                      className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/products' ? 'line-through font-normal' : ''}`}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      プロダクト
+                    </Link>
+                  </li>
+                  <li className="border-b border-white/7">
+                    <Link 
+                      href="/services" 
+                      className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/services' ? 'line-through font-normal' : ''}`}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      サービス
+                    </Link>
+                  </li>
+                  <li className="border-b border-white/7">
+                    <Link 
+                      href="/achievements" 
+                      className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/achievements' ? 'line-through font-normal' : ''}`}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      実績
+                    </Link>
+                  </li>
+                  <li className="border-b border-white/7">
+                    <Link 
+                      href="/recruit" 
+                      className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/recruit' ? 'line-through font-normal' : ''}`}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      採用
+                    </Link>
+                  </li>
+                  <li className="border-b border-white/7">
+                    <Link 
+                      href="/company" 
+                      className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/company' ? 'line-through font-normal' : ''}`}
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      会社案内
+                    </Link>
+                  </li>
+                </ul>
+                
+                <div className="mt-6 px-8 space-y-4">
+                  {/* <Link 
+                    href="/news" 
+                    className="flex items-center text-lg font-extralight hover:opacity-70 transition-opacity"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <span className="mr-2">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 19L19 12L12 5V19Z" fill="currentColor"/>
+                      </svg>
+                    </span>
+                    お知らせ
+                  </Link>
+                   */}
+                  <Link 
+                    href="/download" 
+                    className="flex items-center text-md font-extralight hover:opacity-70 transition-opacity"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <span className="mr-2">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor"/>
+                      </svg>
+                    </span>
+                    資料ダウンロード
+                  </Link>
+                  
+                  <Link 
+                    href="/contact" 
+                    className="flex items-center text-md font-extralight hover:opacity-70 transition-opacity"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <span className="mr-2">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" fill="currentColor"/>
+                      </svg>
+                    </span>
+                    お問い合わせ
+                  </Link>
+                </div>
+                
+                <div className="mt-auto mb-4 px-8 py-4">
+                  <Link 
+                    href="/privacy" 
+                    className="text-sm font-extralight hover:opacity-70 transition-opacity"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    プライバシーポリシー
+                  </Link>
+                </div>
+              </nav>
+              
+              {/* 閉じるボタン */}
+              <div className="p-4 fixed bottom-1 left-1 right-1">
+                <button 
+                  className="flex items-center justify-center w-full py-4 text-white bg-white/2 border w-full border-white/9 rounded-md transition-colors duration-300 hover:bg-white hover:text-black font-extralight"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <span className="mr-2">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" fill="currentColor"/>
+                    </svg>
+                  </span>
+                  閉じる
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
       
       {/* 下部固定メニュー */}
       <header className="fixed bottom-0 w-2/3 right-2 z-40 flex bg-white overflow-hidden rounded-tl-lg rounded-tr-lg">
         <button 
           className="flex-1 flex flex-col items-center justify-center py-3 bg-white text-black border-r border-gray-200"
-          onClick={() => setIsMenuOpen(true)}
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
           <div className="flex flex-col items-center">
-            <div className={`w-12 h-0.5 bg-black my-1 transition-all duration-300 ${isMenuOpen ? 'transform rotate-45 translate-y-2' : ''}`}></div>
-            <div className={`w-12 h-0.5 bg-black mb-1 transition-all duration-300 ${isMenuOpen ? 'opacity-0' : 'opacity-100'}`}></div>
+            <motion.div 
+              className="w-12 h-0.5 bg-black my-1"
+              animate={{
+                rotate: isMenuOpen ? 45 : 0,
+                translateY: isMenuOpen ? 8 : 0
+              }}
+              transition={{ duration: 0.3 }}
+            ></motion.div>
+            <motion.div 
+              className="w-12 h-0.5 bg-black mb-1"
+              animate={{
+                opacity: isMenuOpen ? 0 : 1,
+                width: isMenuOpen ? 0 : '3rem'
+              }}
+              transition={{ duration: 0.3 }}
+            ></motion.div>
+            <motion.div 
+              className="w-12 h-0.5 bg-black mb-1"
+              animate={{
+                rotate: isMenuOpen ? -45 : 0,
+                translateY: isMenuOpen ? -8 : 0
+              }}
+              transition={{ duration: 0.3 }}
+            ></motion.div>
           </div>
           <span className="text-xs">メニュー</span>
         </button>
