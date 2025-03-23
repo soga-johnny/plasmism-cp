@@ -12,7 +12,7 @@ const breadcrumbMap: { [key: string]: { label: string; parent?: string } } = {
   '/about': { label: '私たちについて', parent: '/' },
   '/feature': { label: '特徴', parent: '/' },
   '/products': { label: 'プロダクト', parent: '/' },
-  '/services': { label: 'サービス', parent: '/' },
+  '/service': { label: 'サービス', parent: '/' },
   '/achievements': { label: '実績', parent: '/' },
   '/recruit': { label: '採用', parent: '/' },
   '/company': { label: '会社案内', parent: '/' },

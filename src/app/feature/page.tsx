@@ -294,38 +294,38 @@ export default function Feature() {
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
                   <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
                     <div className="text-xl font-thin text-white/70 mb-2 text-center">01</div>
-                    <h4 className="text-xl font-thin mb-3 text-center">ユーザー調査と分析</h4>
+                    <h4 className="text-xl font-thin mb-3 text-center">ブランド戦略</h4>
                     <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
-                      <li>行動分析とリサーチ</li>
-                      <li>ペルソナ設計</li>
-                      <li>ユーザーインタビュー</li>
+                      <li>企業価値とビジョン明確化</li>
+                      <li>市場調査・競合分析</li>
+                      <li>ブランドポジショニング</li>
                     </ul>
                   </div>
                   <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
                     <div className="text-xl font-thin text-white/70 mb-2 text-center">02</div>
-                    <h4 className="text-xl font-thin mb-3 text-center">設計と構築</h4>
+                    <h4 className="text-xl font-thin mb-3 text-center">アイデンティティ構築</h4>
                     <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
-                      <li>情報アーキテクチャ設計</li>
-                      <li>ワイヤーフレーム作成</li>
-                      <li>インタラクション設計</li>
+                      <li>ブランドコンセプト策定</li>
+                      <li>ロゴ・カラー・タイポグラフィ設計</li>
+                      <li>ブランドガイドライン策定</li>
                     </ul>
                   </div>
                   <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
                     <div className="text-xl font-thin text-white/70 mb-2 text-center">03</div>
-                    <h4 className="text-xl font-thin mb-3 text-center">ビジュアルとプロトタイプ</h4>
+                    <h4 className="text-xl font-thin mb-3 text-center">ブランド表現</h4>
                     <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
-                      <li>UI設計とスタイリング</li>
-                      <li>ビジュアル要素の統一</li>
-                      <li>インタラクティブプロトタイプ作成</li>
+                      <li>コミュニケーション戦略</li>
+                      <li>ウェブ・印刷物・SNSなどの表現統一</li>
+                      <li>マーケティング素材制作</li>
                     </ul>
                   </div>
                   <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
                     <div className="text-xl font-thin text-white/70 mb-2 text-center">04</div>
-                    <h4 className="text-xl font-thin mb-3 text-center">テストと改善</h4>
+                    <h4 className="text-xl font-thin mb-3 text-center">浸透と維持</h4>
                     <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
-                      <li>ユーザビリティテスト</li>
-                      <li>フィードバック収集</li>
-                      <li>継続的な改善</li>
+                      <li>社内外へのブランド教育</li>
+                      <li>一貫性のあるブランド体験提供</li>
+                      <li>認知度向上の施策実施</li>
                     </ul>
                   </div>
                 </div>
