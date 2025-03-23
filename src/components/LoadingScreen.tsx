@@ -23,7 +23,7 @@ export default function LoadingScreen() {
 
   return (
     <div 
-      className={`fixed inset-0 z-50 flex items-center justify-center bg-[#2B2325] ${isFading ? 'fade-out' : ''}`}
+      className={`fixed inset-0 z-[100] flex items-center justify-center bg-[#2B2325] ${isFading ? 'fade-out' : ''}`}
       style={{
         backgroundImage: 'url("/background.png")',
         backgroundRepeat: 'repeat'

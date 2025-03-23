@@ -3,10 +3,12 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 
 export default function Header() {
   const [isMobile, setIsMobile] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const pathname = usePathname()
   
   // 現在の日時を表示する
   const [currentDate, setCurrentDate] = useState('')
@@ -70,14 +72,14 @@ export default function Header() {
         <div className="flex items-center">
         <nav>
             <ul className="flex space-x-6 text-sm font-extralight mr-16">
-              <li><Link href="/" className="hover:opacity-70 transition-opacity">トップ</Link></li>
-              <li><Link href="/about" className="hover:opacity-70 transition-opacity">私たちについて</Link></li>
-              <li><Link href="/feature" className="hover:opacity-70 transition-opacity">特徴</Link></li>
-              <li><Link href="/products" className="hover:opacity-70 transition-opacity">プロダクト</Link></li>
-              <li><Link href="/services" className="hover:opacity-70 transition-opacity">サービス</Link></li>
-              <li><Link href="/achievements" className="hover:opacity-70 transition-opacity">実績</Link></li>
-              <li><Link href="/recruit" className="hover:opacity-70 transition-opacity">採用</Link></li>
-              <li><Link href="/company" className="hover:opacity-70 transition-opacity">会社案内</Link></li>
+              <li><Link href="/" className={`hover:opacity-70 transition-opacity ${pathname === '/' ? 'line-through font-normal' : ''}`}>トップ</Link></li>
+              <li><Link href="/about" className={`hover:opacity-70 transition-opacity ${pathname === '/about' ? 'line-through font-normal' : ''}`}>私たちについて</Link></li>
+              <li><Link href="/feature" className={`hover:opacity-70 transition-opacity ${pathname === '/feature' ? 'line-through font-normal' : ''}`}>特徴</Link></li>
+              <li><Link href="/products" className={`hover:opacity-70 transition-opacity ${pathname === '/products' ? 'line-through font-normal' : ''}`}>プロダクト</Link></li>
+              <li><Link href="/services" className={`hover:opacity-70 transition-opacity ${pathname === '/services' ? 'line-through font-normal' : ''}`}>サービス</Link></li>
+              <li><Link href="/achievements" className={`hover:opacity-70 transition-opacity ${pathname === '/achievements' ? 'line-through font-normal' : ''}`}>実績</Link></li>
+              <li><Link href="/recruit" className={`hover:opacity-70 transition-opacity ${pathname === '/recruit' ? 'line-through font-normal' : ''}`}>採用</Link></li>
+              <li><Link href="/company" className={`hover:opacity-70 transition-opacity ${pathname === '/company' ? 'line-through font-normal' : ''}`}>会社案内</Link></li>
             </ul>
           </nav>
           <div className="mr-6 text-right border-r border-gray-500 pr-6">
@@ -100,7 +102,7 @@ export default function Header() {
     <>
       {/* モバイルメニュー - アニメーション付き */}
       <div 
-        className={`fixed inset-0 z-50 transition-opacity duration-300 ease-in-out ${
+        className={`fixed inset-0 z-[80] transition-opacity duration-300 ease-in-out ${
           isMenuOpen 
             ? 'opacity-100 pointer-events-auto' 
             : 'opacity-0 pointer-events-none'
@@ -111,7 +113,7 @@ export default function Header() {
         
         {/* メニューコンテンツ - アニメーション付き */}
         <div 
-          className={`absolute right-4 left-4 top-4 bottom-0 bg-[#1C1819] rounded-lg overflow-hidden transition-all duration-500 ease-in-out ${
+          className={`absolute right-4 left-4 top-4 bottom-0 bg-[#1C1819] rounded-t-lg overflow-hidden transition-all duration-500 ease-in-out ${
             isMenuOpen 
               ? 'opacity-100 translate-y-0' 
               : 'opacity-0 -translate-y-8'
@@ -131,31 +133,39 @@ export default function Header() {
           </div>
           
           {/* メニュー項目 */}
-          <nav className="flex-1 flex flex-col justify-start mt-16">
+          <nav className="flex-1 flex flex-col justify-start mt-6">
             <ul className="text-left space-y-0 border-t border-white/7">
               <li className="border-b border-white/7">
                 <Link 
                   href="/" 
-                  className="block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200"
+                  className={`block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/' ? 'line-through font-normal' : ''}`}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  ホーム
+                  トップ
                 </Link>
               </li>
-              <li className="border-b border-white/7 flex justify-between items-center">
+              <li className="border-b border-white/7">
                 <Link 
-                  href="/services" 
-                  className="block py-4 px-8 text-lg font-extralight w-full hover:bg-gray-900 transition-colors duration-200 flex justify-between"
+                  href="/about" 
+                  className={`block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/about' ? 'line-through font-normal' : ''}`}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  サービス
-                  <span className="text-xl">+</span>
+                  私たちについて
+                </Link>
+              </li>
+              <li className="border-b border-white/7">
+                <Link 
+                  href="/feature" 
+                  className={`block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/feature' ? 'line-through font-normal' : ''}`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  特徴
                 </Link>
               </li>
               <li className="border-b border-white/7">
                 <Link 
                   href="/products" 
-                  className="block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200"
+                  className={`block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/products' ? 'line-through font-normal' : ''}`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   プロダクト
@@ -163,53 +173,44 @@ export default function Header() {
               </li>
               <li className="border-b border-white/7">
                 <Link 
+                  href="/services" 
+                  className={`block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/services' ? 'line-through font-normal' : ''}`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  サービス
+                </Link>
+              </li>
+              <li className="border-b border-white/7">
+                <Link 
                   href="/achievements" 
-                  className="block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200"
+                  className={`block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/achievements' ? 'line-through font-normal' : ''}`}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  事例紹介
-                </Link>
-              </li>
-              <li className="border-b border-white/7">
-                <Link 
-                  href="/blog" 
-                  className="block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  ブログ
-                </Link>
-              </li>
-              <li className="border-b border-white/7">
-                <Link 
-                  href="/events" 
-                  className="block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  イベント
-                </Link>
-              </li>
-              <li className="border-b border-white/7">
-                <Link 
-                  href="/company" 
-                  className="block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  会社概要
+                  実績
                 </Link>
               </li>
               <li className="border-b border-white/7">
                 <Link 
                   href="/recruit" 
-                  className="block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200"
+                  className={`block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/recruit' ? 'line-through font-normal' : ''}`}
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  採用情報
+                  採用
+                </Link>
+              </li>
+              <li className="border-b border-white/7">
+                <Link 
+                  href="/company" 
+                  className={`block py-4 px-8 text-lg font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/company' ? 'line-through font-normal' : ''}`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  会社案内
                 </Link>
               </li>
             </ul>
             
             <div className="mt-6 px-8 space-y-4">
-              <Link 
+              {/* <Link 
                 href="/news" 
                 className="flex items-center text-lg font-extralight hover:opacity-70 transition-opacity"
                 onClick={() => setIsMenuOpen(false)}
@@ -221,7 +222,7 @@ export default function Header() {
                 </span>
                 お知らせ
               </Link>
-              
+               */}
               <Link 
                 href="/download" 
                 className="flex items-center text-lg font-extralight hover:opacity-70 transition-opacity"
@@ -261,9 +262,9 @@ export default function Header() {
           </nav>
           
           {/* 閉じるボタン */}
-          <div className="p-4 fixed bottom-4 left-4 right-4">
+          <div className="p-4 fixed bottom-1 left-1 right-1">
             <button 
-              className="flex items-center justify-center w-full py-4 text-white bg-transparent border border-white rounded-md transition-colors duration-300 hover:bg-white hover:text-black font-extralight"
+              className="flex items-center justify-center w-full py-4 text-white bg-white/2 border border-white/9 rounded-md transition-colors duration-300 hover:bg-white hover:text-black font-extralight"
               onClick={() => setIsMenuOpen(false)}
             >
               <span className="mr-2">
@@ -271,7 +272,7 @@ export default function Header() {
                   <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" fill="currentColor"/>
                 </svg>
               </span>
-              Close
+              閉じる
             </button>
           </div>
         </div>

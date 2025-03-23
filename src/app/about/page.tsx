@@ -1,6 +1,6 @@
 "use client"
 
-import Header from '@/components/Header'
+// import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Image from 'next/image'
 import CompanyOverview from '@/components/CompanyOverview'
@@ -8,7 +8,7 @@ import CompanyOverview from '@/components/CompanyOverview'
 export default function About() {
   return (
     <main className="min-h-screen flex flex-col text-white md:py-24 pt-8 pb-24">
-      <Header />
+      {/* <Header /> */}
       <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-8 py-16">
         <div className="mb-8 border-b border-white/7">
           <p className="text-md mb-4">● About</p>

@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Inter, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
-import LoadingScreen from "@/components/LoadingScreen";
+import LoadingScreen from "../components/LoadingScreen";
+import PageTransitionProvider from "../components/PageTransitionProvider";
+import Header from "../components/Header";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,7 +42,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${notoSansJP.variable} antialiased`}
       >
         <LoadingScreen />
-        {children}
+        <Header />
+        <PageTransitionProvider>
+          {children}
+        </PageTransitionProvider>
       </body>
     </html>
   );

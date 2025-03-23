@@ -61,3 +61,102 @@ body {
 .fade-in {
   animation: fadeIn 0.8s ease-out forwards;
 }
+
+/* デジタルエフェクト用のスタイル */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+    opacity: 0.02;
+  }
+  20% {
+    transform: translate(-2px, 1px);
+    opacity: 0.03;
+  }
+  40% {
+    transform: translate(-1px, -1px);
+    opacity: 0.04;
+  }
+  60% {
+    transform: translate(2px, 1px);
+    opacity: 0.05;
+  }
+  80% {
+    transform: translate(1px, -2px);
+    opacity: 0.03;
+  }
+  100% {
+    transform: translate(0);
+    opacity: 0.02;
+  }
+}
+
+.digital-transition::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background);
+  mix-blend-mode: difference;
+  opacity: 0.02;
+  animation: glitch 0.2s linear 5;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ページトランジション用の追加エフェクト */
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+.digital-transition::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  animation: scanline 1.2s linear forwards;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ページコンテンツの調整 */
+.page-content-wrapper {
+  padding-top: 76px; /* ヘッダーの高さに合わせて調整 */
+  min-height: calc(100vh - 76px);
+  width: 100%;
+  position: relative;
+  z-index: 20;
+}
+
+@media (max-width: 768px) {
+  .page-content-wrapper {
+    padding-top: 60px; /* モバイルヘッダーの高さに合わせて調整 */
+    min-height: calc(100vh - 60px);
+  }
+}
+
+/* 即時フェードアウト用のアニメーション */
+@keyframes quickFadeOut {
+  0% {
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.quick-fade-out {
+  animation: quickFadeOut 0.6s forwards;
+}

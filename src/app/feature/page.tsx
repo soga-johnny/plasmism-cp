@@ -1,13 +1,13 @@
 "use client"
 
-import Header from '@/components/Header'
+// import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import Image from 'next/image'
 
 export default function Feature() {
   return (
     <main className="min-h-screen flex flex-col text-white md:py-24 pt-8 pb-24 overflow-x-hidden">
-      <Header />
+      {/* <Header /> */}
       <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-8 py-16 relative overflow-x-hidden">
         <div className="mb-8 border-b border-white/7">
           <p className="text-md mb-4">● Feature</p>
@@ -287,31 +287,46 @@ export default function Feature() {
                 </div>
               </div>
 
-   {/* コーポレートブランディングの場合 */}
-              <div className="py-20 border-b border-white/7">
+             {/* コーポレートブランディングの場合 */}
+             <div className="py-20 border-b border-white/7">
                 <h3 className="md:text-4xl text-2xl font-thin md:mb-12 mb-6">コーポレートブランディングの場合</h3>
-                <div className="bg-white/5 p-10 rounded-lg border border-white/6 mb-6">
-                  <ul className="list-none space-y-6 text-sm md:text-base font-light text-white/80">
-                    <li className="flex items-center">
-                      <span className="text-white/90 font-light flex-1">・コーポレートブランディング：80万円〜350万円</span>
-                    </li>
-                  </ul>
-                </div>
-                <div className="bg-white/5 p-10 rounded-lg border border-white/6">
-                  <ul className="list-none space-y-6 text-sm md:text-base font-light text-white/80">
-                    <li className="flex items-center border-b border-white/6 pb-4">
-                      <span className="text-white/90 font-light flex-1">80万円〜350万円というブランディング費用は、以下の価値を含んでいます：</span>
-                    </li>
-                    <li className="flex items-center border-b border-white/6 pb-4">
-                      <span className="text-white/90 font-light flex-1">・市場調査と競合分析に基づいた戦略的なブランドポジショニング<br/>
-・一貫性のあるビジュアルアイデンティティ設計<br/>
-・顧客心理を考慮したブランドストーリーの構築<br/>
-・長期的な企業成長を支える強固なブランド基盤の確立</span>
-                    </li>
-                    <li className="flex items-center">
-                      <span className="text-white/90 font-light flex-1">これは単なるロゴ制作ではなく、ブランドを通じた長期的な企業価値創造への投資です。</span>
-                    </li>
-                  </ul>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
+                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
+                    <div className="text-xl font-thin text-white/70 mb-2 text-center">01</div>
+                    <h4 className="text-xl font-thin mb-3 text-center">ユーザー調査と分析</h4>
+                    <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
+                      <li>行動分析とリサーチ</li>
+                      <li>ペルソナ設計</li>
+                      <li>ユーザーインタビュー</li>
+                    </ul>
+                  </div>
+                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
+                    <div className="text-xl font-thin text-white/70 mb-2 text-center">02</div>
+                    <h4 className="text-xl font-thin mb-3 text-center">設計と構築</h4>
+                    <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
+                      <li>情報アーキテクチャ設計</li>
+                      <li>ワイヤーフレーム作成</li>
+                      <li>インタラクション設計</li>
+                    </ul>
+                  </div>
+                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
+                    <div className="text-xl font-thin text-white/70 mb-2 text-center">03</div>
+                    <h4 className="text-xl font-thin mb-3 text-center">ビジュアルとプロトタイプ</h4>
+                    <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
+                      <li>UI設計とスタイリング</li>
+                      <li>ビジュアル要素の統一</li>
+                      <li>インタラクティブプロトタイプ作成</li>
+                    </ul>
+                  </div>
+                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
+                    <div className="text-xl font-thin text-white/70 mb-2 text-center">04</div>
+                    <h4 className="text-xl font-thin mb-3 text-center">テストと改善</h4>
+                    <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
+                      <li>ユーザビリティテスト</li>
+                      <li>フィードバック収集</li>
+                      <li>継続的な改善</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
 
