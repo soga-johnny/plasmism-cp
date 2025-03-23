@@ -11,10 +11,10 @@ export default function NavigationEvents() {
 
   useEffect(() => {
     // ページ遷移時にローディング状態をリセット
-    const handleRouteChangeStart = () => {
-      setLoading(true);
-      setProgress(0);
-    };
+    // const handleRouteChangeStart = () => {
+    //   setLoading(true);
+    //   setProgress(0);
+    // };
 
     // ページ遷移完了時の処理
     const handleRouteChangeComplete = () => {

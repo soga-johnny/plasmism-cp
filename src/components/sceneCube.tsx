@@ -215,7 +215,7 @@ export default function SceneCube() {
       <Canvas 
         camera={{ position: cameraPosition, fov: cameraFov }}
         style={{ background: 'transparent' }}
-        onCreated={({ gl }) => {
+        onCreated={({ /* gl */ }) => {
           // Canvasの初期化完了時に進捗を更新
           useLoadingStore.getState().incrementProgress(30)
         }}

@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
+import { useEffect } from 'react'
 
 // パンくずリストの設定
 const breadcrumbMap: { [key: string]: { label: string; parent?: string } } = {
@@ -41,6 +42,21 @@ export default function Footer() {
   
   const breadcrumbs = generateBreadcrumbs()
   
+  // お問い合わせと資料請求セクションの表示制御
+  const isContactPage = pathname === '/contact' || pathname.startsWith('/contact/')
+  const isDownloadPage = pathname === '/download' || pathname.startsWith('/download/')
+  const shouldShowContactSection = !isContactPage && !isDownloadPage
+  
+  // 開発環境でのデバッグ用
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'development') {
+      console.log('Current pathname:', pathname)
+      console.log('Is contact page:', isContactPage)
+      console.log('Is download page:', isDownloadPage)
+      console.log('Should show contact section:', shouldShowContactSection)
+    }
+  }, [pathname, isContactPage, isDownloadPage, shouldShowContactSection])
+  
   return (
     <footer className="text-white font-extralight py-12">
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12">
@@ -67,37 +83,39 @@ export default function Footer() {
             {/* パンくずは上部に移動したので、ここは削除 */}
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
-            <div className="bg-white/4 rounded-3xl md:p-20 p-12 border border-white/6">
-                <h3 className="text-4xl mb-6 font-thin text-center border-b border-white pb-1">お問い合わせ・ご相談</h3>
-              <p className="text-sm mb-6 text-gray-300">
-                UI/UXデザイン、ブランディング、クラウドインフラなど、あらゆるデジタル課題に対応。
-                初回相談は無料で、お客様の状況に合わせた最適な提案をいたします。
-              </p>
-              <div className="flex justify-center">
-                <Link href="/contact" className="inline-block">
-                  <svg className="w-14 h-14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </Link>
+          {shouldShowContactSection && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
+              <div className="bg-white/4 rounded-3xl md:p-20 p-12 border border-white/6">
+                  <h3 className="text-4xl mb-6 font-thin text-center border-b border-white pb-1">お問い合わせ・ご相談</h3>
+                <p className="text-sm mb-6 text-gray-300">
+                  UI/UXデザイン、ブランディング、クラウドインフラなど、あらゆるデジタル課題に対応。
+                  初回相談は無料で、お客様の状況に合わせた最適な提案をいたします。
+                </p>
+                <div className="flex justify-center">
+                  <Link href="/contact" className="inline-block">
+                    <svg className="w-14 h-14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+              
+              <div className="bg-white/4 rounded-3xl md:p-20 p-12 border border-white/6">
+                <h3 className="text-4xl mb-6 font-thin text-center border-b border-white pb-1">会社資料ダウンロード</h3>
+                <p className="text-sm mb-6 text-gray-300">
+                  サービス内容、実績事例、アプローチをまとめた資料をご用意。
+                  メールアドレスをご登録いただくだけで、すぐにダウンロードいただけます。
+                </p>
+                <div className="flex justify-center">
+                  <Link href="/download" className="inline-block">
+                    <svg className="w-14 h-14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                      <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                    </svg>
+                  </Link>
+                </div>
               </div>
             </div>
-            
-            <div className="bg-white/4 rounded-3xl md:p-20 p-12 border border-white/6">
-              <h3 className="text-4xl mb-6 font-thin text-center border-b border-white pb-1">会社資料ダウンロード</h3>
-              <p className="text-sm mb-6 text-gray-300">
-                サービス内容、実績事例、アプローチをまとめた資料をご用意。
-                メールアドレスをご登録いただくだけで、すぐにダウンロードいただけます。
-              </p>
-              <div className="flex justify-center">
-                <Link href="/download" className="inline-block">
-                  <svg className="w-14 h-14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
-                    <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                  </svg>
-                </Link>
-              </div>
-            </div>
-          </div>
+          )}
         </div>
         <div className="grid grid-cols-2 gap-y-8 md:grid-cols-4 gap-6 mb-16">
           <div>

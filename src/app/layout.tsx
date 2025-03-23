@@ -6,6 +6,7 @@ import LoadingScreen from "../components/LoadingScreen";
 import PageTransitionProvider from "../components/PageTransitionProvider";
 import Header from "../components/Header";
 import NavigationEvents from "../components/NavigationEvents";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,7 +44,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${notoSansJP.variable} antialiased`}
       >
         <LoadingScreen />
-        <NavigationEvents />
+        <Suspense fallback={null}>
+          <NavigationEvents />
+        </Suspense>
         <Header />
         <PageTransitionProvider>
           {children}
