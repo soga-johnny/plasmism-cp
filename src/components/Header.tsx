@@ -72,7 +72,7 @@ export default function Header() {
             <ul className="flex space-x-6 text-sm font-extralight mr-16">
               <li><Link href="/" className="hover:opacity-70 transition-opacity">トップ</Link></li>
               <li><Link href="/about" className="hover:opacity-70 transition-opacity">私たちについて</Link></li>
-              <li><Link href="/features" className="hover:opacity-70 transition-opacity">特徴</Link></li>
+              <li><Link href="/feature" className="hover:opacity-70 transition-opacity">特徴</Link></li>
               <li><Link href="/products" className="hover:opacity-70 transition-opacity">プロダクト</Link></li>
               <li><Link href="/services" className="hover:opacity-70 transition-opacity">サービス</Link></li>
               <li><Link href="/achievements" className="hover:opacity-70 transition-opacity">実績</Link></li>

@@ -13,14 +13,14 @@ import { useEffect, useState, useRef } from 'react'
 
 export default function Home() {
   const [showCube, setShowCube] = useState(true)
-  const featuresRef = useRef<HTMLElement>(null)
+  const featureRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
     const handleScroll = () => {
-      if (featuresRef.current) {
-        const featuresRect = featuresRef.current.getBoundingClientRect()
+      if (featureRef.current) {
+        const featureRect = featureRef.current.getBoundingClientRect()
         // 特徴セクションが上部に少し入ってきたら（-100px地点）3Dキューブを非表示
-        setShowCube(featuresRect.top > -100)
+        setShowCube(featureRect.top > -100)
       }
     }
     
@@ -83,7 +83,7 @@ export default function Home() {
       </div>
       </section>
 
-      <section ref={featuresRef} className="z-20 bg-[#534A4A] py-20 md:py-32">
+      <section ref={featureRef} className="z-20 bg-[#534A4A] py-20 md:py-32">
         <div className="w-full max-w-[1440px] mx-auto mb-32 px-4 md:px-8">
           <div className="max-w-[800px]">
             <h2 className="text-3xl md:text-5xl font-light mb-8">
@@ -113,7 +113,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section ref={featuresRef} className="z-20 py-20 md:py-32">
+      <section ref={featureRef} className="z-20 py-20 md:py-32">
         <div className="w-full max-w-[1440px] mx-auto mb-32 px-4 md:px-8">
           <div className="max-w-[800px]">
             <h2 className="text-3xl md:text-5xl font-light mb-8">
@@ -166,7 +166,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section ref={featuresRef} className="z-20 bg-[#534A4A] py-20 md:py-32">
+      <section ref={featureRef} className="z-20 bg-[#534A4A] py-20 md:py-32">
         <div className="w-full max-w-[1440px] mx-auto mb-32 px-4 md:px-8">
           <div className="max-w-[800px]">
             <h2 className="text-3xl md:text-5xl font-light mb-8">
@@ -209,7 +209,7 @@ export default function Home() {
       </section>
 
 
-      <section ref={featuresRef} className="z-20 bg-[#534A4A] py-20 md:py-32">
+      <section ref={featureRef} className="z-20 bg-[#534A4A] py-20 md:py-32">
       <div className="max-w-[800px]">
             <h2 className="text-3xl md:text-5xl font-light mb-8">
               採用
@@ -225,7 +225,7 @@ export default function Home() {
           </div>
       </section>
 
-      <section ref={featuresRef} className="z-20 bg-[#EA6130] py-20 md:py-32">
+        <section ref={featureRef} className="z-20 bg-[#EA6130] py-20 md:py-32">
       <div className="max-w-[800px]">
             <h2 className="text-3xl md:text-5xl font-light mb-8">
               お問い合わせ・ご相談
