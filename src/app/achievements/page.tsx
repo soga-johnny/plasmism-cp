@@ -2,6 +2,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getAllAchievements } from '@/lib/notion';
 import Footer from '@/components/Footer';
+import PageTitle from '@/components/PageTitle';
+import React from 'react';
 
 // メタデータ
 export const metadata = {
@@ -10,59 +12,68 @@ export const metadata = {
 };
 
 // 実績一覧ページ
-export default async function AchievementsPage() {
+const AchievementsPage = async () => {
   // Notionから実績データを取得
   const achievementsData = await getAllAchievements();
 
   return (
-    <main className="min-h-screen flex flex-col text-white md:py-24 pt-8 pb-24">
-      <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-8 py-16">
-        <div className="mb-12 border-b border-white/7">
-          <p className="text-md mb-4">● Achievements</p>
-          <h1 className="text-5xl font-thin mb-6">実績</h1>
-          <p className="mb-8 font-extralight text-sm md:text-base">
-            私たちがこれまで手がけてきたプロジェクトやお客様の声をご紹介します。
-          </p>
-        </div>
+    <main className="min-h-screen flex flex-col text-white md:pt-24 pt-8">
+      <div className="flex-1 w-full max-w-[1440px] mx-auto px-8 md:px-16 pt-8 pb-24">
+        <PageTitle 
+          titleEn="Achievements" 
+          titleJa="実績" 
+          description="デザインの実績です。" 
+        />
+        <div className="w-full h-[1px] bg-white/10 my-8"></div>
 
-        {/* 実績一覧 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:mx-8 mx-4">
+        {/* 実績一覧（2カラムグリッド） */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-14">
           {achievementsData.length > 0 ? (
             achievementsData.map((achievement: any) => {
               // ページIDを取得
               const id = achievement.id;
               
               // プロパティを取得
-              const properties = achievement.properties;
-              const title = properties?.Title?.title[0]?.plain_text || '無題';
-              const description = properties?.Description?.rich_text[0]?.plain_text || '';
-              const date = properties?.Date?.date?.start || '';
-              const category = properties?.Category?.select?.name || '';
+              const properties = achievement.properties || {};
+              const title = properties?.Title?.title?.[0]?.plain_text || 'Untitled';
+              const description = properties?.Description?.rich_text?.[0]?.plain_text || '';
               
-              // サムネイル画像（カバー画像がない場合はデフォルト画像を使用）
-              const coverImage = achievement.cover?.external?.url || 
-                                achievement.cover?.file?.url || 
-                                '/default-achievement.jpg';
+              // サムネイル画像の取得
+              // Coverプロパティ（Files & media型）の扱い
+              // Notion API経由のCoverプロパティに対応
+              let coverImage;
+              
+              // Cover プロパティがある場合は優先して使用
+              if (properties?.Cover?.files?.[0]) {
+                const coverFile = properties.Cover.files[0];
+                if (coverFile.external) {
+                  coverImage = coverFile.external.url;
+                } else if (coverFile.file) {
+                  coverImage = coverFile.file.url;
+                }
+              }
+              
+              // プロパティにない場合はページのカバー画像を使用
+              if (!coverImage) {
+                coverImage = achievement.cover?.external?.url || 
+                            achievement.cover?.file?.url || 
+                            '/not-found.png';
+              }
 
               return (
-                <Link href={`/achievements/${id}`} key={id}>
-                  <div className="bg-white/5 backdrop-blur-sm rounded-lg overflow-hidden hover:bg-white/10 transition-all duration-300 h-full">
-                    <div className="relative w-full h-48">
+                <Link href={`/achievements/${id}`} key={id} className="block">
+                  <div className="flex flex-col h-full">
+                    <div className="relative w-full aspect-[4/3] mb-5 overflow-hidden rounded-md">
                       <Image
                         src={coverImage}
                         alt={title}
                         fill
                         className="object-cover"
+                        sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     </div>
-                    <div className="p-4">
-                      <div className="flex items-center mb-2">
-                        <span className="text-xs bg-white/20 rounded-full px-3 py-1">{category}</span>
-                        <span className="ml-2 text-xs text-white/70">{formatDate(date)}</span>
-                      </div>
-                      <h2 className="text-xl font-medium mb-2">{title}</h2>
-                      <p className="text-sm text-white/80 line-clamp-2">{description}</p>
-                    </div>
+                    <h2 className="text-2xl font-light mb-2">{title}</h2>
+                    <p className="text-sm text-white/70 line-clamp-2">{description}</p>
                   </div>
                 </Link>
               );
@@ -77,16 +88,6 @@ export default async function AchievementsPage() {
       <Footer />
     </main>
   );
-}
+};
 
-// 日付のフォーマット関数
-function formatDate(dateString: string): string {
-  if (!dateString) return '';
-  
-  const date = new Date(dateString);
-  return date.toLocaleDateString('ja-JP', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  });
-} 
+export default AchievementsPage; 

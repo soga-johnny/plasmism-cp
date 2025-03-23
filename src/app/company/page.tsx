@@ -4,6 +4,7 @@
 import Footer from '@/components/Footer'
 import CompanyOverview from '@/components/CompanyOverview'
 import RecruitInfo from '@/components/RecruitInfo'
+import PageTitle from '@/components/PageTitle'
 // import Image from 'next/image'
 
 export default function Company() {
@@ -11,11 +12,11 @@ export default function Company() {
     <main className="min-h-screen flex flex-col text-white md:py-24 pt-8 pb-24">
       {/* <Header /> */}
       <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-8 py-16">
-        <div className="mb-8 border-b border-white/7">
-          <p className="text-md mb-4">● Company</p>
-          <h1 className="text-5xl font-thin mb-6">会社案内</h1>
-          <p className="mb-8 font-extralight text-sm md:text-base">プラズミズムの会社概要と採用情報についてご案内します。</p>
-        </div>
+        <PageTitle 
+          titleEn="Company" 
+          titleJa="会社案内" 
+          description="プラズミズムの会社概要と採用情報についてご案内します。" 
+        />
         
         <div className="space-y-12 mb-16 md:mx-16 mx-4 pt-10">
           {/* 会社概要 */}

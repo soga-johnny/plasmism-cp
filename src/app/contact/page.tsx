@@ -1,6 +1,7 @@
 "use client"
 
 import Footer from '@/components/Footer'
+import PageTitle from '@/components/PageTitle'
 import { useState } from 'react'
 
 export default function Contact() {
@@ -13,13 +14,13 @@ export default function Contact() {
   return (
     <main className="min-h-screen flex flex-col text-white md:py-24 pt-2 pb-24">
       <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-8 md:py-16 pt-6">
-        <div className="mb-8 border-b border-white/7">
-          <p className="text-md mb-4">● Contact</p>
-          <h1 className="text-5xl font-thin mb-6">お問い合わせ・ご相談</h1>
-          <p className="mb-8 font-extralight text-sm md:text-base">制作のご相談・お問い合わせは、必要事項をご入力の上ご連絡ください。2〜3営業日以内に担当者がメールで返信します。</p>
-          <p className="mb-8 font-extralight text-sm md:text-base">※は必須項目です。</p>
-          <p className="mb-8 font-extralight text-sm md:text-base">営業・セールスその他の方は、<span className="underline">採用・協業用フォーム</span>をご利用ください。</p>
-        </div>
+        <PageTitle 
+          titleEn="Contact" 
+          titleJa="お問い合わせ・ご相談" 
+          description="制作のご相談・お問い合わせは、必要事項をご入力の上ご連絡ください。2〜3営業日以内に担当者がメールで返信します。" 
+        />
+        <p className="mb-8 font-extralight text-sm md:text-base">※は必須項目です。</p>
+        <p className="mb-8 font-extralight text-sm md:text-base">営業・セールスその他の方は、<span className="underline">採用・協業用フォーム</span>をご利用ください。</p>
         
         <div className="space-y-8 mb-16 max-w-[664px] mx-auto pt-10">
           <form className="space-y-12">

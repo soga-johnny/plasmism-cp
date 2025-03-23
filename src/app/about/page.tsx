@@ -4,17 +4,18 @@
 import Footer from '@/components/Footer'
 import Image from 'next/image'
 import CompanyOverview from '@/components/CompanyOverview'
+import PageTitle from '@/components/PageTitle'
 
 export default function About() {
   return (
     <main className="min-h-screen flex flex-col text-white md:py-24 pt-8 pb-24">
       {/* <Header /> */}
       <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-8 py-16">
-        <div className="mb-8 border-b border-white/7">
-          <p className="text-md mb-4">● About</p>
-          <h1 className="text-5xl font-thin mb-6">私たちについて</h1>
-          <p className="mb-8 font-extralight text-sm md:text-base">プラズミズムは、最適解の設計・実装・検証・改善をコンピューターと情報表現でデザインする会社です。</p>
-        </div>
+        <PageTitle 
+          titleEn="About" 
+          titleJa="私たちについて" 
+          description="プラズミズムは、最適解の設計・実装・検証・改善をコンピューターと情報表現でデザインする会社です。" 
+        />
         
         <div className="space-y-12 mb-16 md:mx-16 mx-4 pt-10 ">
           <section className="border-b border-white/7 pb-10">

@@ -1,51 +1,53 @@
 import { ReactNode } from 'react';
 import Image from 'next/image';
+import { NotionRichText, RenderableBlock } from '@/types/notion';
 
 // Notionのブロックタイプに対応するコンポーネントを作成
-export function renderNotionBlock(block: any): ReactNode {
+export function renderNotionBlock(block: RenderableBlock): ReactNode {
   const { type, id } = block;
-  const value = block[type];
+  // 型アサーションを使用して安全にアクセス
+  const value = block[type as keyof RenderableBlock] as any;
 
   switch (type) {
     case 'paragraph':
       return (
         <p key={id} className="mb-4">
-          {value.rich_text.map((text: any, i: number) => renderRichText(text, i))}
+          {value.rich_text.map((text: NotionRichText, i: number) => renderRichText(text, i))}
         </p>
       );
 
     case 'heading_1':
       return (
         <h1 key={id} className="text-3xl font-bold mb-4">
-          {value.rich_text.map((text: any, i: number) => renderRichText(text, i))}
+          {value.rich_text.map((text: NotionRichText, i: number) => renderRichText(text, i))}
         </h1>
       );
 
     case 'heading_2':
       return (
         <h2 key={id} className="text-2xl font-bold mb-3">
-          {value.rich_text.map((text: any, i: number) => renderRichText(text, i))}
+          {value.rich_text.map((text: NotionRichText, i: number) => renderRichText(text, i))}
         </h2>
       );
 
     case 'heading_3':
       return (
         <h3 key={id} className="text-xl font-bold mb-2">
-          {value.rich_text.map((text: any, i: number) => renderRichText(text, i))}
+          {value.rich_text.map((text: NotionRichText, i: number) => renderRichText(text, i))}
         </h3>
       );
 
     case 'bulleted_list_item':
       return (
         <li key={id} className="ml-6 list-disc mb-1">
-          {value.rich_text.map((text: any, i: number) => renderRichText(text, i))}
+          {value.rich_text.map((text: NotionRichText, i: number) => renderRichText(text, i))}
         </li>
       );
 
     case 'numbered_list_item':
       return (
         <li key={id} className="ml-6 list-decimal mb-1">
-          {value.rich_text.map((text: any, i: number) => renderRichText(text, i))}
+          {value.rich_text.map((text: NotionRichText, i: number) => renderRichText(text, i))}
         </li>
       );
 
@@ -73,7 +75,7 @@ export function renderNotionBlock(block: any): ReactNode {
     case 'quote':
       return (
         <blockquote key={id} className="pl-4 border-l-4 border-gray-300 my-4 italic">
-          {value.rich_text.map((text: any, i: number) => renderRichText(text, i))}
+          {value.rich_text.map((text: NotionRichText, i: number) => renderRichText(text, i))}
         </blockquote>
       );
 
@@ -81,7 +83,7 @@ export function renderNotionBlock(block: any): ReactNode {
       return (
         <pre key={id} className="bg-gray-800 text-white p-4 rounded-lg my-4 overflow-x-auto">
           <code>
-            {value.rich_text.map((text: any) => text.plain_text).join('')}
+            {value.rich_text.map((text: NotionRichText) => text.plain_text).join('')}
           </code>
         </pre>
       );
@@ -92,11 +94,12 @@ export function renderNotionBlock(block: any): ReactNode {
 }
 
 // リッチテキストをレンダリングするヘルパー関数
-function renderRichText(text: any, key: number): ReactNode {
+function renderRichText(text: NotionRichText, key: number): ReactNode {
   const { annotations, plain_text, href } = text;
   const { bold, italic, strikethrough, underline, code } = annotations;
 
-  let content = plain_text;
+  // ReactNodeとして扱う
+  let content: ReactNode = plain_text;
 
   if (code) {
     content = <code className="bg-gray-100 text-red-500 px-1 py-0.5 rounded">{content}</code>;

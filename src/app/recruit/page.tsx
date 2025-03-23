@@ -4,17 +4,18 @@
 import Footer from '@/components/Footer'
 import RecruitInfo from '@/components/RecruitInfo'
 import Image from 'next/image'
+import PageTitle from '@/components/PageTitle'
 
 export default function Recruit() {
   return (
     <main className="min-h-screen flex flex-col text-white md:py-24 pt-8 pb-24">
       {/* <Header /> */}
       <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-8 py-16">
-        <div className="mb-8 border-b border-white/7">
-          <p className="text-md mb-4">● Recruit</p>
-          <h1 className="text-5xl font-thin mb-6">採用情報</h1>
-          <p className="mb-8 font-extralight text-sm md:text-base">プラズミズムでは、共に革新的なデジタル体験を創造する仲間を募集しています。</p>
-        </div>
+        <PageTitle 
+          titleEn="Recruit" 
+          titleJa="採用情報" 
+          description="プラズミズムでは、共に革新的なデジタル体験を創造する仲間を募集しています。" 
+        />
         
         <div className="space-y-12 mb-16 md:mx-16 mx-4 pt-10">
           {/* 採用情報ヘッダーセクション */}

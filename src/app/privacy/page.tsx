@@ -2,17 +2,18 @@
 
 // import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import PageTitle from '@/components/PageTitle'
 
 export default function Privacy() {
   return (
     <main className="min-h-screen flex flex-col text-white md:py-24 pt-8 pb-24">
       {/* <Header /> */}
       <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-8 py-16">
-        <div className="mb-8">
-          <p className="text-md mb-4">● Privacy policy</p>
-          <h1 className="text-5xl font-thin mb-6">プライバシーポリシー</h1>
-          <p className="mb-8 font-extralight text-sm md:text-base">お客様の個人情報に関する取り組みについて</p>
-        </div>
+        <PageTitle 
+          titleEn="Privacy policy" 
+          titleJa="プライバシーポリシー" 
+          description="お客様の個人情報に関する取り組みについて" 
+        />
 
         <div className="border-t border-white/7 pt-20 mb-12 md:px-16 px-4">
           <p className="mb-20 leading-relaxed text-sm">Plasmism株式会社（以下「当社」といいます。）は、当社が管理するウェブサイト（URL：https://plasmism.com/）（以下「当社サイト」といいます。）の提供にあたり、当社のお客様（当社サイトの利用者を含みます。）、取引先ご担当者様及び採用候補者の個人情報を取得することがあります。
