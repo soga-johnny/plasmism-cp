@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import { useScroll } from 'framer-motion'
+import { useLoadingStore } from './LoadingScreen'
 import Image from 'next/image'
 
 export default function SceneSample(){
@@ -17,6 +18,7 @@ export default function SceneSample(){
   
   // クライアントサイドでのみwindowSizeを更新
   const [isMounted, setIsMounted] = useState(false)
+  const { incrementProgress } = useLoadingStore()
 
   // レスポンシブパラメータの計算
   const isMobile = windowSize.width <= 768
@@ -65,6 +67,44 @@ export default function SceneSample(){
       unsubscribe();
     };
   }, [scrollYProgress, isMobile, isMounted])
+
+  // 画像の読み込みをトラッキング
+  useEffect(() => {
+    const imageElements = document.querySelectorAll('img')
+    let loadedCount = 0
+    
+    const handleImageLoad = () => {
+      loadedCount++
+      // 各画像が読み込まれるたびに進捗を少し進める
+      if (imageElements.length > 0) {
+        incrementProgress(5 / imageElements.length)
+      }
+      
+      // すべての画像が読み込まれたら
+      if (loadedCount === imageElements.length) {
+        incrementProgress(5) // ボーナス進捗
+      }
+    }
+    
+    imageElements.forEach(img => {
+      if (img.complete) {
+        handleImageLoad()
+      } else {
+        img.addEventListener('load', handleImageLoad)
+      }
+    })
+    
+    return () => {
+      imageElements.forEach(img => {
+        img.removeEventListener('load', handleImageLoad)
+      })
+    }
+  }, [incrementProgress])
+
+  // コンポーネントがマウントされたら進捗を加算
+  useEffect(() => {
+    incrementProgress(10)
+  }, [incrementProgress])
 
   // モバイルとデスクトップのスタイル定義
   const mobileStyles = {

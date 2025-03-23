@@ -2,34 +2,62 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { create } from 'zustand';
+
+// ローディング状態を管理するグローバルストア
+interface LoadingState {
+  isLoading: boolean;
+  progress: number;
+  setLoading: (isLoading: boolean) => void;
+  setProgress: (progress: number) => void;
+  incrementProgress: (amount: number) => void;
+}
+
+export const useLoadingStore = create<LoadingState>((set) => ({
+  isLoading: true,
+  progress: 0,
+  setLoading: (isLoading) => set({ isLoading }),
+  setProgress: (progress) => set({ progress: Math.min(Math.max(progress, 0), 100) }),
+  incrementProgress: (amount) => set((state) => ({ 
+    progress: Math.min(Math.max(state.progress + amount, 0), 100) 
+  })),
+}));
 
 export default function LoadingScreen() {
-  const [isLoading, setIsLoading] = useState(true);
+  const { isLoading, progress, setLoading } = useLoadingStore();
   const [isFading, setIsFading] = useState(false);
 
   useEffect(() => {
-    // 3Dシーンの読み込みが完了したらローディング画面を非表示にする
-    const timer = setTimeout(() => {
+    // 進捗率が100%に達したらフェードアウトを開始
+    if (progress >= 100 && !isFading) {
       setIsFading(true);
       setTimeout(() => {
-        setIsLoading(false);
+        setLoading(false);
       }, 500); // フェードアウトアニメーションの時間と同じ
+    }
+  }, [progress, isFading, setLoading]);
+
+  // 初期ロード時に最低2秒間はローディング画面を表示する（UX向上のため）
+  useEffect(() => {
+    const minLoadingTimer = setTimeout(() => {
+      // 最低表示時間が経過しても進捗が100%未満なら80%まで自動で進める
+      useLoadingStore.getState().setProgress(Math.max(useLoadingStore.getState().progress, 80));
     }, 2000);
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(minLoadingTimer);
   }, []);
 
   if (!isLoading) return null;
 
   return (
     <div 
-      className={`fixed inset-0 z-[100] flex items-center justify-center bg-[#2B2325] ${isFading ? 'fade-out' : ''}`}
+      className={`fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#2B2325] ${isFading ? 'fade-out' : ''}`}
       style={{
         backgroundImage: 'url("/background.png")',
         backgroundRepeat: 'repeat'
       }}
     >
-      <div className="relative w-48 h-48 fade-in">
+      <div className="relative w-32 h-32 md:w-48 md:h-48 fade-in mb-8">
         <Image
           src="/logo.svg"
           alt="Logo"
@@ -37,6 +65,17 @@ export default function LoadingScreen() {
           className="object-contain"
           priority
         />
+      </div>
+      
+      {/* プログレスバーの追加 */}
+      <div className="w-32 h-1 bg-white/20 rounded-full overflow-hidden fade-in">
+        <div 
+          className="h-full bg-white transition-all duration-300 ease-out"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+      <div className="mt-2 text-white/60 text-xs fade-in">
+        {progress < 100 ? `読み込み中... ${Math.floor(progress)}%` : '完了'}
       </div>
     </div>
   );

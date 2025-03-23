@@ -277,7 +277,8 @@ export default function Header() {
               </nav>
               
               {/* 閉じるボタン */}
-              <div className="p-4 fixed bottom-1 left-1 right-1">
+              {/* fixedでバグるのでabsoluteに  */}
+              <div className="p-4 absolute bottom-2 left-2 right-2">
                 <button 
                   className="flex items-center justify-center w-full py-4 text-white bg-white/2 border w-full border-white/9 rounded-md transition-colors duration-300 hover:bg-white hover:text-black font-extralight"
                   onClick={() => setIsMenuOpen(false)}

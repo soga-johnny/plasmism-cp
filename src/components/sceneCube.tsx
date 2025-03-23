@@ -6,6 +6,8 @@ import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import { Suspense, useRef, useEffect, useState } from 'react'
 import { useScroll, motion } from 'framer-motion'
 import { MeshPhysicalMaterial, Mesh, Color } from 'three'
+import { useLoadingStore } from './LoadingScreen'
+import { useProgress } from '@react-three/drei'
 
 function Cube() {
   const meshRef = useRef<Mesh>(null)
@@ -143,6 +145,13 @@ export default function SceneCube() {
   const [cameraPosition, setCameraPosition] = useState<[number, number, number]>([0, 0, 8])
   const [cameraFov, setCameraFov] = useState(50)
   const [isMobile, setIsMobile] = useState(false)
+  const { progress } = useProgress()
+  const { setProgress } = useLoadingStore()
+
+  // Three.jsのプログレスを LoadingStore に反映
+  useEffect(() => {
+    setProgress(progress)
+  }, [progress, setProgress])
 
   useEffect(() => {
     const updateCamera = () => {
@@ -157,6 +166,27 @@ export default function SceneCube() {
     return () => window.removeEventListener('resize', updateCamera)
   }, [])
 
+  // 3Dシーンの初期化完了時
+  useEffect(() => {
+    // リソース読み込み完了時の処理
+    const handleResourcesReady = () => {
+      // フルロードを示す
+      setTimeout(() => {
+        setProgress(100)
+      }, 500)
+    }
+
+    // ウィンドウロード完了時にリソース準備完了とみなす
+    if (typeof window !== 'undefined') {
+      if (document.readyState === 'complete') {
+        handleResourcesReady()
+      } else {
+        window.addEventListener('load', handleResourcesReady)
+        return () => window.removeEventListener('load', handleResourcesReady)
+      }
+    }
+  }, [setProgress])
+
   return (
     <motion.div 
       className="w-full h-screen absolute top-0 z-10"
@@ -169,15 +199,15 @@ export default function SceneCube() {
         y: 0
       }}
       transition={{ 
-        duration: 4,
+        duration: 3,
         ease: "easeOut",
         delay: 3,
         opacity: {
-          duration: 4,
+          duration: 3,
           ease: "easeOut",
         },
         y: {
-          duration: 3,
+          duration: 2,
           ease: "easeOut",
         }
       }}
@@ -185,6 +215,10 @@ export default function SceneCube() {
       <Canvas 
         camera={{ position: cameraPosition, fov: cameraFov }}
         style={{ background: 'transparent' }}
+        onCreated={({ gl }) => {
+          // Canvasの初期化完了時に進捗を更新
+          useLoadingStore.getState().incrementProgress(30)
+        }}
       >
         <Suspense fallback={null}>
           <ambientLight intensity={2} />
