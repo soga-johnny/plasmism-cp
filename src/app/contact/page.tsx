@@ -19,9 +19,9 @@ export default function Contact() {
           titleJa="お問い合わせ・ご相談" 
           description="制作のご相談・お問い合わせは、必要事項をご入力の上ご連絡ください。2〜3営業日以内に担当者がメールで返信します。" 
         />
+        <p className="mb-2 font-extralight text-sm md:text-base">営業・セールスその他の方は、<a href="https://forms.gle/Znqu5mha2zg1J4ds8" target="_blank" rel="noopener noreferrer" className="underline hover:opacity-70 transition-opacity">採用・協業用フォーム</a>をご利用ください。</p>
         <p className="mb-8 font-extralight text-sm md:text-base">※は必須項目です。</p>
-        <p className="mb-8 font-extralight text-sm md:text-base">営業・セールスその他の方は、<span className="underline">採用・協業用フォーム</span>をご利用ください。</p>
-        
+
         <div className="space-y-8 mb-16 max-w-[664px] mx-auto pt-10">
           <form className="space-y-12">
             <div className="space-y-1">

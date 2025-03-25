@@ -11,7 +11,7 @@ export default function RecruitInfo() {
         {/* Notionページへの遷移ボタン */}
         <div className="mb-12">
           <Link 
-            href="https://www.notion.so/plasmism" 
+            href="https://same-ranunculus-85c.notion.site/Plasmism-1bf43fbe1206801bb0efd6d37bf01449" 
             target="_blank" 
             rel="noopener noreferrer"
             className="bg-white/10 hover:bg-white/15 transition-all border border-white/20 rounded-xl px-8 py-6 flex flex-col md:flex-row md:justify-between md:items-center w-full"
