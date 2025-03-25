@@ -76,7 +76,7 @@ export default function Header() {
               <li><Link href="/" className={`hover:opacity-70 transition-opacity ${pathname === '/' ? 'line-through font-normal' : ''}`}>トップ</Link></li>
               <li><Link href="/about" className={`hover:opacity-70 transition-opacity ${pathname === '/about' ? 'line-through font-normal' : ''}`}>私たちについて</Link></li>
               <li><Link href="/feature" className={`hover:opacity-70 transition-opacity ${pathname === '/feature' ? 'line-through font-normal' : ''}`}>特徴</Link></li>
-              <li><Link href="/products" className={`hover:opacity-70 transition-opacity ${pathname === '/products' ? 'line-through font-normal' : ''}`}>プロダクト</Link></li>
+              <li><Link href="/product" className={`hover:opacity-70 transition-opacity ${pathname === '/product' ? 'line-through font-normal' : ''}`}>プロダクト</Link></li>
               <li><Link href="/service" className={`hover:opacity-70 transition-opacity ${pathname === '/service' ? 'line-through font-normal' : ''}`}>サービス</Link></li>
               <li><Link href="/achievements" className={`hover:opacity-70 transition-opacity ${pathname === '/achievements' ? 'line-through font-normal' : ''}`}>実績</Link></li>
               <li><Link href="/recruit" className={`hover:opacity-70 transition-opacity ${pathname === '/recruit' ? 'line-through font-normal' : ''}`}>採用</Link></li>
@@ -179,7 +179,7 @@ export default function Header() {
                   </li>
                   <li className="border-b border-white/7">
                     <Link 
-                      href="/products" 
+                      href="/product" 
                       className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/products' ? 'line-through font-normal' : ''}`}
                       onClick={() => setIsMenuOpen(false)}
                     >

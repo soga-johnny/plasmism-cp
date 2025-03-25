@@ -220,7 +220,7 @@ export default function Home() {
                 </p>
                 <Image src="/image3-1.png" alt="プロダクト概要" width={560} height={350} className="w-full max-w-[560px] rounded-lg mb-8" />
                 <div className="mt-8">
-                  <Link href="/products">
+                  <Link href="/product">
                     <Button variant="outline" size="lg">
                       詳しく見る
                     </Button>

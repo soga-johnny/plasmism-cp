@@ -11,7 +11,7 @@ const breadcrumbMap: { [key: string]: { label: string; parent?: string } } = {
   '/privacy': { label: 'プライバシーポリシー', parent: '/' },
   '/about': { label: '私たちについて', parent: '/' },
   '/feature': { label: '特徴', parent: '/' },
-  '/products': { label: 'プロダクト', parent: '/' },
+  '/product': { label: 'プロダクト', parent: '/' },
   '/service': { label: 'サービス', parent: '/' },
   '/achievements': { label: '実績', parent: '/' },
   '/recruit': { label: '採用', parent: '/' },
@@ -122,7 +122,7 @@ export default function Footer() {
             <ul className="space-y-3">
               <li><Link href="/about" className="hover:text-gray-300 transition-colors text-lg">私たちについて</Link></li>
               <li><Link href="/feature" className="hover:text-gray-300 transition-colors text-lg">特徴</Link></li>
-              <li><Link href="/products" className="hover:text-gray-300 transition-colors text-lg">プロダクト</Link></li>
+              <li><Link href="/product" className="hover:text-gray-300 transition-colors text-lg">プロダクト</Link></li>
               <li><Link href="/services" className="hover:text-gray-300 transition-colors text-lg">サービス</Link></li>
             </ul>
           </div>
