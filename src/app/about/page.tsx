@@ -26,7 +26,7 @@ export default function About() {
                     <h2 className="text-md font-thin">ミッション</h2>
                   </div>
                   <div className="border border-white/10 rounded-full -ml-8 px-4 py-3">
-                    <h2 className="text-md font-thin">存在意義</h2>
+                    <h2 className="text-md font-thin">存在意義aaaaaaaaaaaa</h2>
                   </div>
                 </div>
                 <div className="rounded-lg">
