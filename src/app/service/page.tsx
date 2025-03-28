@@ -7,8 +7,8 @@ import Link from 'next/link'
 
 export default function Service() {
   return (
-    <main className="min-h-screen flex flex-col text-white md:py-24 pt-8 pb-24">
-      <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-8 py-16">
+    <main className="min-h-screen flex flex-col text-white md:py-12 pt-2 pb-24">
+      <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-2 pb-12">
         <PageTitle 
           titleEn="Service" 
           titleJa="サービス" 
@@ -16,19 +16,22 @@ export default function Service() {
         />
         
         <div className="mb-16 md:mx-16 mx-4">
-          <p className="text-white/80 mb-10 font-light">プラズミズムは3つの専門領域でサービスを提供しています。各サービスは単体でも、組み合わせても提供可能です。</p>
+          <p className="text-white/80 mb-10 font-light">各サービスは単体でも、組み合わせても提供可能です。</p>
           
           <div className="space-y-4">
-            <a href="#uiux" className="flex items-center group border-b border-white/10 pb-4 hover:opacity-80 transition-opacity">
+            <a href="#uiux" className="flex items-center group border-b border-white/10 pb-4 hover:bg-white/10 hover:border-white/20 transition-all duration-300 rounded-lg p-4" onClick={(e) => {
+              e.preventDefault();
+              document.querySelector('#uiux')?.scrollIntoView({ behavior: 'smooth' });
+            }}>
               <div className="w-12 md:w-16 text-right pr-4 md:pr-6">
-                <span className="text-lg md:text-2xl font-thin">01</span>
+                <span className="text-lg md:text-2xl font-thin group-hover:text-white/90">01</span>
               </div>
               <div className="flex-1 flex items-center justify-between">
                 <div>
-                  <h3 className="text-xl md:text-2xl font-thin">UI/UXデザイン</h3>
-                  <p className="text-white/60 text-sm md:text-base font-light">ユーザー中心設計による体験価値の最大化</p>
+                  <h3 className="text-xl md:text-2xl font-thin group-hover:text-white/90">UXデザイン</h3>
+                  <p className="text-white/60 text-sm md:text-base font-light group-hover:text-white/80">ユーザー中心設計による体験価値の最大化</p>
                 </div>
-                <div className="ml-4">
+                <div className="ml-4 transform group-hover:rotate-270 transition-transform duration-300">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M7 10l5 5 5-5z" fill="currentColor"/>
                   </svg>
@@ -36,16 +39,19 @@ export default function Service() {
               </div>
             </a>
             
-            <a href="#branding" className="flex items-center group border-b border-white/10 pb-4 hover:opacity-80 transition-opacity">
+            <a href="#branding" className="flex items-center group border-b border-white/10 pb-4 hover:bg-white/10 hover:border-white/20 transition-all duration-300 rounded-lg p-4" onClick={(e) => {
+              e.preventDefault();
+              document.querySelector('#branding')?.scrollIntoView({ behavior: 'smooth' });
+            }}>
               <div className="w-12 md:w-16 text-right pr-4 md:pr-6">
-                <span className="text-lg md:text-2xl font-thin">02</span>
+                <span className="text-lg md:text-2xl font-thin group-hover:text-white/90">02</span>
               </div>
               <div className="flex-1 flex items-center justify-between">
                 <div>
-                  <h3 className="text-xl md:text-2xl font-thin">コーポレートブランディング</h3>
-                  <p className="text-white/60 text-sm md:text-base font-light">一貫性のある企業ブランドの構築</p>
+                  <h3 className="text-xl md:text-2xl font-thin group-hover:text-white/90">コーポレートデザイン</h3>
+                  <p className="text-white/60 text-sm md:text-base font-light group-hover:text-white/80">一貫性のある企業ブランドの構築</p>
                 </div>
-                <div className="ml-4">
+                <div className="ml-4 transform group-hover:rotate-270 transition-transform duration-300">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M7 10l5 5 5-5z" fill="currentColor"/>
                   </svg>
@@ -53,16 +59,19 @@ export default function Service() {
               </div>
             </a>
             
-            <a href="#cloud" className="flex items-center group border-b border-white/10 pb-4 hover:opacity-80 transition-opacity">
+            <a href="#cloud" className="flex items-center group border-b border-white/10 pb-4 hover:bg-white/10 hover:border-white/20 transition-all duration-300 rounded-lg p-4" onClick={(e) => {
+              e.preventDefault();
+              document.querySelector('#cloud')?.scrollIntoView({ behavior: 'smooth' });
+            }}>
               <div className="w-12 md:w-16 text-right pr-4 md:pr-6">
-                <span className="text-lg md:text-2xl font-thin">03</span>
+                <span className="text-lg md:text-2xl font-thin group-hover:text-white/90">03</span>
               </div>
               <div className="flex-1 flex items-center justify-between">
                 <div>
-                  <h3 className="text-xl md:text-2xl font-thin">クラウドインフラ</h3>
-                  <p className="text-white/60 text-sm md:text-base font-light">安定的で拡張性の高い技術基盤の確立</p>
+                  <h3 className="text-xl md:text-2xl font-thin group-hover:text-white/90">アーキテクチャデザイン</h3>
+                  <p className="text-white/60 text-sm md:text-base font-light group-hover:text-white/80">安定的で拡張性の高い技術基盤の確立</p>
                 </div>
-                <div className="ml-4">
+                <div className="ml-4 transform group-hover:rotate-270 transition-transform duration-300">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M7 10l5 5 5-5z" fill="currentColor"/>
                   </svg>
@@ -71,11 +80,21 @@ export default function Service() {
             </a>
           </div>
         </div>
-        
+
         <div className="space-y-24 mb-16 md:mx-16 mx-4 pt-10">
-          {/* UIUXデザイン */}
-          <section id="uiux" className="pb-20 border-b border-white/7">
-            <h2 className="text-4xl font-thin mb-10">UIUXデザイン</h2>
+          {/* UXデザイン */}
+          <section id="uiux" className="pb-20 border-b border-white/7">            
+          <div className="flex items-center group md:py-6 py-4 px-4 mb-8 rounded-lg sticky md:top-20 top-4 bg-[#251E1F]/90 border border-white/8 z-10 bg-[url('/background.png')] bg-cover bg-center">
+              <div className="w-12 md:w-16 text-right pr-4 md:pr-6">
+                <span className="text-lg md:text-2xl font-thin">01</span>
+              </div>
+              <div className="flex-1 flex items-center justify-between">
+                <div>
+                  <h3 className="text-2xl md:text-4xl font-thin mb-2">UXデザイン</h3>
+                  <p className="text-white/60 text-sm md:text-base font-light">ユーザー中心設計による体験価値の最大化</p>
+                </div>
+              </div>
+            </div>
             
             {/* こんな課題はありませんか？ */}
             <div className="mb-16">
@@ -248,7 +267,7 @@ export default function Service() {
             
             {/* よくあるご質問 */}
             <div>
-              <h3 className="text-2xl font-thin mb-6">UI/UXデザインに関するよくある質問</h3>
+              <h3 className="text-2xl font-thin mb-6">UXデザインに関するよくある質問</h3>
               <div className="border-t border-white/7">
                 <div className="border-b border-white/7 py-8">
                   <h4 className="text-xl font-thin mb-4">Q. 準委任契約での契約は可能ですか？また、具体的にどのような契約形態ですか？</h4>
@@ -288,9 +307,19 @@ export default function Service() {
             </div>
           </section>
           
-          {/* コーポレートブランディング */}
+          {/* コーポレートデザイン */}
           <section id="branding" className="pb-20 border-b border-white/7">
-            <h2 className="text-4xl font-thin mb-10">コーポレートブランディング</h2>
+            <div className="flex items-center group md:py-6 py-4 px-4 mb-8 rounded-lg sticky md:top-20 top-4 bg-[#251E1F]/90 border border-white/8 z-10 bg-[url('/background.png')] bg-cover bg-center">
+              <div className="w-12 md:w-16 text-right pr-4 md:pr-6">
+                <span className="text-lg md:text-2xl font-thin">02</span>
+              </div>
+              <div className="flex-1 flex items-center justify-between">
+                <div>
+                  <h3 className="text-2xl md:text-4xl font-thin mb-2">コーポレートデザイン</h3>
+                  <p className="text-white/60 text-sm md:text-base font-light">一貫性のある企業ブランドの構築</p>
+                </div>
+              </div>
+            </div>
             
             {/* こんな課題はありませんか？ */}
             <div className="mb-16">
@@ -385,7 +414,7 @@ export default function Service() {
             
             {/* よくあるご質問 */}
             <div>
-              <h3 className="text-2xl font-thin mb-6">コーポレートブランディングに関するよくある質問</h3>
+              <h3 className="text-2xl font-thin mb-6">コーポレートデザインに関するよくある質問</h3>
               <div className="border-t border-white/7">
                 <div className="border-b border-white/7 py-8">
                   <h4 className="text-xl font-thin mb-4">Q. ブランディングにはどのくらいの期間がかかりますか？</h4>
@@ -404,9 +433,19 @@ export default function Service() {
             </div>
           </section>
           
-          {/* クラウドインフラ */}
+          {/* アーキテクチャデザイン */}
           <section id="cloud" className="pb-20">
-            <h2 className="text-4xl font-thin mb-10">クラウドインフラ</h2>
+            <div className="flex items-center group md:py-6 py-4 px-4 mb-8 rounded-lg sticky md:top-20 top-4 bg-[#251E1F]/90 border border-white/8 z-10 bg-[url('/background.png')] bg-cover bg-center">
+              <div className="w-12 md:w-16 text-right pr-4 md:pr-6">
+                <span className="text-lg md:text-2xl font-thin">03</span>
+              </div>
+              <div className="flex-1 flex items-center justify-between">
+                <div>
+                  <h3 className="text-2xl md:text-4xl font-thin mb-2">アーキテクチャデザイン</h3>
+                  <p className="text-white/60 text-sm md:text-base font-light">安定的で拡張性の高い技術基盤の確立</p>
+                </div>
+              </div>
+            </div>
             
             {/* こんな課題はありませんか？ */}
             <div className="mb-16">
@@ -501,12 +540,12 @@ export default function Service() {
             
             {/* よくあるご質問 */}
             <div>
-              <h3 className="text-2xl font-thin mb-6">クラウドインフラに関するよくある質問</h3>
+              <h3 className="text-2xl font-thin mb-6">アーキテクチャデザインに関するよくある質問</h3>
               <div className="border-t border-white/7">
                 <div className="border-b border-white/7 py-8">
-                  <h4 className="text-xl font-thin mb-4">Q. クラウド移行にはどのくらいの期間がかかりますか？</h4>
+                  <h4 className="text-xl font-thin mb-4">Q. アーキテクチャデザインにはどのくらいの期間がかかりますか？</h4>
                   <p className="text-white/80 text-sm md:text-base font-light leading-relaxed">
-                    システム規模や複雑さによって異なりますが、標準的には計画策定から完全移行まで3〜6ヶ月程度を見込んでいます。段階的な移行計画を策定し、ビジネスへの影響を最小限に抑えながら進めます。
+                    システム規模や複雑さによって異なりますが、標準的には要件定義から詳細設計まで3〜6ヶ月程度を見込んでいます。段階的な設計計画を策定し、ビジネスへの影響を最小限に抑えながら進めます。
                   </p>
                 </div>
                 

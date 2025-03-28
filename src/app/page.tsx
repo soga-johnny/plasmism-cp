@@ -13,31 +13,28 @@ import Link from 'next/link'
 // import { motion } from 'framer-motion'
 
 export default function Home() {
-  const [showCube, setShowCube] = useState(true)
-  const featureRef = useRef<HTMLElement>(null)
+  // const [showCube, setShowCube] = useState(true)
+  // const featureRef = useRef<HTMLElement>(null)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (featureRef.current) {
-        const featureRect = featureRef.current.getBoundingClientRect()
-        // 特徴セクションが上部に少し入ってきたら（-100px地点）3Dキューブを非表示
-        setShowCube(featureRect.top > -100)
-      }
-    }
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     if (featureRef.current) {
+  //       const featureRect = featureRef.current.getBoundingClientRect()
+  //       // 特徴セクションが上部に少し入ってきたら（-100px地点）3Dキューブを非表示
+  //       setShowCube(featureRect.top > -100)
+  //     }
+  //   }
     
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  //   window.addEventListener('scroll', handleScroll)
+  //   return () => window.removeEventListener('scroll', handleScroll)
+  // }, [])
 
   return (
     <main className="relative">
       {/* <Header /> */}
-      <section>
-      {showCube && (
-        <div className="fixed top-0 right-0 w-full h-screen z-10">
-          <SceneCube />
-        </div>
-      )}
+      <div className="fixed top-0 right-0 w-full h-screen z-30">
+        <SceneCube />
+      </div>
       <div className="relative z-0">
         <div className="h-screen w-full max-w-[1440px] mx-auto flex items-end pb-16 px-4 md:px-8">
           <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-end gap-8 md:gap-0">
@@ -82,9 +79,10 @@ export default function Home() {
             </div>
         </div>
       </div>
-      </section>
 
-      <section ref={featureRef} className="z-20 bg-white/10 py-20 md:py-32 rounded-3xl">
+      <section className="z-20 bg-white/10 py-20 md:py-32 rounded-3xl">
+      {/* <section ref={featureRef} className="z-20 bg-white/10 py-20 md:py-32 rounded-3xl"> */}
+
         <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8 pb-20 border-b border-white/7">
           <div className="flex flex-col md:flex-row justify-between">
             <div>

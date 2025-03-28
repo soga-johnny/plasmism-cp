@@ -17,15 +17,13 @@ const AchievementsPage = async () => {
   const achievementsData = await getAllAchievements();
 
   return (
-    <main className="min-h-screen flex flex-col text-white md:pt-24 pt-8">
-      <div className="flex-1 w-full max-w-[1440px] mx-auto px-8 md:px-16 pt-8 pb-24">
+    <main className="min-h-screen flex flex-col text-white md:py-12 pt-2 pb-24">
+      <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-2 pb-12">
         <PageTitle 
           titleEn="Achievements" 
           titleJa="実績" 
           description="デザインの実績です。" 
         />
-        <div className="w-full h-[1px] bg-white/10 my-8"></div>
-
         {/* 実績一覧（2カラムグリッド） */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-14">
           {achievementsData.length > 0 ? (

@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 
 // パンくずリストの設定
 const breadcrumbMap: { [key: string]: { label: string; parent?: string } } = {
@@ -14,6 +14,7 @@ const breadcrumbMap: { [key: string]: { label: string; parent?: string } } = {
   '/product': { label: 'プロダクト', parent: '/' },
   '/service': { label: 'サービス', parent: '/' },
   '/achievements': { label: '実績', parent: '/' },
+  '/achievements/[id]': { label: '', parent: '/achievements' },
   '/recruit': { label: '採用', parent: '/' },
   '/company': { label: '会社案内', parent: '/' },
   '/contact': { label: 'お問い合わせ', parent: '/' },
@@ -22,11 +23,50 @@ const breadcrumbMap: { [key: string]: { label: string; parent?: string } } = {
 
 export default function Footer() {
   const pathname = usePathname()
+  const [dynamicTitle, setDynamicTitle] = useState<string>('')
+  const [isLoading, setIsLoading] = useState(false)
+  
+  // Notionのタイトルを取得する関数
+  const fetchNotionTitle = async (id: string) => {
+    setIsLoading(true)
+    try {
+      const response = await fetch(`/api/notion/pages/${id}`)
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+      const data = await response.json()
+      const title = data.properties?.Title?.title?.[0]?.plain_text || '実績詳細'
+      setDynamicTitle(title)
+    } catch (error) {
+      console.error('Failed to fetch Notion title:', error)
+      setDynamicTitle('実績詳細')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+  
+  // パスが変更されたときにタイトルを取得
+  useEffect(() => {
+    if (pathname.startsWith('/achievements/')) {
+      const id = pathname.split('/')[2]
+      fetchNotionTitle(id)
+    }
+  }, [pathname])
   
   // パンくずリストを生成する関数
   const generateBreadcrumbs = () => {
     const breadcrumbs: {path: string; label: string}[] = []
     let currentPath = pathname
+    
+    // 動的なパスの処理
+    if (currentPath.startsWith('/achievements/')) {
+      const id = currentPath.split('/')[2]
+      breadcrumbs.unshift({
+        path: currentPath,
+        label: isLoading ? '読み込み中...' : (dynamicTitle || '実績詳細')
+      })
+      currentPath = '/achievements'
+    }
     
     while (currentPath && breadcrumbMap[currentPath]) {
       breadcrumbs.unshift({
@@ -85,35 +125,36 @@ export default function Footer() {
           
           {shouldShowContactSection && (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
-              <div className="bg-white/4 rounded-3xl md:p-20 p-12 border border-white/6">
-                  <h3 className="text-4xl mb-6 font-thin text-center border-b border-white pb-1">お問い合わせ・ご相談</h3>
-                <p className="text-sm mb-6 text-gray-300">
+              <Link href="/contact" className="inline-block group">
+              <div className="bg-white/10 hover:bg-white/15 transition-all border border-white/20 rounded-xl md:px-12 px-6 md:py-20 py-12 w-full">
+                  <h3 className="text-4xl mb-6 font-thin text-center border-b border-white/8 pb-4">お問い合わせ・ご相談</h3>
+                <p className="text-sm mb-12 text-gray-300">
                   UI/UXデザイン、ブランディング、クラウドインフラなど、あらゆるデジタル課題に対応。
                   初回相談は無料で、お客様の状況に合わせた最適な提案をいたします。
                 </p>
                 <div className="flex justify-center">
-                  <Link href="/contact" className="inline-block">
-                    <svg className="w-14 h-14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+                    <svg className="w-14 h-14 transition-transform duration-500 group-hover:rotate-[360deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.5">
                       <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
-                  </Link>
-                </div>
+                </div> 
               </div>
+              </Link>
               
-              <div className="bg-white/4 rounded-3xl md:p-20 p-12 border border-white/6">
-                <h3 className="text-4xl mb-6 font-thin text-center border-b border-white pb-1">会社資料ダウンロード</h3>
-                <p className="text-sm mb-6 text-gray-300">
+              <Link href="/download" className="inline-block group">
+              <div className="bg-white/10 hover:bg-white/15 transition-all border border-white/20 rounded-xl md:px-12 px-6 md:py-20 py-12 w-full">
+                <h3 className="text-4xl mb-6 font-thin text-center border-b border-white/8 pb-4">会社資料ダウンロード</h3>
+                <p className="text-sm mb-12 text-gray-300">
                   サービス内容、実績事例、アプローチをまとめた資料をご用意。
                   メールアドレスをご登録いただくだけで、すぐにダウンロードいただけます。
                 </p>
                 <div className="flex justify-center">
-                  <Link href="/download" className="inline-block">
-                    <svg className="w-14 h-14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1">
+  
+                    <svg className="w-14 h-14 transition-transform duration-500 group-hover:rotate-[360deg]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="0.5">
                       <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                     </svg>
-                  </Link>
                 </div>
               </div>
+              </Link>
             </div>
           )}
         </div>

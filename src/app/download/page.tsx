@@ -12,17 +12,17 @@ export default function Download() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col text-white md:py-24 pt-2 pb-24">
-      <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-8 md:py-16 pt-6">
+    <main className="min-h-screen flex flex-col text-white md:py-12 pt-2 pb-24">
+      <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-2 pb-12">
         <PageTitle 
           titleEn="Download" 
           titleJa="会社資料ダウンロード" 
           description="弊社のサービス資料をダウンロードいただけます。必要事項をご入力の上、送信ボタンをクリックしてください。" 
         />
-        <p className="mb-8 font-extralight text-sm md:text-base">※は必須項目です。</p>
-        <p className="mb-8 font-extralight text-sm md:text-base">資料ダウンロード後、担当者から追加情報のご案内をさせていただく場合があります。</p>
+        <p className="max-w-[720px] mx-auto mb-8 font-extralight text-sm md:text-base">※は必須項目です。</p>
+        <p className="max-w-[720px] mx-auto mb-8 font-extralight text-sm md:text-base">資料ダウンロード後、担当者から追加情報のご案内をさせていただく場合があります。</p>
         
-        <div className="space-y-8 mb-16 max-w-[664px] mx-auto pt-10">
+        <div className="space-y-8 mb-16 max-w-[720px] mx-auto pt-10">
           <form className="space-y-12">
             <div className="space-y-1">
               <label htmlFor="company" className="block text-sm">

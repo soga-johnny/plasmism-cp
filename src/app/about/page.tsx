@@ -8,9 +8,8 @@ import PageTitle from '@/components/PageTitle'
 
 export default function About() {
   return (
-    <main className="min-h-screen flex flex-col text-white md:py-24 pt-8 pb-24">
-      {/* <Header /> */}
-      <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-8 py-16">
+    <main className="min-h-screen flex flex-col text-white md:py-12 pt-2 pb-24">
+      <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-2 pb-12">
         <PageTitle 
           titleEn="About" 
           titleJa="私たちについて" 
@@ -26,7 +25,7 @@ export default function About() {
                     <h2 className="text-md font-thin">ミッション</h2>
                   </div>
                   <div className="border border-white/10 rounded-full -ml-8 px-4 py-3">
-                    <h2 className="text-md font-thin">存在意義aaaaaaaaaaaa</h2>
+                    <h2 className="text-md font-thin">存在意義</h2>
                   </div>
                 </div>
                 <div className="rounded-lg">
@@ -219,7 +218,7 @@ export default function About() {
                   <h3 className="text-sm font-thin mb-3">Johnny Soga</h3>
                   <p className="text-white text-xs md:text-sm font-light leading-relaxed">
                   大阪府生まれ。建設業出身からの独学でイラストレーター / Webデザイナーとして独立。沖縄広告賞にて金賞を受賞。<br/>
-業務領域を拡大し、複数社スタートアップにてUI/UXデザインを主軸に、XRデザイン・フロントエンドエンジニアリング・Webマーケティング・PdMを経験。合同会社For Twoにて、CDOとしてプロダクトを開発面・戦略面からグロース支援。<br/>
+                  業務領域を拡大し、複数社スタートアップにてUI/UXデザインを主軸に、XRデザイン・フロントエンドエンジニアリング・Webマーケティング・PdMを経験。合同会社For Twoにて、CDOとしてプロダクトを開発面・戦略面からグロース支援。
 CDOを2年経験の後、より良い顧客体験を追求したく、2024年にPlasmism株式会社を設立。
                   </p>
                 </div>

@@ -96,8 +96,8 @@ const AchievementPage: DynamicPageComponent<{ id: string }> = async ({ params })
     }
 
     return (
-      <main className="min-h-screen flex flex-col text-white md:pt-24 pt-8">
-        <div className="flex-1 w-full max-w-[1440px] mx-auto px-8 md:px-16 pt-8 pb-24">
+      <main className="min-h-screen flex flex-col text-white md:py-12 pt-2 pb-24">
+      <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-2 pb-12">
           <div className="mb-8">
             <Link href="/achievements" className="inline-flex items-center text-white/70 hover:text-white transition-colors">
               <ArrowLeft size={16} className="mr-2" />
@@ -163,8 +163,13 @@ const AchievementPage: DynamicPageComponent<{ id: string }> = async ({ params })
             
           </div>
           
-          <div className="w-full h-[1px] bg-white/10 my-12"></div>
-        </div>
+          <div className="mt-8">
+            <Link href="/achievements" className="inline-flex items-center text-white/70 hover:text-white transition-colors">
+              <ArrowLeft size={16} className="mr-2" />
+              <span>実績一覧に戻る</span>
+            </Link>
+          </div>       
+           </div>
         <Footer />
       </main>
     );
