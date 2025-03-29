@@ -123,7 +123,7 @@ export default function Header() {
   return (
     <>
       {/* 下部固定メニュー */}
-      <header className="fixed bottom-3 w-2/3 right-2 z-[50] flex bg-white overflow-hidden rounded-lg rounded-tr-lg">
+      <header className="fixed bottom-3 left-1/2 transform -translate-x-1/2 w-2/3 z-[50] flex bg-white overflow-hidden rounded-lg rounded-tr-lg">
         <button 
           className="flex-1 flex flex-col items-center justify-center py-2 bg-white text-black border-r border-gray-200"
           onClick={toggleMenu}
@@ -134,12 +134,12 @@ export default function Header() {
           </div>
           <span className="text-xs">メニュー</span>
         </button>
-        <Link 
+        {/* <Link 
           href="/contact" 
           className="flex-1 flex items-center justify-center gap-2 py-1 bg-[#c22626] text-white"
         >
           <span className="text-xs">お問合わせ</span>
-        </Link>
+        </Link> */}
       </header>
       
       {/* モバイルメニュー - AnimatePresenceをクライアントサイドでのみレンダリング */}
@@ -151,16 +151,33 @@ export default function Header() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              transition={{ duration: 0.3 }}
               onClick={closeMenu}
             />
             
             <motion.div
-              className="fixed inset-x-4 bottom-0 h-[97vh] bg-[#1C1819] rounded-t-lg overflow-hidden z-[70]"
-              initial={{ y: "100%" }}
-              animate={{ y: 0 }}
-              exit={{ y: "100%" }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+              className="fixed inset-x-4 bottom-4 top-4 h-[96vh] bg-[#1C1819] border border-white/10 rounded-lg overflow-hidden z-[70] flex flex-col"
+              initial={{ opacity: 0, scale: 0.95, filter: "blur(8px)" }}
+              animate={{ 
+                opacity: 1, 
+                scale: 1, 
+                filter: "blur(0px)",
+                transition: {
+                  type: "spring",
+                  damping: 20,
+                  stiffness: 300,
+                  duration: 0.5
+                }
+              }}
+              exit={{ 
+                opacity: 0, 
+                scale: 0.98,
+                filter: "blur(4px)",
+                transition: {
+                  duration: 0.25,
+                  ease: "easeInOut"
+                }
+              }}
             >
               {/* ロゴ */}
               <div className="px-8 pt-4">
@@ -175,136 +192,136 @@ export default function Header() {
                 </Link>
               </div>
               
-              {/* メニュー項目 */}
-              <nav className="flex-1 flex flex-col justify-start mt-4">
-                <ul className="text-left space-y-0 border-t border-white/10">
-                  <li className="border-b border-white/10">
-                    <Link 
-                      href="/" 
-                      className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/' ? 'line-through font-normal' : ''}`}
-                      onClick={closeMenu}
-                    >
-                      トップ
-                    </Link>
-                  </li>
-                  <li className="border-b border-white/10">
-                    <Link 
-                      href="/about" 
-                      className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/about' ? 'line-through font-normal' : ''}`}
-                      onClick={closeMenu}
-                    >
-                      私たちについて
-                    </Link>
-                  </li>
-                  <li className="border-b border-white/10">
-                    <Link 
-                      href="/feature" 
-                      className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/feature' ? 'line-through font-normal' : ''}`}
-                      onClick={closeMenu}
-                    >
-                      特徴
-                    </Link>
-                  </li>
-                  <li className="border-b border-white/10">
-                    <Link 
-                      href="/product" 
-                      className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/product' ? 'line-through font-normal' : ''}`}
-                      onClick={closeMenu}
-                    >
-                      プロダクト
-                    </Link>
-                  </li>
-                  <li className="border-b border-white/10">
-                    <Link 
-                      href="/service" 
-                      className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/service' ? 'line-through font-normal' : ''}`}
-                      onClick={closeMenu}
-                    >
-                      サービス
-                    </Link>
-                  </li>
-                  <li className="border-b border-white/10">
-                    <Link 
-                      href="/achievements" 
-                      className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/achievements' ? 'line-through font-normal' : ''}`}
-                      onClick={closeMenu}
-                    >
-                      実績
-                    </Link>
-                  </li>
-                  <li className="border-b border-white/10">
-                    <Link 
-                      href="/recruit" 
-                      className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/recruit' ? 'line-through font-normal' : ''}`}
-                      onClick={closeMenu}
-                    >
-                      採用
-                    </Link>
-                  </li>
-                  <li className="border-b border-white/10">
-                    <Link 
-                      href="/company" 
-                      className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === '/company' ? 'line-through font-normal' : ''}`}
-                      onClick={closeMenu}
-                    >
-                      会社案内
-                    </Link>
-                  </li>
-                </ul>
-                
-                <div className="mt-6 px-8 space-y-4">
-                  <Link 
-                    href="/download" 
-                    className="flex items-center text-md font-extralight hover:opacity-70 transition-opacity"
-                    onClick={closeMenu}
-                  >
-                    <span className="mr-2">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z" fill="currentColor"/>
-                      </svg>
-                    </span>
-                    資料ダウンロード
-                  </Link>
+              {/* スクロール可能なコンテンツエリア */}
+              <div className="flex-1 overflow-y-auto py-4">
+                {/* メニュー項目アニメーション */}
+                <nav className="flex flex-col justify-start">
+                  <ul className="text-left space-y-0 border-t border-white/10">
+                    {[
+                      { path: "/", label: "トップ" },
+                      { path: "/about", label: "私たちについて" },
+                      { path: "/feature", label: "特徴" },
+                      { path: "/product", label: "プロダクト" },
+                      { path: "/service", label: "サービス" },
+                      { path: "/achievements", label: "実績" },
+                      { path: "/recruit", label: "採用" },
+                      { path: "/company", label: "会社案内" }
+                    ].map((item, index) => (
+                      <motion.li 
+                        key={item.path}
+                        className="border-b border-white/10"
+                        initial={{ opacity: 0, x: -10 }}
+                        animate={{ 
+                          opacity: 1, 
+                          x: 0,
+                          transition: {
+                            delay: 0.05 * index,
+                            duration: 0.25
+                          }
+                        }}
+                      >
+                        <Link 
+                          href={item.path} 
+                          className={`block py-3 px-8 text-md font-extralight hover:bg-gray-900 transition-colors duration-200 ${pathname === item.path ? 'line-through font-normal' : ''}`}
+                          onClick={closeMenu}
+                        >
+                          {item.label}
+                        </Link>
+                      </motion.li>
+                    ))}
+                  </ul>
                   
-                  <Link 
-                    href="/contact" 
-                    className="flex items-center text-md font-extralight hover:opacity-70 transition-opacity"
-                    onClick={closeMenu}
+                  <div className="mt-6 px-8 space-y-4">
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ 
+                        opacity: 1, 
+                        y: 0,
+                        transition: {
+                          delay: 0.4,
+                          duration: 0.3
+                        }
+                      }}
+                    >
+                      <Link 
+                        href="/download" 
+                        className="bg-[#ffffff] hover:bg-[#BC2611] hover:scale-105 hover:text-[#ffffff] transition-all duration-300 text-[#251E1F] rounded-md py-3 px-4 flex items-center justify-between text-sm w-full"
+                        onClick={closeMenu}
+                      >
+                        資料ダウンロード <span className="border-l border-[#251E1F] pl-2 group-hover:translate-x-1 transition-transform duration-300">→</span>
+                      </Link>
+                    </motion.div>
+                    
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ 
+                        opacity: 1, 
+                        y: 0,
+                        transition: {
+                          delay: 0.5,
+                          duration: 0.3
+                        }
+                      }}
+                    >
+                      <Link 
+                        href="/contact" 
+                        className="bg-[#ffffff] hover:bg-[#BC2611] hover:scale-105 hover:text-[#ffffff] transition-all duration-300 text-[#251E1F] rounded-md py-3 px-4 flex items-center justify-between text-sm w-full"
+                        onClick={closeMenu}
+                      >
+                        お問い合わせ <span className="ml-2 border-l border-[#251E1F] pl-2 group-hover:translate-x-1 transition-transform duration-300">→</span>
+                      </Link>
+                    </motion.div>
+                  </div>
+                  
+                  <motion.div 
+                    className="mt-auto mb-4 px-8 py-4"
+                    initial={{ opacity: 0 }}
+                    animate={{ 
+                      opacity: 1,
+                      transition: {
+                        delay: 0.6,
+                        duration: 0.3
+                      }
+                    }}
                   >
-                    <span className="mr-2">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z" fill="currentColor"/>
-                      </svg>
-                    </span>
-                    お問い合わせ
-                  </Link>
-                </div>
-                
-                <div className="mt-auto mb-4 px-8 py-4">
-                  <Link 
-                    href="/privacy" 
-                    className="text-sm font-extralight hover:opacity-70 transition-opacity"
-                    onClick={closeMenu}
-                  >
-                    プライバシーポリシー
-                  </Link>
-                </div>
-              </nav>
+                    <Link 
+                      href="/privacy" 
+                      className="text-sm font-extralight hover:opacity-70 transition-opacity"
+                      onClick={closeMenu}
+                    >
+                      プライバシーポリシー
+                    </Link>
+                  </motion.div>
+                </nav>
+              </div>
               
-              {/* 閉じるボタン */}
-              <div className="p-4 absolute bottom-2 left-2 right-2">
+              {/* 閉じるボタン - 固定位置 */}
+              <motion.div 
+                className="p-3 border-t border-white/10"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ 
+                  opacity: 1, 
+                  y: 0,
+                  transition: {
+                    delay: 0.6,
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 25
+                  }
+                }}
+              >
                 <button 
-                  className="flex items-center justify-center w-full py-4 text-white bg-white/5 border border-white/10 rounded-md transition-colors duration-300 hover:bg-white hover:text-black font-extralight"
+                  className="flex items-center justify-center w-full py-3 text-white bg-white/5 text-sm border border-white/10 rounded-md transition-colors duration-300 hover:bg-white hover:text-black font-extralight"
                   onClick={closeMenu}
                 >
                   <span className="mr-2">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" fill="currentColor"/>
                     </svg>
                   </span>
                   閉じる
                 </button>
-              </div>
+              </motion.div>
             </motion.div>
           </>
         )}

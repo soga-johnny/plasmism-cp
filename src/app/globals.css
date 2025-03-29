@@ -198,3 +198,36 @@ body {
     animation: blink 1s infinite;
   }
 }
+
+/* モバイル用スタイル */
+@media (max-width: 768px), (pointer: coarse) {
+  /* モバイルでの遷移表示のアニメーション */
+  @keyframes mobileFadeIn {
+    0% { 
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0.7);
+    }
+    100% { 
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+  
+  @keyframes mobileFadeOut {
+    0% { 
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    100% { 
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(1.2);
+    }
+  }
+  
+  .mobile-transition-state {
+    font-size: 12px;
+    padding: 4px 10px;
+    animation: mobileFadeIn 0.3s ease-out forwards, mobileFadeOut 0.4s ease-in forwards 1.5s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  }
+}
