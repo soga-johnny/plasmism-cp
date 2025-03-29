@@ -123,16 +123,16 @@ export default function Header() {
   return (
     <>
       {/* 下部固定メニュー */}
-      <header className="fixed bottom-3 left-1/2 transform -translate-x-1/2 w-2/3 z-[50] flex bg-white overflow-hidden rounded-lg rounded-tr-lg">
+      <header className="fixed bottom-4 left-1/2 transform -translate-x-1/2 w-2/3 z-[50] flex bg-white overflow-hidden rounded-lg rounded-tr-lg">
         <button 
-          className="flex-1 flex flex-col items-center justify-center py-2 bg-white text-black border-r border-gray-200"
+          className="flex-1 flex items-center justify-center py-3 bg-white text-[#251E1F] border-r border-gray-200"
           onClick={toggleMenu}
         >
           <div className="flex flex-col items-center">
             <div className="w-12 h-0.5 bg-black my-1"></div>
             <div className="w-12 h-0.5 bg-black mb-1"></div>
           </div>
-          <span className="text-xs">メニュー</span>
+          <span className="text-xs ml-4">メニュー</span>
         </button>
         {/* <Link 
           href="/contact" 
@@ -156,7 +156,7 @@ export default function Header() {
             />
             
             <motion.div
-              className="fixed inset-x-4 bottom-4 top-4 h-[96vh] bg-[#1C1819] border border-white/10 rounded-lg overflow-hidden z-[70] flex flex-col"
+              className="fixed inset-x-4 bottom-6 top-4 h-[96vh] bg-[#1C1819] border border-white/10 rounded-lg overflow-hidden z-[70] flex flex-col"
               initial={{ opacity: 0, scale: 0.95, filter: "blur(8px)" }}
               animate={{ 
                 opacity: 1, 
@@ -193,10 +193,10 @@ export default function Header() {
               </div>
               
               {/* スクロール可能なコンテンツエリア */}
-              <div className="flex-1 overflow-y-auto py-4">
+              <div className="flex-1 overflow-y-auto py-6">
                 {/* メニュー項目アニメーション */}
                 <nav className="flex flex-col justify-start">
-                  <ul className="text-left space-y-0 border-t border-white/10">
+                  <ul className="text-left mx-8 py-1 space-y-0 border-t border-white/10">
                     {[
                       { path: "/", label: "トップ" },
                       { path: "/about", label: "私たちについて" },

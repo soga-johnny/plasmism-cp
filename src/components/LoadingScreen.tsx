@@ -8,6 +8,7 @@ import { create } from 'zustand';
 interface LoadingState {
   isLoading: boolean;
   progress: number;
+  loadStartTime?: number;
   setLoading: (isLoading: boolean) => void;
   setProgress: (progress: number) => void;
   incrementProgress: (amount: number) => void;
@@ -16,6 +17,7 @@ interface LoadingState {
 export const useLoadingStore = create<LoadingState>((set) => ({
   isLoading: true,
   progress: 0,
+  loadStartTime: Date.now(),
   setLoading: (isLoading) => set({ isLoading }),
   setProgress: (progress) => set({ progress: Math.min(Math.max(progress, 0), 100) }),
   incrementProgress: (amount) => set((state) => ({ 
@@ -31,9 +33,16 @@ export default function LoadingScreen() {
     // 進捗率が100%に達したらフェードアウトを開始
     if (progress >= 100 && !isFading) {
       setIsFading(true);
+      
+      // 最低1.5秒はローディング画面を表示する
+      const minDisplayTime = 3000; // 3秒
+      const loadStartTime = useLoadingStore.getState().loadStartTime || Date.now();
+      const elapsedTime = Date.now() - loadStartTime;
+      const remainingTime = Math.max(0, minDisplayTime - elapsedTime);
+      
       setTimeout(() => {
         setLoading(false);
-      }, 500); // フェードアウトアニメーションの時間と同じ
+      }, remainingTime + 500); // 残り時間 + フェードアウトアニメーションの時間
     }
   }, [progress, isFading, setLoading]);
 
