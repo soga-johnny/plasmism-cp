@@ -6,14 +6,23 @@ import { ArrowLeft } from 'lucide-react';
 import Footer from '@/components/Footer';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { AppPageParams, DynamicPageComponent } from '@/app/next-type-fixes';
 
 // 動的メタデータ
-export async function generateMetadata({ 
-  params 
-}: AppPageParams<{ id: string }>): Promise<Metadata> {
+export async function generateMetadata({ params }: any): Promise<Metadata> {
   try {
-    const achievement = await getAchievementById(params.id);
+    // Next.js 15.2.3に対応
+    const id = typeof params === 'object' && params !== null 
+               ? (params.id || (params instanceof Promise ? (await params).id : null))
+               : null;
+               
+    if (!id) {
+      return {
+        title: '実績が見つかりません | プラズミズム',
+        description: '指定された実績は見つかりませんでした。',
+      };
+    }
+    
+    const achievement = await getAchievementById(id);
     
     if (!achievement) {
       return {
@@ -21,21 +30,19 @@ export async function generateMetadata({
         description: '指定された実績は見つかりませんでした。',
       };
     }
-
-    // Notionページの型を any で扱う
+    
     const page = achievement.page as any;
     const title = page.properties?.Title?.title?.[0]?.plain_text || '実績詳細';
     const description = page.properties?.Description?.rich_text?.[0]?.plain_text || '';
-
+    
     return {
       title: `${title} | プラズミズム`,
-      description,
+      description: description,
     };
-  } catch (error) {
-    console.error('Metadata generation error:', error);
+  } catch {
     return {
-      title: 'エラーが発生しました | プラズミズム',
-      description: '実績の読み込み中にエラーが発生しました。',
+      title: '実績詳細 | プラズミズム',
+      description: 'プラズミズムの実績詳細です。',
     };
   }
 }
@@ -50,9 +57,18 @@ export async function generateStaticParams() {
 }
 
 // 実績詳細ページ
-const AchievementPage: DynamicPageComponent<{ id: string }> = async ({ params }) => {
+export default async function AchievementPage({ params }: any) {
   try {
-    const achievementData = await getAchievementById(params.id);
+    // Next.js 15.2.3に対応
+    const id = typeof params === 'object' && params !== null 
+               ? (params.id || (params instanceof Promise ? (await params).id : null))
+               : null;
+               
+    if (!id) {
+      notFound();
+    }
+    
+    const achievementData = await getAchievementById(id);
     
     if (!achievementData) {
       notFound();
@@ -96,8 +112,8 @@ const AchievementPage: DynamicPageComponent<{ id: string }> = async ({ params })
     }
 
     return (
-      <main className="min-h-screen flex flex-col text-white md:pt-24 pt-8">
-        <div className="flex-1 w-full max-w-[1440px] mx-auto px-8 md:px-16 pt-8 pb-24">
+      <main className="min-h-screen flex flex-col text-white md:py-12 pt-2 pb-24">
+      <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-2 pb-12">
           <div className="mb-8">
             <Link href="/achievements" className="inline-flex items-center text-white/70 hover:text-white transition-colors">
               <ArrowLeft size={16} className="mr-2" />
@@ -163,15 +179,18 @@ const AchievementPage: DynamicPageComponent<{ id: string }> = async ({ params })
             
           </div>
           
-          <div className="w-full h-[1px] bg-white/10 my-12"></div>
-        </div>
+          <div className="mt-8">
+            <Link href="/achievements" className="inline-flex items-center text-white/70 hover:text-white transition-colors">
+              <ArrowLeft size={16} className="mr-2" />
+              <span>実績一覧に戻る</span>
+            </Link>
+          </div>       
+           </div>
         <Footer />
       </main>
     );
-  } catch (error) {
-    console.error('Page rendering error:', error);
+  } catch (_error) {
+    console.error('Page rendering error:', _error);
     notFound();
   }
-};
-
-export default AchievementPage; 
+} 

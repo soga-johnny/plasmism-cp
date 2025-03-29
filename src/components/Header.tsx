@@ -33,14 +33,15 @@ export default function Header() {
       const day = String(now.getDate()).padStart(2, '0')
       const hours = String(now.getHours()).padStart(2, '0')
       const minutes = String(now.getMinutes()).padStart(2, '0')
+      const seconds = String(now.getSeconds()).padStart(2, '0')
       
       setCurrentDate(`${year}.${month}.${day}`)
-      setCurrentTime(`${hours}:${minutes}`)
+      setCurrentTime(`${hours}:${minutes}:${seconds}`)
     }
     
-    // 初回と1分ごとに更新
+    // 初回と1秒ごとに更新
     updateDateTime()
-    const interval = setInterval(updateDateTime, 60000)
+    const interval = setInterval(updateDateTime, 1000)
     
     // メニュー開閉時にbodyのスクロールを制御
     if (isMenuOpen) {
@@ -72,7 +73,7 @@ export default function Header() {
         </div>
         <div className="flex items-center">
         <nav>
-            <ul className="flex space-x-6 text-sm font-extralight mr-16">
+            <ul className="flex space-x-6 text-sm font-extralight mr-12">
               <li><Link href="/" className={`hover:opacity-70 transition-opacity ${pathname === '/' ? 'line-through font-normal' : ''}`}>トップ</Link></li>
               <li><Link href="/about" className={`hover:opacity-70 transition-opacity ${pathname === '/about' ? 'line-through font-normal' : ''}`}>私たちについて</Link></li>
               <li><Link href="/feature" className={`hover:opacity-70 transition-opacity ${pathname === '/feature' ? 'line-through font-normal' : ''}`}>特徴</Link></li>
@@ -83,14 +84,14 @@ export default function Header() {
               <li><Link href="/company" className={`hover:opacity-70 transition-opacity ${pathname === '/company' ? 'line-through font-normal' : ''}`}>会社案内</Link></li>
             </ul>
           </nav>
-          <div className="mr-6 text-right border-r border-gray-500 pr-6">
+          <div className="mr-2 text-right border-r border-gray-500 pr-4">
             <div className="text-sm font-extralight">{currentDate}</div>
-            <div className="text-2xl font-extralight">{currentTime}</div>
+            <div className="text-md font-extralight">{currentTime}</div>
           </div>
-          <Link href="/contact" className="bg-[#BC2611] hover:bg-[#a01f1f] transition-colors text-white rounded-md py-4 px-4 mx-2 flex items-center text-sm">
+          <Link href="/contact" className="bg-[#BC2611] hover:bg-[#a01f1f] transition-colors text-white rounded-md py-3 px-4 mx-2 flex items-center text-sm">
             お問い合わせ <span className="ml-2 border-l border-red-400 pl-2">→</span>
           </Link>
-          <Link href="/download" className="bg-[#BC2611] hover:bg-[#a01f1f] transition-colors text-white rounded-md py-4 px-4 flex items-center text-sm">
+          <Link href="/download" className="bg-[#BC2611] hover:bg-[#a01f1f] transition-colors text-white rounded-md py-3 px-4 flex items-center text-sm">
             資料DL <span className="ml-2 border-l border-red-400 pl-2">→</span>
           </Link>
         </div>

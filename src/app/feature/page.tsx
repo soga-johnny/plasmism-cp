@@ -7,16 +7,15 @@ import PageTitle from '@/components/PageTitle'
 
 export default function Feature() {
   return (
-    <main className="min-h-screen flex flex-col text-white md:py-24 pt-8 pb-24 overflow-x-hidden">
-      {/* <Header /> */}
-      <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-8 py-16 relative overflow-x-hidden">
+    <main className="min-h-screen flex flex-col text-white md:py-12 pt-2 pb-24">
+      <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-2 pb-12">
         <PageTitle 
           titleEn="Feature" 
           titleJa="特徴" 
           description="少数精鋭だからこそ実現する、幅広い経験と深い専門性があります。" 
         />
         
-        <div className="space-y-12 mb-16 md:mx-16 mx-4 pt-10 ">
+        <div className="space-y-12 md:mx-16 mx-4 pt-10 ">
 
         <section className="border-b border-white/7 pb-10">
             <div className="flex flex-col items-center text-center">
@@ -32,9 +31,9 @@ export default function Feature() {
             </div>
           </section>
           {/* 1-1 設計セクション */}
-          <section className="border-b border-white/7 md:pt-60 pt-20 pb-20 relative overflow-visible overflow-x-hidden">
+          <section className="border-b border-white/7 md:pt-40 pt-20 md:pb-20 pb-10 relative overflow-visible overflow-x-hidden">
             {/* 背景テキスト */}
-            <div className="absolute md:-top-20 -top-10 left-1/2 transform -translate-x-1/2 md:text-[300px] text-[100px] font-thin z-0 select-none pointer-events-none text-center bg-clip-text text-transparent md:w-[200%] w-[150%]" style={{ backgroundImage: 'linear-gradient(to right, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)' }}>
+            <div className="absolute md:-top-24 -top-10 left-1/2 transform -translate-x-1/2 md:text-[300px] text-[120px] font-serif font-light z-0 select-none pointer-events-none text-center bg-clip-text text-transparent md:w-[200%] w-[220%]" style={{ backgroundImage: 'linear-gradient(to right, transparent 0%, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%, transparent 100%)' }}>
               Design
             </div>
             <div className="flex flex-col md:flex-row justify-between relative z-10">
@@ -72,7 +71,7 @@ export default function Feature() {
                   </div>
                 </div>
               </div>
-              <div className="mt-8 md:mt-2 w-full h-full">
+              <div className="mt-8 md:mt-2 md:max-w-[500px] w-full h-full">
                 <Image 
                   src="/sample1.png"
                   alt="実装イメージ"
@@ -85,10 +84,10 @@ export default function Feature() {
           </section>
 
           {/* 1-2 実装セクション */}
-          <section className="border-b border-white/7 md:pt-60 pt-20 pb-20 relative overflow-visible overflow-x-hidden">
+          <section className="border-b border-white/7 md:pt-40 pt-20 md:pb-20 pb-10 relative overflow-visible overflow-x-hidden">
             {/* 背景テキスト */}
-            <div className="absolute md:-top-20 -top-10 left-1/2 transform -translate-x-1/2 md:text-[300px] text-[100px] font-thin z-0 select-none pointer-events-none text-center bg-clip-text text-transparent md:w-[200%] w-[150%]" style={{ backgroundImage: 'linear-gradient(to right, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)' }}>
-              Implementation
+            <div className="absolute md:-top-20 -top-10 left-1/2 transform -translate-x-1/2 md:text-[250px] text-[100px] font-serif font-light z-0 select-none pointer-events-none text-center bg-clip-text text-transparent md:w-[200%] w-[220%]" style={{ backgroundImage: 'linear-gradient(to right, transparent 0%, transparent 25%, rgba(255,255,255,0.05) 50%, transparent 75%, transparent 100%)' }}>
+              Implement
             </div>
             <div className="flex flex-col md:flex-row justify-between relative z-10">
               <div className="md:flex flex">
@@ -107,8 +106,7 @@ export default function Feature() {
                   <h2 className="text-3xl md:text-4xl font-thin mb-4">実装</h2>
                   <div className="rounded-lg">
                     <p className="font-thin text-2xl md:text-3xl leading-loose mb-4">
-                      技術的な実現性と将来性を<br/>
-                      見据えた実装
+                      技術的な実現性と将来性を見据えた実装
                     </p>
                     <p className="text-white/80 text-sm md:text-base font-light leading-relaxed mb-8">
                       設計フェーズで確立したコンセプトを忠実かつ柔軟に実装します。最新の技術スタックを活用しながらも、保守性と拡張性を常に念頭に置き、長期的な視点でのプロダクト開発を行います。
@@ -123,7 +121,7 @@ export default function Feature() {
                   </div>
                 </div>
               </div>
-              <div className="mt-8 md:mt-2 w-full h-full">
+              <div className="mt-8 md:mt-2 md:max-w-[500px] w-full h-full">
                 <Image 
                   src="/sample1.png"
                   alt="実装イメージ"
@@ -136,9 +134,9 @@ export default function Feature() {
           </section>
           
           {/* 1-3 検証セクション */}
-          <section className="border-b border-white/7 md:pt-60 pt-20 pb-20 relative overflow-visible overflow-x-hidden">
+          <section className="border-b border-white/7 md:pt-40 pt-20 md:pb-20 pb-10 relative overflow-visible overflow-x-hidden">
             {/* 背景テキスト */}
-            <div className="absolute md:-top-20 -top-10 left-1/2 transform -translate-x-1/2 md:text-[300px] text-[100px] font-thin z-0 select-none pointer-events-none text-center bg-clip-text text-transparent md:w-[200%] w-[150%]" style={{ backgroundImage: 'linear-gradient(to right, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)' }}>
+            <div className="absolute md:-top-24 -top-10 left-1/2 transform -translate-x-1/2 md:text-[300px] text-[120px] font-serif font-light z-0 select-none pointer-events-none text-center bg-clip-text text-transparent md:w-[200%] w-[220%]" style={{ backgroundImage: 'linear-gradient(to right, transparent 0%, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%, transparent 100%)' }}>
               Testing
             </div>
             <div className="flex flex-col md:flex-row justify-between relative z-10">
@@ -174,7 +172,7 @@ export default function Feature() {
                   </div>
                 </div>
               </div>
-              <div className="mt-8 md:mt-2 w-full h-full">
+              <div className="mt-8 md:mt-2 md:max-w-[500px] w-full h-full">
                 <Image 
                   src="/sample1.png"
                   alt="検証イメージ"
@@ -187,9 +185,9 @@ export default function Feature() {
           </section>
           
           {/* 1-4 改良セクション */}
-          <section className="border-b border-white/7 md:pt-60 pt-20 pb-20 relative overflow-visible overflow-x-hidden">
+          <section className="border-b border-white/7 md:pt-40 pt-20 md:pb-20 pb-10 relative overflow-visible overflow-x-hidden">
             {/* 背景テキスト */}
-            <div className="absolute md:-top-20 -top-10 left-1/2 transform -translate-x-1/2 md:text-[300px] text-[100px] font-thin z-0 select-none pointer-events-none text-center bg-clip-text text-transparent md:w-[200%] w-[150%]" style={{ backgroundImage: 'linear-gradient(to right, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%)' }}>
+            <div className="absolute md:-top-20 -top-10 left-1/2 transform -translate-x-1/2 md:text-[250px] text-[100px] font-serif font-light z-0 select-none pointer-events-none text-center bg-clip-text text-transparent md:w-[200%] w-[220%]" style={{ backgroundImage: 'linear-gradient(to right, transparent 0%, transparent 25%, rgba(255,255,255,0.05) 50%, transparent 75%, transparent 100%)' }}>
               Improvement
             </div>
             <div className="flex flex-col md:flex-row justify-between relative z-10">
@@ -225,7 +223,7 @@ export default function Feature() {
                   </div>
                 </div>
               </div>
-              <div className="mt-8 md:mt-2 w-full h-full">
+              <div className="mt-8 md:mt-2 md:max-w-[500px] w-full h-full">
                 <Image 
                   src="/sample1.png"
                   alt="改良イメージ"

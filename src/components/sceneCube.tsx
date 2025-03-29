@@ -30,7 +30,7 @@ function Cube() {
 
   // 反射マテリアルの作成
   const reflectiveMaterial = new MeshPhysicalMaterial({
-    color: 0xC0BFD2,  // ベースカラーを茶色に設定
+    color: 0xB5989F,  // ベースカラーを茶色に設定
     transmission: 1,
     roughness: 0.05,  // より滑らかに
     metalness: 1.0,
@@ -92,7 +92,7 @@ function Cube() {
       const t = Math.min(progress * 10, 1)
       
       // マテリアルのプロパティを補間
-      material.color = new Color(0xC0BFD2).lerp(new Color(0xFFFFFF), t)  // 色を補間
+      material.color = new Color(0xB5989F).lerp(new Color(0xFFFFFF), t)  // 色を補間
       material.transmission = 0.4 + t
       material.metalness = 1 - t
       material.roughness = 0.05 * (1 - t) + 0.01 * t  // より滑らかな状態から開始
@@ -189,7 +189,7 @@ export default function SceneCube() {
 
   return (
     <motion.div 
-      className="w-full h-screen absolute top-0 z-10"
+      className="fixed w-full h-screen top-0 left-0 z-10"
       initial={{ 
         opacity: 0,
         y: -2000 

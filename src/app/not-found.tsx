@@ -5,8 +5,8 @@ import Link from 'next/link'
 
 export default function NotFound() {
   return (
-    <main className="min-h-screen flex flex-col text-white md:py-24 pt-8 pb-24">
-      <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-8 py-16">
+    <main className="min-h-screen flex flex-col text-white md:py-12 pt-2 pb-24">
+      <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-2 pb-12">
         <div className="space-y-12 mb-16 md:mx-16 mx-4 pt-10">
           {/* 404エラーセクション */}
           <section className="border-b border-white/7 pb-20">
