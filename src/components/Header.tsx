@@ -122,6 +122,11 @@ export default function Header() {
   // SPヘッダー
   return (
     <>
+      {/* モバイル用時計 - 最上部中央配置 */}
+      <div className="fixed top-1 left-1/2 transform -translate-x-1/2 z-[40] mix-blend-difference text-white text-center">
+        <div className="text-[8px] font-extralight tracking-wider">{currentDate} {currentTime}</div>
+      </div>
+      
       {/* 下部固定メニュー */}
       <header className="fixed bottom-4 left-1/2 transform -translate-x-1/2 w-2/3 z-[50] flex bg-white overflow-hidden rounded-lg rounded-tr-lg">
         <button 
@@ -129,10 +134,10 @@ export default function Header() {
           onClick={toggleMenu}
         >
           <div className="flex flex-col items-center">
-            <div className="w-12 h-0.5 bg-black my-1"></div>
-            <div className="w-12 h-0.5 bg-black mb-1"></div>
+            <div className="w-6 h-0.5 bg-[#251E1F] mb-1"></div>
+            <div className="w-6 h-0.5 bg-[#251E1F]"></div>
           </div>
-          <span className="text-xs ml-4">メニュー</span>
+          <span className="text-xs ml-3">メニュー</span>
         </button>
         {/* <Link 
           href="/contact" 
