@@ -233,27 +233,27 @@ export default function Service() {
                     />
                   </div>
                   <div className="p-6">
-                    <h4 className="text-xl font-thin mb-2">NAMINORI</h4>
-                    <p className="text-white/80 text-sm font-light mb-4">リブランディング/UIデザイン</p>
-                    <Link href="/achievements/achievement-1" className="text-white/60 hover:text-white text-sm">
-                      詳細を見る →
+                    <h4 className="text-xl font-thin mb-2 group-hover:text-white transition-colors duration-300">NAMINORI</h4>
+                    <p className="text-white/80 text-sm font-light mb-4 group-hover:text-white/90 transition-colors duration-300">リブランディング/UIデザイン</p>
+                    <Link href="/achievements/achievement-1" className="text-white/60 hover:text-white text-sm group-hover:translate-x-1 transition-all duration-300 inline-flex items-center">
+                      詳細を見る <span className="ml-1 transition-transform duration-300 group-hover:translate-x-1">→</span>
                     </Link>
                   </div>
                 </div>
-                <div className="bg-white/5 rounded-lg border border-white/6 overflow-hidden">
+                <div className="bg-white/5 rounded-lg border border-white/6 overflow-hidden hover:bg-white/10 transition-all duration-300 group">
                   <div className="relative w-full aspect-[4/3]">
                     <Image
                       src="/sample1.png"
                       alt="UIUXデザイン実績"
                       fill
-                      className="object-cover"
+                      className="object-cover transition-transform duration-300 group-hover:scale-105"
                     />
                   </div>
                   <div className="p-6">
-                    <h4 className="text-xl font-thin mb-2">NAMINORI</h4>
-                    <p className="text-white/80 text-sm font-light mb-4">リブランディング/UIデザイン</p>
-                    <Link href="/achievements/achievement-2" className="text-white/60 hover:text-white text-sm">
-                      詳細を見る →
+                    <h4 className="text-xl font-thin mb-2 group-hover:text-white transition-colors duration-300">NAMINORI</h4>
+                    <p className="text-white/80 text-sm font-light mb-4 group-hover:text-white/90 transition-colors duration-300">リブランディング/UIデザイン</p>
+                    <Link href="/achievements/achievement-2" className="text-white/60 hover:text-white text-sm group-hover:translate-x-1 transition-all duration-300 inline-flex items-center">
+                      詳細を見る <span className="ml-1 transition-transform duration-300 group-hover:translate-x-1">→</span>
                     </Link>
                   </div>
                 </div>
