@@ -123,21 +123,51 @@ export default function Header() {
   return (
     <>
       {/* モバイル用時計 - 最上部中央配置 */}
-      <div className="fixed top-1 left-1/2 transform -translate-x-1/2 z-[40] mix-blend-difference text-white text-center">
+      <div className="fixed top-0.5 left-1/2 transform -translate-x-1/2 z-[40] mix-blend-difference text-white text-center">
         <div className="text-[8px] font-extralight tracking-wider">{currentDate} {currentTime}</div>
       </div>
       
       {/* 下部固定メニュー */}
-      <header className="fixed bottom-4 left-1/2 transform -translate-x-1/2 w-2/3 z-[50] flex bg-white overflow-hidden rounded-lg rounded-tr-lg">
+      <header className="fixed bottom-5 left-1/2 transform -translate-x-1/2 w-2/3 z-[70] flex bg-white overflow-hidden rounded-lg rounded-tr-lg">
         <button 
-          className="flex-1 flex items-center justify-center py-3 bg-white text-[#251E1F] border-r border-gray-200"
+          className="flex-1 flex items-center justify-center py-4 bg-white text-[#251E1F] border-r border-gray-200 active:scale-95 active:bg-gray-100 transition-all duration-300 overflow-hidden"
           onClick={toggleMenu}
         >
-          <div className="flex flex-col items-center">
-            <div className="w-6 h-0.5 bg-[#251E1F] mb-1"></div>
-            <div className="w-6 h-0.5 bg-[#251E1F]"></div>
+          <div className="relative w-full h-full flex items-center justify-center">
+            <div
+              className={`absolute flex items-center justify-center transition-all duration-500 transform ${
+                isMenuOpen ? 'translate-y-[-100%] opacity-0' : 'translate-y-0 opacity-100'
+              }`}
+            >
+              <div className="flex items-center">
+                <div className="flex flex-col items-center mr-3">
+                  <div className="w-6 h-[1px] bg-[#251E1F] mb-1 transform transition-transform duration-300"></div>
+                  <div className="w-6 h-[1px] bg-[#251E1F] transform transition-transform duration-300"></div>
+                </div>
+                <span className="text-xs">メニュー</span>
+              </div>
+            </div>
+
+            <div
+              className={`absolute flex items-center justify-center transition-all duration-500 transform ${
+                isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-[100%] opacity-0'
+              }`}
+            >
+              <span className="mr-2">
+                <svg 
+                  width="18" 
+                  height="18" 
+                  viewBox="0 0 24 24" 
+                  fill="none" 
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="transform rotate-0 transition-transform duration-500"
+                >
+                  <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" fill="currentColor" stroke="currentColor" strokeWidth="0.5"/>
+                </svg>
+              </span>
+              <span className="text-xs">閉じる</span>
+            </div>
           </div>
-          <span className="text-xs ml-3">メニュー</span>
         </button>
         {/* <Link 
           href="/contact" 
@@ -152,7 +182,7 @@ export default function Header() {
         {isMenuOpen && (
           <>
             <motion.div
-              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-[60]"
+              className="fixed inset-0 bg-black/60 z-[60]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -161,7 +191,7 @@ export default function Header() {
             />
             
             <motion.div
-              className="fixed inset-x-4 bottom-6 top-4 h-[96vh] bg-[#1C1819] border border-white/10 rounded-lg overflow-hidden z-[70] flex flex-col"
+              className="fixed inset-x-4 bottom-15 h-[80vh] bg-[#1C1819] border border-white/10 rounded-lg overflow-hidden z-[70] flex flex-col"
               initial={{ opacity: 0, scale: 0.95, filter: "blur(8px)" }}
               animate={{ 
                 opacity: 1, 
@@ -299,34 +329,6 @@ export default function Header() {
                   </motion.div>
                 </nav>
               </div>
-              
-              {/* 閉じるボタン - 固定位置 */}
-              <motion.div 
-                className="p-3 border-t border-white/10"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ 
-                  opacity: 1, 
-                  y: 0,
-                  transition: {
-                    delay: 0.6,
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 25
-                  }
-                }}
-              >
-                <button 
-                  className="flex items-center justify-center w-full py-3 text-white bg-white/5 text-sm border border-white/10 rounded-md transition-colors duration-300 hover:bg-white hover:text-black font-extralight"
-                  onClick={closeMenu}
-                >
-                  <span className="mr-2">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" fill="currentColor"/>
-                    </svg>
-                  </span>
-                  閉じる
-                </button>
-              </motion.div>
             </motion.div>
           </>
         )}
