@@ -12,7 +12,7 @@ export const metadata = {
 };
 
 // 実績一覧ページ
-const AchievementsPage = async () => {
+export default async function AchievementsPage() {
   // Notionから実績データを取得
   const achievementsData = await getAllAchievements();
 
@@ -59,19 +59,26 @@ const AchievementsPage = async () => {
               }
 
               return (
-                <Link href={`/achievements/${id}`} key={id} className="block">
-                  <div className="flex flex-col h-full">
-                    <div className="relative w-full aspect-[4/3] mb-5 overflow-hidden rounded-md">
+                <Link href={`/achievements/${id}`} key={id} className="block group relative">
+                  <div className="flex flex-col h-full p-4 rounded-xl transition-all duration-300 hover:bg-white/5 border border-transparent hover:border-white/10">
+                    <div className="relative w-full aspect-[4/3] mb-5 overflow-hidden rounded-lg">
                       <Image
                         src={coverImage}
                         alt={title}
                         fill
-                        className="object-cover"
+                        className="object-cover transform transition-transform duration-500 group-hover:scale-105"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
+                      <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300"></div>
                     </div>
-                    <h2 className="text-2xl font-light mb-2">{title}</h2>
-                    <p className="text-sm text-white/70 line-clamp-2">{description}</p>
+                    <h2 className="text-2xl font-light mb-2 transition-colors duration-300 group-hover:text-white">{title}</h2>
+                    <p className="text-sm text-white/70 line-clamp-2 transition-colors duration-300 group-hover:text-white/90">{description}</p>
+                    <div className="absolute right-6 bottom-6 opacity-0 transform translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-white/70 group-hover:text-white flex items-center text-sm">
+                      詳細を見る
+                      <svg className="w-4 h-4 ml-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </div>
                   </div>
                 </Link>
               );
@@ -86,6 +93,4 @@ const AchievementsPage = async () => {
       <Footer />
     </main>
   );
-};
-
-export default AchievementsPage; 
+} 

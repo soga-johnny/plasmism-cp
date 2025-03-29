@@ -8,7 +8,6 @@ import ScrollingTitle from '@/components/ScrollingTitle'
 // import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import { Button } from '@/components/ui/button'
-import { useEffect, useState, useRef } from 'react'
 import Link from 'next/link'
 // import { motion } from 'framer-motion'
 

@@ -49,8 +49,8 @@ ${message}
       { message: "メール送信が完了しました" },
       { status: 200 }
     );
-  } catch (error) {
-    console.error("Error sending email:", error);
+  } catch (_error) {
+    console.error("Error sending email:", _error);
     return NextResponse.json(
       { error: "メール送信に失敗しました" },
       { status: 500 }

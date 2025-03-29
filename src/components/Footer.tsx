@@ -48,8 +48,8 @@ export default function Footer() {
   // パスが変更されたときにタイトルを取得
   useEffect(() => {
     if (pathname.startsWith('/achievements/')) {
-      const id = pathname.split('/')[2]
-      fetchNotionTitle(id)
+      const _id = pathname.split('/')[2]
+      fetchNotionTitle(_id)
     }
   }, [pathname])
   
@@ -60,7 +60,6 @@ export default function Footer() {
     
     // 動的なパスの処理
     if (currentPath.startsWith('/achievements/')) {
-      const id = currentPath.split('/')[2]
       breadcrumbs.unshift({
         path: currentPath,
         label: isLoading ? '読み込み中...' : (dynamicTitle || '実績詳細')

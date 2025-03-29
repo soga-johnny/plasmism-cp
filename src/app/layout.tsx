@@ -7,6 +7,7 @@ import PageTransitionProvider from "../components/PageTransitionProvider";
 import Header from "../components/Header";
 import NavigationEvents from "../components/NavigationEvents";
 import { Suspense } from "react";
+import ClientCursorWrapper from "../components/ClientCursorWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,6 +52,7 @@ export default function RootLayout({
         <PageTransitionProvider>
           {children}
         </PageTransitionProvider>
+        <ClientCursorWrapper />
       </body>
     </html>
   );

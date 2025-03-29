@@ -30,7 +30,7 @@ export async function GET(request: Request) {
     }
 
     return NextResponse.json({ ogImage })
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to fetch OGP data' }, { status: 500 })
   }
 } 
