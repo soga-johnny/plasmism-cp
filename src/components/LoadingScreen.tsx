@@ -28,23 +28,42 @@ export const useLoadingStore = create<LoadingState>((set) => ({
 export default function LoadingScreen() {
   const { isLoading, progress, setLoading } = useLoadingStore();
   const [isFading, setIsFading] = useState(false);
+  const [canHide, setCanHide] = useState(false);
+  const [showReady, setShowReady] = useState(false);
+
+  // コンポーネントがマウントされてから2.5秒後にcanHideをtrueに設定
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setCanHide(true);
+    }, 2000); // 2秒
+
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
-    // 進捗率が100%に達したらフェードアウトを開始
-    if (progress >= 100 && !isFading) {
-      setIsFading(true);
+    // 進捗率が100%に達し、かつ最低表示時間を経過したらフェードアウトを開始
+    if (progress >= 100 && !isFading && canHide) {
+      // まず「Ready」表示に切り替え
+      setShowReady(true);
       
-      // 最低1.5秒はローディング画面を表示する
-      const minDisplayTime = 3000; // 3秒
-      const loadStartTime = useLoadingStore.getState().loadStartTime || Date.now();
-      const elapsedTime = Date.now() - loadStartTime;
-      const remainingTime = Math.max(0, minDisplayTime - elapsedTime);
-      
+      // 「Ready」表示後、少し待ってからフェードアウト
       setTimeout(() => {
-        setLoading(false);
-      }, remainingTime + 500); // 残り時間 + フェードアウトアニメーションの時間
+        setIsFading(true);
+        
+        setTimeout(() => {
+          setLoading(false);
+        }, 500); // フェードアウトアニメーションの時間
+      }, 800); // 「Ready」表示時間
     }
-  }, [progress, isFading, setLoading]);
+  }, [progress, isFading, setLoading, canHide]);
+  
+  // 「Ready」表示を別のuseEffectから切り離し
+  useEffect(() => {
+    // 別途進捗率が100%に達したことを検知する目的で残しておく
+    if (progress >= 100 && !showReady && !canHide) {
+      // この時点ではまだReadyを表示しない
+    }
+  }, [progress, showReady, canHide]);
 
   // 初期ロード時に最低2秒間はローディング画面を表示する（UX向上のため）
   useEffect(() => {
@@ -77,14 +96,17 @@ export default function LoadingScreen() {
       </div>
       
       {/* プログレスバーの追加 */}
-      <div className="w-32 h-1 bg-white/20 rounded-full overflow-hidden fade-in">
+      <div className="w-24 h-0.5 bg-white/20 rounded-full overflow-hidden fade-in">
         <div 
           className="h-full bg-white transition-all duration-300 ease-out"
           style={{ width: `${progress}%` }}
         />
       </div>
       <div className="mt-2 text-white/60 text-xs fade-in">
-        {progress < 100 ? `読み込み中... ${Math.floor(progress)}%` : '完了'}
+        {showReady ? 
+          <span className="text-[#00E7A2] font-medium animate-pulse">Ready</span> : 
+          `Starting... ${Math.floor(progress)}%`
+        }
       </div>
     </div>
   );
