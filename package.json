@@ -12,6 +12,7 @@
     "@aws-sdk/client-ses": "^3.777.0",
     "@notionhq/client": "^2.3.0",
     "@radix-ui/react-slot": "^1.1.2",
+    "@react-spring/three": "^9.7.5",
     "@react-three/drei": "^10.0.4",
     "@react-three/fiber": "^9.1.0",
     "@react-three/postprocessing": "^3.0.4",

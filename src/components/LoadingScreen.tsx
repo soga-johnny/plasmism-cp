@@ -91,6 +91,7 @@ export default function LoadingScreen() {
           alt="Logo"
           fill
           className="object-contain"
+          style={{}}
           priority
         />
       </div>

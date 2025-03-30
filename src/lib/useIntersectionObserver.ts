@@ -21,15 +21,16 @@ export default function useIntersectionObserver<T extends Element>(
   useEffect(() => {
     if (!elementRef.current) return;
 
+    const element = elementRef.current;
     const observer = new IntersectionObserver(([entry]) => {
       setIsIntersecting(entry.isIntersecting);
     }, options);
 
-    observer.observe(elementRef.current);
+    observer.observe(element);
 
     return () => {
-      if (elementRef.current) {
-        observer.unobserve(elementRef.current);
+      if (element) {
+        observer.unobserve(element);
       }
       observer.disconnect();
     };
