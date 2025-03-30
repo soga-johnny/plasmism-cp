@@ -7,36 +7,27 @@ import { useEffect, useState, useRef } from 'react';
 const pageVariants = {
   initial: {
     opacity: 0,
-    y: 5,
-    scale: 0.99,
-    filter: 'blur(40px)',
+    clipPath: 'inset(0% 0% 100% 0%)'
   },
   animate: {
     opacity: 1,
-    y: 0,
-    scale: 1,
-    filter: 'blur(0px)',
+    clipPath: 'inset(0% 0% 0% 0%)',
     transition: {
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1],
-      // 各プロパティの個別タイミング調整
-      opacity: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-      y: { duration: 1, ease: [0.22, 1, 0.36, 1] },
-      scale: { duration: 1.2, ease: [0.22, 1, 0.36, 1] },
-      filter: { duration: 0.9, ease: [0.22, 1, 0.36, 1] }
+      clipPath: {
+        duration: 1.2,
+        ease: [0.22, 1, 0.36, 1]
+      },
+      opacity: {
+        duration: 1.2,
+        ease: [0.22, 1, 0.36, 1]
+      }
     }
   },
   exit: {
     opacity: 0,
-    scale: 1,
-    filter: 'blur(100px)',
     transition: {
-      duration: 0.2, // 短縮
-      ease: [0.22, 1, 0.36, 1],
-      // 各プロパティの個別タイミング調整（短縮）
-      opacity: { duration: 0.1, ease: [0.22, 1, 0.36, 1] },
-      scale: { duration: 0.15, ease: [0.22, 1, 0.36, 1] },
-      filter: { duration: 0.15, ease: [0.22, 1, 0.36, 1] }
+      duration: 0.001,
+      ease: [0.22, 1, 0.36, 1]
     }
   }
 };
@@ -83,13 +74,13 @@ export default function PageTransitionProvider({
     <div className="page-content-wrapper relative">
       {/* 即時フェードアウト用のオーバーレイ */}
       {isPreviousPageExiting && (
-        <div className="fixed inset-0 bg-[#2B2325] opacity-0 z-20 quick-fade-out pointer-events-none" />
+        <div className="fixed inset-0 bg-[#2B2325] opacity-0 z-20 fade-out pointer-events-none" />
       )}
       
       <AnimatePresence 
-        mode="sync"
+        mode="wait"
         onExitComplete={() => window.scrollTo(0, 0)}
-        initial={false}
+        initial={true}
       >
         <motion.div
           key={pathname}
@@ -97,7 +88,7 @@ export default function PageTransitionProvider({
           animate="animate"
           exit="exit"
           variants={pageVariants}
-          className="min-h-screen flex flex-col relative z-10"
+          className="relative z-10"
         >
           {children}
           {showDigitalEffect && (
