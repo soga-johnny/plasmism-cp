@@ -52,8 +52,8 @@ export default function LoadingScreen() {
         
         setTimeout(() => {
           setLoading(false);
-        }, 500); // フェードアウトアニメーションの時間
-      }, 800); // 「Ready」表示時間
+        }, 800); // フェードアウトアニメーションの時間
+      }, 900); // 「Ready」表示時間
     }
   }, [progress, isFading, setLoading, canHide]);
   

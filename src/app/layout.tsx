@@ -8,6 +8,7 @@ import Header from "../components/Header";
 import NavigationEvents from "../components/NavigationEvents";
 import { Suspense } from "react";
 import ClientCursorWrapper from "../components/ClientCursorWrapper";
+import ScrollToTop from "../components/ScrollToTop";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -53,6 +54,7 @@ export default function RootLayout({
           {children}
         </PageTransitionProvider>
         <ClientCursorWrapper />
+        <ScrollToTop />
       </body>
     </html>
   );
