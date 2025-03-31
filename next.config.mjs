@@ -1,7 +1,7 @@
-import type { NextConfig } from "next";
+// import type { NextConfig } from "next"; // コメントアウト
 
 /** @type {import('next').NextConfig} */
-const nextConfig: NextConfig = {
+const nextConfig = { // 型注釈 : NextConfig を削除
   images: {
     remotePatterns: [
       {
