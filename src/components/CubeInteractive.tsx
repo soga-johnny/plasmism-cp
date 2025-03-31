@@ -253,8 +253,8 @@ export default function CubeInteractive() {
           {!isMobile && <OrbitControls enableZoom={false} enablePan={false} enableRotate={false} />}
           <EffectComposer>
             <Bloom 
-              intensity={0.2}
-              luminanceThreshold={0.1}
+              intensity={0.1}
+              luminanceThreshold={0.2}
               luminanceSmoothing={0.4}
               mipmapBlur={true}
               radius={0.5}
