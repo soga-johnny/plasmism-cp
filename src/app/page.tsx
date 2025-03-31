@@ -3,7 +3,7 @@
 import Image from "next/image";
 // import StickyScenes from '@/components/StickyScenes'
 // import SceneSample from '@/components/sceneSample'
-import IntegratedScene3D from '@/components/sceneCube'
+import dynamic from 'next/dynamic'
 // import ScrollingTitle from '@/components/ScrollingTitle'
 // import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -11,12 +11,28 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import CubeInteractive from '@/components/CubeInteractive'
+
+// クライアントサイドでのみインポートするためにdynamic importを使用
+const IntegratedScene3D = dynamic(() => import('@/components/sceneCube'), { 
+  ssr: false,
+  loading: () => <div className="h-screen w-full"></div>
+})
+
+const CubeInteractive = dynamic(() => import('@/components/CubeInteractive'), {
+  ssr: false,
+  loading: () => <div></div>
+})
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll()
   const [hasReachedContent, setHasReachedContent] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
+  
+  // マウント後にクライアントサイドでのみレンダリングするためのフラグ
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
   
   // 3Dシーンとインタラクティブキューブのフェードアウト制御
   const sceneOpacity = useTransform(
@@ -55,9 +71,11 @@ export default function Home() {
         <div className="w-full max-w-[1440px] mx-auto h-full px-4 pt-40 md:px-8 flex items-start justify-center">
         </div>
       </div>
-      <motion.div style={{ opacity: sceneOpacity }}>
-        <IntegratedScene3D />
-      </motion.div>
+      {isMounted && (
+        <motion.div style={{ opacity: sceneOpacity }}>
+          <IntegratedScene3D />
+        </motion.div>
+      )}
       
       {/* スクロール領域を確保するための透明なスペーサー */}
       <div className="h-[600vh]" />
@@ -217,7 +235,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="z-20 bg-white/10 py-20 md:py-32 rounded-3xl">
+        <section className="z-20 bg-white/5 py-20 md:py-32 rounded-3xl">
           <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8 pb-20 border-b border-white/7">
             <div className="flex flex-col md:flex-row justify-between">
               <div>
@@ -251,17 +269,17 @@ export default function Home() {
           </div>
           <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8 pt-20">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-              <div className="bg-white/4 p-8 rounded-lg border border-white/6">
+              <div className="bg-white/4 p-8 rounded-lg border border-white/6 hover:bg-white/8 transition-all duration-300">
                 <h3 className="text-2xl font-thin mb-4">NAMINORI</h3>
                 <p className="text-white/80 text-sm md:text-base font-light leading-relaxed mb-6">AI技術を活用したデザイン支援ツール。ユーザー体験を向上させるための直感的なインターフェースを提供します。</p>
                 <Image src="/image4-1.png" alt="NAMINORI" width={320} height={200} className="w-full rounded-lg" />
               </div>
-              <div className="bg-white/4 p-8 rounded-lg border border-white/6">
+              <div className="bg-white/4 p-8 rounded-lg border border-white/6 hover:bg-white/8 transition-all duration-300">
                 <h3 className="text-2xl font-thin mb-4">Lean Designer</h3>
                 <p className="text-white/80 text-sm md:text-base font-light leading-relaxed mb-6">デザイナーとエンジニアの協業をスムーズにするコラボレーションプラットフォーム。効率的なワークフローを実現します。</p>
                 <Image src="/image4-1.png" alt="Lean Designer" width={320} height={200} className="w-full rounded-lg" />
               </div>
-              <div className="bg-white/4 p-8 rounded-lg border border-white/6">
+              <div className="bg-white/4 p-8 rounded-lg border border-white/6 hover:bg-white/8 transition-all duration-300">
                 <h3 className="text-2xl font-thin mb-4">Cloud Vision</h3>
                 <p className="text-white/80 text-sm md:text-base font-light leading-relaxed mb-6">クラウドインフラの監視・最適化ツール。セキュリティとパフォーマンスを両立したシステム運用を支援します。</p>
                 <Image src="/image4-1.png" alt="Cloud Vision" width={320} height={200} className="w-full rounded-lg" />
@@ -270,7 +288,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="bg-white/20 z-20 py-20 md:py-32 mt-1 rounded-3xl mb-20">
+        <section className="bg-white/8 z-20 py-20 md:py-32 mt-1 rounded-3xl mb-20">
           <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8">
             <div className="flex flex-col md:flex-row justify-between">
               <div>

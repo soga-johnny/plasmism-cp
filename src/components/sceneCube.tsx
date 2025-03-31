@@ -286,196 +286,180 @@ function SectionIndicator({ currentSection, progress }: { currentSection: number
 
 // メインの3Dシーン全体を管理するコンポーネント
 export default function IntegratedScene3D() {
-  const [currentSection, setCurrentSection] = useState(0)
-  const [interpolationData, setInterpolationData] = useState({ section: 0, nextSection: 0, factor: 0 })
   const { scrollYProgress } = useScroll()
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const [showAuroraBg, setShowAuroraBg] = useState(false)
   const { progress } = useProgress()
-  const { setProgress } = useLoadingStore()
-
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.on('change', (latest) => {
-      const interpData = getInterpolationFactor(latest)
-      setCurrentSection(interpData.section)
-      setInterpolationData(interpData)
-    })
-    return () => unsubscribe()
-  }, [scrollYProgress])
-
-  // カメラ位置の調整
-  const [_cameraPosition, _setCameraPosition] = useState<[number, number, number]>([0, 0, 8])
-  const [cameraFov, setCameraFov] = useState(50)
+  const { setProgress, setLoading } = useLoadingStore()
+  const [scrollOffset, setScrollOffset] = useState(0)
+  const [isInitialized, setIsInitialized] = useState(false)
+  const [isInitializing, setIsInitializing] = useState(true)
   const [isMobile, setIsMobile] = useState(false)
+  const [cameraFov, setCameraFov] = useState(50)
+  const [targetCameraPosition, setTargetCameraPosition] = useState<Vector3>(new Vector3(0, 0, 7))
+  const [currentSection, setCurrentSection] = useState(0)
+  const [currentSectionData, setCurrentSectionData] = useState<SceneSection>(SECTIONS[0])
+  const [nextSectionData, setNextSectionData] = useState<SceneSection>(SECTIONS[Math.min(1, SECTIONS.length - 1)])
+  const [interpolationValue, setInterpolationValue] = useState({ factor: 0, section: 0, nextSection: 1 })
   
-  // スクロール終了検出用
-  const scrollEndRef = useRef<boolean>(false)
-  const [scrollEnd, setScrollEnd] = useState(false)
+  // SSRで実行されないようにするためのフラグ
+  const [isBrowser, setIsBrowser] = useState(false)
   
-  // フェードアウト用のアニメーション値
-  const opacity = useTransform(
-    scrollYProgress,
-    [0.5, 0.55, 0.6],  // スクロール位置を調整
-    [1, 0.5, 0]
-  );
-
-  // カメラの目標位置を計算
-  const targetCameraPosition = useMemo(() => {
-    const section = SECTIONS[currentSection];
-    const nextSectionIndex = Math.min(currentSection + 1, SECTIONS.length - 1);
-    const nextSection = SECTIONS[nextSectionIndex];
+  useEffect(() => {
+    setIsBrowser(true) 
     
-    // 現在のセクションと次のセクションの間を補間
-    return new Vector3().lerpVectors(
-      section.cameraPosition,
-      nextSection.cameraPosition,
-      interpolationData.factor
-    );
-  }, [currentSection, interpolationData.factor]);
-
-  // Three.jsのプログレスを LoadingStore に反映
-  useEffect(() => {
-    setProgress(progress)
-  }, [progress, setProgress])
-
-  // セクション変更の監視
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.on('change', (latest: number) => {
-      const interpData = getInterpolationFactor(latest)
-      setCurrentSection(interpData.section)
-      setInterpolationData(interpData)
+    // ブラウザ環境でのみ実行される処理
+    if (typeof window !== 'undefined') {
+      // モバイル判定
+      setIsMobile(window.innerWidth < 768)
       
-      // セクション5の場合はオーロラ背景を表示
-      setShowAuroraBg(interpData.section === 4 || (interpData.section === 3 && interpData.factor > 0.5))
-      
-      // スクロール終了の検出（0.6以上スクロールした場合）
-      if (latest >= 0.6 && !scrollEndRef.current) {
-        scrollEndRef.current = true;
-        setScrollEnd(true);
-      } else if (latest < 0.6 && scrollEndRef.current) {
-        scrollEndRef.current = false;
-        setScrollEnd(false);
+      // リサイズハンドラ
+      const handleResize = () => {
+        setIsMobile(window.innerWidth < 768)
+        updateCamera()
       }
-    })
-    
-    return () => {
-      unsubscribe()
+      
+      // スクロールハンドラ
+      const handleScroll = () => {
+        if (typeof window !== 'undefined') {
+          setScrollOffset(window.scrollY)
+        }
+      }
+      
+      window.addEventListener('resize', handleResize)
+      window.addEventListener('scroll', handleScroll)
+      
+      return () => {
+        window.removeEventListener('resize', handleResize)
+        window.removeEventListener('scroll', handleScroll)
+      }
     }
-  }, [scrollYProgress])
-
-  useEffect(() => {
-    const updateCamera = () => {
-      const mobile = window.innerWidth <= 768
-      setIsMobile(mobile)
-      _setCameraPosition([0, 0, mobile ? 9 : 8])
-      setCameraFov(mobile ? 45 : 50)
-    }
-    
-    updateCamera()
-    window.addEventListener('resize', updateCamera)
-    return () => window.removeEventListener('resize', updateCamera)
   }, [])
 
-  // 3Dシーンの初期化完了時
+  // カメラの設定更新（ブラウザ環境でのみ実行）
+  const updateCamera = () => {
+    if (typeof window === 'undefined') return
+    
+    const mobile = window.innerWidth < 768
+    setCameraFov(mobile ? 60 : 50)
+  }
+
+  // リソース読み込み完了時の処理
+  const handleResourcesReady = () => {
+    if (typeof window === 'undefined') return
+    
+    setIsInitializing(false)
+    setTimeout(() => {
+      setIsInitialized(true)
+      setLoading(false)
+    }, 1000)
+  }
+
+  // Three.jsのプログレスを監視
   useEffect(() => {
-    // リソース読み込み完了時の処理
-    const handleResourcesReady = () => {
-      // フルロードを示す
-      setTimeout(() => {
-        setProgress(100)
-      }, 500)
+    if (progress === 100) {
+      handleResourcesReady()
     }
+    setProgress(progress)
+  }, [progress, setProgress, handleResourcesReady])
 
-    // ウィンドウロード完了時にリソース準備完了とみなす
-    if (typeof window !== 'undefined') {
-      if (document.readyState === 'complete') {
-        handleResourcesReady()
-      } else {
-        window.addEventListener('load', handleResourcesReady)
-        return () => window.removeEventListener('load', handleResourcesReady)
+  // セクション位置の計算
+  useEffect(() => {
+    if (!isBrowser) return
+    
+    // スクロール位置からセクション情報を計算
+    const interpolation = getInterpolationFactor(scrollYProgress.get())
+    
+    // アップデートが必要な場合のみステート更新
+    if (
+      interpolation.section !== interpolationValue.section ||
+      interpolation.nextSection !== interpolationValue.nextSection ||
+      Math.abs(interpolation.factor - interpolationValue.factor) > 0.01
+    ) {
+      setInterpolationValue(interpolation)
+      setCurrentSection(interpolation.section)
+      setCurrentSectionData(SECTIONS[interpolation.section])
+      setNextSectionData(SECTIONS[interpolation.nextSection])
+    }
+  }, [scrollYProgress, interpolationValue, isBrowser])
+
+  // スクロールに応じたセクション切り替え
+  useEffect(() => {
+    if (!isBrowser) return
+    
+    // スクロール位置の変化を監視
+    const unsubscribe = scrollYProgress.onChange((value) => {
+      const interpolation = getInterpolationFactor(value)
+      
+      // アップデートが必要な場合のみステート更新
+      if (
+        interpolation.section !== interpolationValue.section ||
+        interpolation.nextSection !== interpolationValue.nextSection ||
+        Math.abs(interpolation.factor - interpolationValue.factor) > 0.01
+      ) {
+        setInterpolationValue(interpolation)
+        setCurrentSection(interpolation.section)
+        setCurrentSectionData(SECTIONS[interpolation.section])
+        setNextSectionData(SECTIONS[interpolation.nextSection])
       }
-    }
-  }, [setProgress])
+    })
+    
+    return () => unsubscribe()
+  }, [scrollYProgress, interpolationValue, isBrowser])
 
-  // 現在のセクションに基づく背景色とパターン
-  const currentSectionData = SECTIONS[currentSection]
-  const nextSectionIndex = Math.min(currentSection + 1, SECTIONS.length - 1)
-  const nextSectionData = SECTIONS[nextSectionIndex]
-  
-  // 現在のセクションと次のセクションの背景色を補間
-  const backgroundColor = currentSectionData.backgroundColor || 'transparent'
-  const nextBackgroundColor = nextSectionData.backgroundColor || 'transparent'
-  const backgroundGradient = currentSectionData.backgroundGradient || null
-  const nextBackgroundGradient = nextSectionData.backgroundGradient || null
-  
-  // セクション間での背景パターンの表示制御
-  const showBackgroundPattern = 
-    (currentSection > 0 && currentSection < 4) || 
-    (currentSection === 0 && interpolationData.factor > 0.5) || 
-    (currentSection === 4 && interpolationData.factor < 0.5)
-  
-  // 背景透明度の補間
-  const backgroundOpacity = currentSectionData.backgroundOpacity !== undefined 
-    ? currentSectionData.backgroundOpacity 
-    : 1
-  const nextBackgroundOpacity = nextSectionData.backgroundOpacity !== undefined
-    ? nextSectionData.backgroundOpacity
-    : 1
-  const interpolatedOpacity = backgroundOpacity + (nextBackgroundOpacity - backgroundOpacity) * interpolationData.factor
+  // ブラウザ環境でない場合は何も表示しない
+  if (!isBrowser) {
+    return null
+  }
 
   return (
     <div className="relative w-full h-screen">
       {/* セクションインジケーター */}
-      <SectionIndicator currentSection={currentSection} progress={interpolationData.factor} />
+      <SectionIndicator currentSection={currentSection} progress={interpolationValue.factor} />
       
       {/* セクション背景色 */}
       <div
         className="fixed top-0 left-0 w-full h-screen z-0 transition-all duration-300"
         style={{
-          background: typeof backgroundGradient === 'string' 
-            ? backgroundGradient
-            : backgroundColor,
-          opacity: interpolatedOpacity
+          background: typeof currentSectionData.backgroundGradient === 'string' 
+            ? currentSectionData.backgroundGradient
+            : currentSectionData.backgroundColor,
+          opacity: 1
         }}
       />
       
       {/* 次のセクションの背景 - トランジション用 */}
-      {interpolationData.factor > 0 && currentSection < SECTIONS.length - 1 && (
+      {interpolationValue.factor > 0 && currentSection < SECTIONS.length - 1 && (
         <div
           className="fixed top-0 left-0 w-full h-screen z-0"
           style={{
-            background: typeof nextBackgroundGradient === 'string'
-              ? nextBackgroundGradient
-              : nextBackgroundColor,
-            opacity: interpolationData.factor * (nextBackgroundOpacity || 1),
+            background: typeof nextSectionData.backgroundGradient === 'string'
+              ? nextSectionData.backgroundGradient
+              : nextSectionData.backgroundColor,
+            opacity: interpolationValue.factor * 0.9,
             transition: 'opacity 300ms ease-out'
           }}
         />
       )}
       
       {/* 背景パターン */}
-      {showBackgroundPattern && (
+      {currentSection > 0 && currentSection < 4 && (
         <div
           className="fixed top-0 left-0 w-full h-screen z-[1]"
           style={{
             backgroundImage: 'url("/background.png")',
             backgroundRepeat: 'repeat',
-            opacity: currentSection === 0 || currentSection === 4 
-              ? (currentSection === 0 ? interpolationData.factor : 1 - interpolationData.factor) 
-              : 1,
-            transition: 'opacity 300ms ease-out',
+            opacity: currentSection === 0 ? interpolationValue.factor : 1 - interpolationValue.factor
           }}
         />
       )}
       
       {/* オーロラ背景（セクション5用） */}
-      {showAuroraBg && (
+      {currentSection === 4 && (
         <div
           className="fixed top-0 left-0 w-full h-screen z-[1] bg-gradient-to-br from-purple-900/30 via-pink-700/20 to-red-800/30"
           style={{
             animation: 'aurora 15s linear infinite',
             transition: 'opacity 600ms ease-in-out',
-            opacity: currentSection === 4 ? 1 : Math.max(0, (interpolationData.factor - 0.5) * 2)
+            opacity: interpolationValue.factor > 0.5 ? 1 : Math.max(0, (interpolationValue.factor - 0.5) * 2)
           }}
         />
       )}
@@ -493,7 +477,7 @@ export default function IntegratedScene3D() {
           y: 0,
           scale: 1
         }}
-        style={{ opacity: opacity as any }}
+        style={{ opacity: 1 }}
         transition={{ 
           duration: 1.8,
           ease: "easeOut",
@@ -501,7 +485,6 @@ export default function IntegratedScene3D() {
         }}
       >
         <Canvas 
-          ref={canvasRef}
           camera={{ 
             position: [0, 0, 8],
             fov: cameraFov,
@@ -515,7 +498,7 @@ export default function IntegratedScene3D() {
             targetCameraPosition={targetCameraPosition}
             cameraFov={cameraFov}
             isMobile={isMobile}
-            interpolationFactor={interpolationData.factor}
+            interpolationFactor={interpolationValue.factor}
             nextSectionData={nextSectionData}
           />
         </Canvas>
@@ -523,7 +506,7 @@ export default function IntegratedScene3D() {
       
       {/* スクロールガイド */}
       <div 
-        className={`fixed bottom-8 left-1/2 transform -translate-x-1/2 z-20 text-white/70 text-md font-light transition-all duration-1000 ${scrollEnd ? 'opacity-0 translate-y-4' : 'opacity-100 animate-pulse hover:translate-y-[-4px]'} before:content-[''] before:absolute before:w-full before:h-[1px] before:bg-white/30 before:bottom-[-4px] before:left-0 before:scale-x-0 before:transition-transform before:duration-300 hover:before:scale-x-100`}
+        className={`fixed bottom-8 left-1/2 transform -translate-x-1/2 z-20 text-white/70 text-md font-light transition-all duration-1000 ${scrollOffset >= 0.6 ? 'opacity-0 translate-y-4' : 'opacity-100 animate-pulse hover:translate-y-[-4px]'} before:content-[''] before:absolute before:w-full before:h-[1px] before:bg-white/30 before:bottom-[-4px] before:left-0 before:scale-x-0 before:transition-transform before:duration-300 hover:before:scale-x-100`}
       >
         Vision ↓
       </div>
@@ -531,7 +514,6 @@ export default function IntegratedScene3D() {
       {/* セクションのコンテンツ（左側のテキスト）*/}
       <div 
         className="fixed top-0 left-0 w-full h-screen z-20 pointer-events-none"
-        style={{ opacity: opacity as any }}
       >
         <div className="w-full max-w-[1440px] h-full mx-auto flex flex-col justify-center px-8">
           <div className="max-w-md relative">
@@ -540,8 +522,8 @@ export default function IntegratedScene3D() {
               key={`section-${currentSection}`}
               initial={{ opacity: 0, x: -20 }}
               animate={{ 
-                opacity: interpolationData.factor < 0.5 ? 1 : 1 - ((interpolationData.factor - 0.5) * 2), 
-                x: -20 * (interpolationData.factor > 0.5 ? interpolationData.factor : 0)
+                opacity: interpolationValue.factor < 0.5 ? 1 : 1 - ((interpolationValue.factor - 0.5) * 2), 
+                x: -20 * (interpolationValue.factor > 0.5 ? interpolationValue.factor : 0)
               }}
               transition={{ duration: 0.3, ease: "easeOut" }}
               className="text-white absolute w-full"
@@ -553,13 +535,13 @@ export default function IntegratedScene3D() {
             </motion.div>
             
             {/* 次のセクション (トランジション用) - 閾値を超えた場合のみ表示 */}
-            {currentSection < SECTIONS.length - 1 && interpolationData.factor > 0.5 && (
+            {currentSection < SECTIONS.length - 1 && interpolationValue.factor > 0.5 && (
               <motion.div
-                key={`section-next-${nextSectionIndex}`}
+                key={`section-next-${nextSectionData.id}`}
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ 
-                  opacity: (interpolationData.factor - 0.5) * 2,
-                  x: 20 - 40 * (interpolationData.factor - 0.5)
+                  opacity: (interpolationValue.factor - 0.5) * 2,
+                  x: 20 - 40 * (interpolationValue.factor - 0.5)
                 }}
                 transition={{ duration: 0.3, ease: "easeOut" }}
                 className="text-white absolute w-full"
@@ -664,7 +646,7 @@ function CanvasContent({
       <directionalLight position={[-10, -10, -5]} intensity={0.5} />
       <spotLight position={[0, 10, 0]} intensity={1.5} castShadow penumbra={1} distance={50} />
       <hemisphereLight intensity={0.5} groundColor="black" />
-      <Environment preset="city" />
+      <Environment background={false} />
       
       {/* 現在のセクションの画像 - 閾値を下回った場合のみ表示 */}
       {showCurrentSection && (
