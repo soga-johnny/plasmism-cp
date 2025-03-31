@@ -1,5 +1,5 @@
-import { getAchievementById, getAllAchievements } from '@/lib/notion';
-import { renderNotionBlock } from '@/lib/notion-renderer';
+import { getAchievementById, getAllAchievements } from '../../../lib/notion';
+import { renderNotionBlock } from '../../../lib/notion-renderer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
