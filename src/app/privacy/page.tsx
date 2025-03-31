@@ -23,7 +23,7 @@ export default function Privacy() {
             </p>
         </div>
         
-        <div className="space-y-12 mb-16 md:mx-16 mx-4 border-t border-white/7 pt-10 ">
+        <div className="space-y-12 mb-16 md:mx-16 mx-4 border-t border-white/10 pt-10 ">
           <section>
             <h2 className="text-3xl md:text-4xl font-thin mb-6">１. 当社に関する情報</h2>
             <div className="p-6 rounded-lg">

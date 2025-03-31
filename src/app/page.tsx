@@ -122,7 +122,7 @@ export default function Home() {
         </div>
 
         <section className="z-20 bg-[#251E1F] py-20 md:py-32 rounded-3xl">
-          <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8 pb-20 border-b border-white/7">
+          <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8 pb-20 border-b border-white/10">
             <div className="flex flex-col md:flex-row justify-between">
               <div>
                 <div className="flex space-x-4 mb-8">
@@ -163,7 +163,7 @@ export default function Home() {
         </section>
 
         <section className="z-20 py-20 md:py-32">
-          <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8 pb-20 border-b border-white/7">
+          <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8 pb-20 border-b border-white/10">
             <div className="flex flex-col md:flex-row justify-between">
               <div>
                 <div className="flex space-x-4 mb-8">
@@ -198,7 +198,7 @@ export default function Home() {
             <h2 className="text-3xl md:text-5xl font-thin mb-12">Plasmismが提供する価値</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16 mb-6">
               <div>
-                <h3 className="text-xl md:text-2xl font-thin mb-4 border-l-4 border-white/30 pl-4">
+                <h3 className="text-xl md:text-2xl font-thin mb-4 border-l-4 border-white/20 pl-4">
                   1. 確かな基盤を築く
                 </h3>
                 <p className="text-white/80 text-sm md:text-base font-light leading-relaxed">
@@ -206,7 +206,7 @@ export default function Home() {
                 </p>
               </div>
               <div>
-                <h3 className="text-xl md:text-2xl font-thin mb-4 border-l-4 border-white/30 pl-4">
+                <h3 className="text-xl md:text-2xl font-thin mb-4 border-l-4 border-white/20 pl-4">
                   2. 柔軟に適応し、流れを生む
                 </h3>
                 <p className="text-white/80 text-sm md:text-base font-light leading-relaxed">
@@ -214,7 +214,7 @@ export default function Home() {
                 </p>
               </div>
               <div>
-                <h3 className="text-xl md:text-2xl font-thin mb-4 border-l-4 border-white/30 pl-4">
+                <h3 className="text-xl md:text-2xl font-thin mb-4 border-l-4 border-white/20 pl-4">
                   3. 見えない価値を捉える
                 </h3>
                 <p className="text-white/80 text-sm md:text-base font-light leading-relaxed">
@@ -224,7 +224,7 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-16">
               <div>
-                <h3 className="text-xl md:text-2xl font-thin mb-4 border-l-4 border-white/30 pl-4">
+                <h3 className="text-xl md:text-2xl font-thin mb-4 border-l-4 border-white/20 pl-4">
                   4. 次元を超えた融合
                 </h3>
                 <p className="text-white/80 text-sm md:text-base font-light leading-relaxed">
@@ -236,7 +236,7 @@ export default function Home() {
         </section>
 
         <section className="z-20 bg-white/5 py-20 md:py-32 rounded-3xl">
-          <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8 pb-20 border-b border-white/7">
+          <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8 pb-20 border-b border-white/10">
             <div className="flex flex-col md:flex-row justify-between">
               <div>
                 <div className="flex space-x-4 mb-8">
@@ -269,17 +269,17 @@ export default function Home() {
           </div>
           <div className="w-full max-w-[1440px] mx-auto px-4 md:px-8 pt-20">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
-              <div className="bg-white/4 p-8 rounded-lg border border-white/6 hover:bg-white/8 transition-all duration-300">
+              <div className="bg-white/4 p-8 rounded-lg border border-white/10 hover:bg-white/8 transition-all duration-300">
                 <h3 className="text-2xl font-thin mb-4">NAMINORI</h3>
                 <p className="text-white/80 text-sm md:text-base font-light leading-relaxed mb-6">AI技術を活用したデザイン支援ツール。ユーザー体験を向上させるための直感的なインターフェースを提供します。</p>
                 <Image src="/image4-1.png" alt="NAMINORI" width={320} height={200} className="w-full rounded-lg" />
               </div>
-              <div className="bg-white/4 p-8 rounded-lg border border-white/6 hover:bg-white/8 transition-all duration-300">
+              <div className="bg-white/4 p-8 rounded-lg border border-white/10 hover:bg-white/8 transition-all duration-300">
                 <h3 className="text-2xl font-thin mb-4">Lean Designer</h3>
                 <p className="text-white/80 text-sm md:text-base font-light leading-relaxed mb-6">デザイナーとエンジニアの協業をスムーズにするコラボレーションプラットフォーム。効率的なワークフローを実現します。</p>
                 <Image src="/image4-1.png" alt="Lean Designer" width={320} height={200} className="w-full rounded-lg" />
               </div>
-              <div className="bg-white/4 p-8 rounded-lg border border-white/6 hover:bg-white/8 transition-all duration-300">
+              <div className="bg-white/4 p-8 rounded-lg border border-white/10 hover:bg-white/8 transition-all duration-300">
                 <h3 className="text-2xl font-thin mb-4">Cloud Vision</h3>
                 <p className="text-white/80 text-sm md:text-base font-light leading-relaxed mb-6">クラウドインフラの監視・最適化ツール。セキュリティとパフォーマンスを両立したシステム運用を支援します。</p>
                 <Image src="/image4-1.png" alt="Cloud Vision" width={320} height={200} className="w-full rounded-lg" />

@@ -9,7 +9,7 @@ export default function NotFound() {
       <div className="flex-1 w-full max-w-[1440px] mx-auto px-4 md:px-2 pb-12">
         <div className="space-y-12 mb-16 md:mx-16 mx-4 pt-10">
           {/* 404エラーセクション */}
-          <section className="border-b border-white/7 pb-20">
+          <section className="border-b border-white/10 pb-20">
             <div className="flex flex-col items-center text-center">
               <div className="rounded-lg">
                 <h1 className="font-thin text-7xl md:text-9xl leading-tight mb-6">
@@ -23,7 +23,7 @@ export default function NotFound() {
                 </p>
                 <Link 
                   href="/"
-                  className="inline-block border border-white/20 bg-white/10 rounded-full px-8 py-4 text-sm hover:bg-white/20 transition-colors duration-300"
+                  className="inline-block border border-white/10 bg-white/10 rounded-full px-8 py-4 text-sm hover:bg-white/20 transition-colors duration-300"
                 >
                   トップページに戻る
                 </Link>

@@ -100,7 +100,7 @@ export default function Footer() {
     <footer className="text-white font-extralight py-12">
       <div className="w-full max-w-[1440px] mx-auto px-6 md:px-12">
         {/* パンくずリスト */}
-        <div className="border-y border-white/7 py-6 my-8">
+        <div className="border-y border-white/10 py-6 my-8">
           <div className="flex items-center space-x-2 text-sm">
             {breadcrumbs.map((breadcrumb, index) => (
               <div key={breadcrumb.path} className="flex items-center">
@@ -126,7 +126,7 @@ export default function Footer() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-1">
               <Link href="/contact" className="inline-block group">
               <div className="bg-white/10 hover:bg-white/15 transition-all border border-white/20 rounded-xl md:px-12 px-8 md:py-20 py-10 w-full">
-                  <h3 className="md:text-4xl text-3xl mb-6 font-thin text-center border-b border-white/8 pb-4">お問い合わせ・ご相談</h3>
+                  <h3 className="md:text-4xl text-3xl mb-6 font-thin text-center border-b border-white/10 pb-4">お問い合わせ・ご相談</h3>
                 <p className="text-sm md:mb-12 mb-6 text-gray-300">
                   UI/UXデザイン、ブランディング、クラウドインフラなど、あらゆるデジタル課題に対応。
                   初回相談は無料で、お客様の状況に合わせた最適な提案をいたします。
@@ -141,7 +141,7 @@ export default function Footer() {
               
               <Link href="/download" className="inline-block group">
               <div className="bg-white/10 hover:bg-white/15 transition-all border border-white/20 rounded-xl md:px-12 px-8 md:py-20 py-10 w-full">
-                <h3 className="md:text-4xl text-3xl mb-6 font-thin text-center border-b border-white/8 pb-4">会社資料ダウンロード</h3>
+                <h3 className="md:text-4xl text-3xl mb-6 font-thin text-center border-b border-white/10 pb-4">会社資料ダウンロード</h3>
                 <p className="text-sm md:mb-12 mb-6 text-gray-300">
                   サービス内容、実績事例、アプローチをまとめた資料をご用意。
                   メールアドレスをご登録いただくだけで、すぐにダウンロードいただけます。

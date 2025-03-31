@@ -1,14 +1,12 @@
 "use client"
 
 import { Canvas, useFrame } from '@react-three/fiber'
-import { RoundedBox, Environment, Text } from '@react-three/drei'
+import { RoundedBox, Text, Environment, useProgress } from '@react-three/drei'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
 import { Suspense, useRef, useEffect, useState } from 'react'
 import { useScroll, motion } from 'framer-motion'
 import { MeshPhysicalMaterial, Mesh, Color } from 'three'
 import { useLoadingStore } from './LoadingScreen'
-import { useProgress } from '@react-three/drei'
-// import * as THREE from 'three'
 
 function Cube() {
   const meshRef = useRef<Mesh>(null)
@@ -62,21 +60,23 @@ function Cube() {
   const reflectiveMaterial = new MeshPhysicalMaterial({
     color: 0xD3CCDD, 
     transmission: 1,
-    roughness: 0.05,  // より滑らかに
+    roughness: 0.05,
     metalness: 1.0,
-    ior: 1.0,  // 屈折率を上げてよりキラキラと
+    ior: 1.0,
     thickness: 0.3,
-    specularIntensity: 1,  // 鏡面反射を強く
-    specularColor: 0xff3366,  // 赤みがかった反射色
-    // clearcoat: 1.0,
-    envMapIntensity: 4.5,  // 環境マップの強度を上げる
+    specularIntensity: 1,
+    specularColor: 0xff3366,
+    envMapIntensity: 4.5,
     reflectivity: 1,
     depthWrite: true,
     depthTest: true,
-    sheen: 1.0,  // 絹のような光沢を追加
-    sheenColor: 0x3366ff,  // 青みがかった光沢色
-    attenuationColor: new Color(0xff9999),  // ピンク系の減衰色
-    attenuationDistance: 0.5
+    sheen: 1.0,
+    sheenColor: 0x3366ff,
+    attenuationColor: new Color(0xff9999),
+    attenuationDistance: 0.5,
+    toneMapped: false,
+    transparent: true,
+    opacity: 1
   })
 
   useFrame((state, delta) => {
@@ -125,7 +125,7 @@ function Cube() {
     material.transmission = 0.4 + t
     material.metalness = 1 - t
     material.roughness = 0.05 * (1 - t) + 0.01 * t  // より滑らかな状態から開始
-    material.opacity = 0.1 + (t * 0.05)
+    material.opacity = 0.1 + (t * 0.5)
     material.envMapIntensity = 4.5 - (t * 2)  // より強い環境マップから開始
     material.reflectivity = 1 - (0.2 * t)
     material.ior = 2.0 + (t * 1)  // より高い屈折率から開始
@@ -204,24 +204,56 @@ function Cube() {
   )
 }
 
-export default function CubeInteractive() {
-  // カメラ位置の調整
-  const [cameraPosition, setCameraPosition] = useState<[number, number, number]>([0, 0, 8])
-  const [cameraFov, setCameraFov] = useState(50)
-  const [, setIsMobile] = useState(false) // isMobileは使用されていないのでアンダースコアに変更
+function Scene() {
   const { progress } = useProgress()
   const { setProgress } = useLoadingStore()
   const [isMounted, setIsMounted] = useState(false)
+  const lastProgressRef = useRef(0)
 
   useEffect(() => {
     setIsMounted(true)
   }, [])
 
-  // Three.jsのプログレスを LoadingStore に反映
   useEffect(() => {
     if (!isMounted) return
-    setProgress(progress)
+    
+    // 前の値と比較して変化があった場合のみ更新する
+    if (progress !== lastProgressRef.current) {
+      lastProgressRef.current = progress
+      setProgress(progress)
+    }
   }, [progress, setProgress, isMounted])
+
+  if (!isMounted) return null
+
+  return (
+    <>
+      <ambientLight intensity={2} />
+      <directionalLight position={[10, 10, 5]} intensity={2} />
+      <directionalLight position={[-10, -10, -5]} intensity={0.5} />
+      <hemisphereLight intensity={0.5} groundColor="black" />
+      <Cube />
+      <Environment preset="city" />
+      <EffectComposer>
+        <Bloom 
+          luminanceThreshold={0.6}
+          luminanceSmoothing={0.9}
+          intensity={0.1}
+        />
+      </EffectComposer>
+    </>
+  )
+}
+
+export default function CubeInteractive() {
+  const [cameraPosition, setCameraPosition] = useState<[number, number, number]>([0, 0, 8])
+  const [cameraFov, setCameraFov] = useState(50)
+  const [, setIsMobile] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   useEffect(() => {
     if (!isMounted || typeof window === 'undefined') return
@@ -243,41 +275,28 @@ export default function CubeInteractive() {
   return (
     <motion.div 
       className="fixed w-full h-screen top-0 left-0 z-30"
-      initial={{ 
-        opacity: 0,
-      }}
-      animate={{ 
-        opacity: 1,
-      }}
-      transition={{ 
-        duration: 1.5,
-        ease: "easeOut",
-        delay: 0.5,
-      }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
     >
       <Canvas 
         camera={{ position: cameraPosition, fov: cameraFov }}
-        gl={{ alpha: true, antialias: true, preserveDrawingBuffer: true }}
+        gl={{ 
+          alpha: true, 
+          antialias: true, 
+          preserveDrawingBuffer: true,
+          powerPreference: "high-performance"
+        }}
         onCreated={({ gl }) => {
-          // レンダリング設定の最適化
           gl.setClearColor(0x000000, 0)
-          gl.setPixelRatio(Math.min(window.devicePixelRatio, 1))
+          gl.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+          gl.outputEncoding = 3000 // sRGBEncoding
         }}
         dpr={[1, 2]}
-        style={{ pointerEvents: 'none' }} // キューブの後ろの要素とのインタラクションを可能にする
+        style={{ pointerEvents: 'none' }}
       >
         <Suspense fallback={null}>
-          <ambientLight intensity={2} />
-          <directionalLight position={[10, 10, 5]} intensity={2} />
-          <Cube />
-          <Environment background={false} />
-          <EffectComposer>
-            <Bloom 
-              luminanceThreshold={0.6}
-              luminanceSmoothing={0.9}
-              intensity={0.1}
-            />
-          </EffectComposer>
+          <Scene />
         </Suspense>
       </Canvas>
     </motion.div>

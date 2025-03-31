@@ -38,13 +38,13 @@ export default function LoadingScreen() {
     setIsMounted(true);
   }, []);
 
-  // コンポーネントがマウントされてから2.5秒後にcanHideをtrueに設定
+  // コンポーネントがマウントされてから2秒後にcanHideをtrueに設定
   useEffect(() => {
     if (!isMounted) return;
 
     const timer = setTimeout(() => {
       setCanHide(true);
-    }, 2000); // 2秒
+    }, 2000);
 
     return () => clearTimeout(timer);
   }, [isMounted]);
@@ -63,12 +63,22 @@ export default function LoadingScreen() {
         
         setTimeout(() => {
           setLoading(false);
-        }, 800); // フェードアウトアニメーションの時間
-      }, 900); // 「Ready」表示時間
+        }, 800);
+      }, 900);
     }
   }, [progress, isFading, setLoading, canHide, isMounted]);
+
+  // 「Ready」表示を別のuseEffectから切り離し
+  useEffect(() => {
+    if (!isMounted) return;
+
+    // 別途進捗率が100%に達したことを検知する目的で残しておく
+    if (progress >= 100 && !showReady && !canHide) {
+      // この時点ではまだReadyを表示しない
+    }
+  }, [progress, showReady, canHide, isMounted]);
   
-  // 初期ロード時に最低2秒間はローディング画面を表示する（UX向上のため）
+  // 初期ロード時に最低2秒間はローディング画面を表示する
   useEffect(() => {
     if (!isMounted) return;
 
@@ -98,12 +108,10 @@ export default function LoadingScreen() {
           alt="Logo"
           fill
           className="object-contain"
-          style={{}}
           priority
         />
       </div>
-      
-      {/* プログレスバーの追加 */}
+
       <div className="w-24 h-0.5 bg-white/20 rounded-full overflow-hidden fade-in">
         <div 
           className="h-full bg-white transition-all duration-300 ease-out"
@@ -118,4 +126,4 @@ export default function LoadingScreen() {
       </div>
     </div>
   );
-} 
+}

@@ -17,7 +17,7 @@ export default function Feature() {
         
         <div className="space-y-12 md:mx-16 mx-4 pt-10 ">
 
-        <section className="border-b border-white/7 pb-10">
+        <section className="border-b border-white/10 pb-10">
             <div className="flex flex-col items-center text-center">
                 <div className="rounded-lg">
                   <h2 className="font-thin text-3xl md:text-7xl leading-tight mb-6">
@@ -31,7 +31,7 @@ export default function Feature() {
             </div>
           </section>
           {/* 1-1 設計セクション */}
-          <section className="border-b border-white/7 md:pt-40 pt-20 md:pb-20 pb-10 relative overflow-visible overflow-x-hidden">
+          <section className="border-b border-white/10 md:pt-40 pt-20 md:pb-20 pb-10 relative overflow-visible overflow-x-hidden">
             {/* 背景テキスト */}
             <div className="absolute md:-top-24 -top-10 left-1/2 transform -translate-x-1/2 md:text-[300px] text-[120px] font-serif font-light z-0 select-none pointer-events-none text-center bg-clip-text text-transparent md:w-[200%] w-[220%]" style={{ backgroundImage: 'linear-gradient(to right, transparent 0%, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%, transparent 100%)' }}>
               Design
@@ -61,7 +61,7 @@ export default function Feature() {
                     <p className="text-white/80 text-sm md:text-base font-light leading-relaxed mb-8">
                       クライアントからの直接指名案件のみを扱うことで、ビジネスの本質的な課題に向き合います。小規模なチーム編成だからこそ、柔軟な発想とスピード感のある設計プロセスを実現。UI/UXデザインからコーポレートブランディング、クラウドインフラまで一貫した視点で設計します。
                     </p>
-                    <div className="bg-white/4 rounded-2xl md:py-8 py-4 px-4 border border-white/6">
+                    <div className="bg-white/4 rounded-2xl md:py-8 py-4 px-4 border border-white/10">
                       <ul className="list-disc pl-6 space-y-4 text-sm md:text-base font-light">
                         <li>ユーザーの行動分析に基づいた直感的なインターフェース設計</li>
                         <li>企業価値を明確に表現するブランドアイデンティティの構築</li>
@@ -84,7 +84,7 @@ export default function Feature() {
           </section>
 
           {/* 1-2 実装セクション */}
-          <section className="border-b border-white/7 md:pt-40 pt-20 md:pb-20 pb-10 relative overflow-visible overflow-x-hidden">
+          <section className="border-b border-white/10 md:pt-40 pt-20 md:pb-20 pb-10 relative overflow-visible overflow-x-hidden">
             {/* 背景テキスト */}
             <div className="absolute md:-top-20 -top-10 left-1/2 transform -translate-x-1/2 md:text-[250px] text-[100px] font-serif font-light z-0 select-none pointer-events-none text-center bg-clip-text text-transparent md:w-[200%] w-[220%]" style={{ backgroundImage: 'linear-gradient(to right, transparent 0%, transparent 25%, rgba(255,255,255,0.05) 50%, transparent 75%, transparent 100%)' }}>
               Implement
@@ -111,7 +111,7 @@ export default function Feature() {
                     <p className="text-white/80 text-sm md:text-base font-light leading-relaxed mb-8">
                       設計フェーズで確立したコンセプトを忠実かつ柔軟に実装します。最新の技術スタックを活用しながらも、保守性と拡張性を常に念頭に置き、長期的な視点でのプロダクト開発を行います。
                     </p>
-                    <div className="bg-white/4 rounded-2xl md:py-8 py-4 px-4 border border-white/6">
+                    <div className="bg-white/4 rounded-2xl md:py-8 py-4 px-4 border border-white/10">
                       <ul className="list-disc pl-6 space-y-4 text-sm md:text-base font-light">
                         <li>最新フレームワークと実績あるライブラリの最適な組み合わせ</li>
                         <li>スケーラブルなコンポーネント設計とモジュール化</li>
@@ -134,7 +134,7 @@ export default function Feature() {
           </section>
           
           {/* 1-3 検証セクション */}
-          <section className="border-b border-white/7 md:pt-40 pt-20 md:pb-20 pb-10 relative overflow-visible overflow-x-hidden">
+          <section className="border-b border-white/10 md:pt-40 pt-20 md:pb-20 pb-10 relative overflow-visible overflow-x-hidden">
             {/* 背景テキスト */}
             <div className="absolute md:-top-24 -top-10 left-1/2 transform -translate-x-1/2 md:text-[300px] text-[120px] font-serif font-light z-0 select-none pointer-events-none text-center bg-clip-text text-transparent md:w-[200%] w-[220%]" style={{ backgroundImage: 'linear-gradient(to right, transparent 0%, transparent 30%, rgba(255, 255, 255, 0.05) 50%, transparent 70%, transparent 100%)' }}>
               Testing
@@ -162,7 +162,7 @@ export default function Feature() {
                     <p className="text-white/80 text-sm md:text-base font-light leading-relaxed mb-8">
                       実装したプロダクトが当初の課題を解決できているかを多角的に検証します。定量的なデータ分析とユーザーフィードバックの両面から評価を行い、改善点を明確化します。
                     </p>
-                    <div className="bg-white/4 rounded-2xl md:py-8 py-4 px-4 border border-white/6">
+                    <div className="bg-white/4 rounded-2xl md:py-8 py-4 px-4 border border-white/10">
                       <ul className="list-disc pl-6 space-y-4 text-sm md:text-base font-light">
                         <li>A/Bテストによるユーザー行動分析と改善策の検討</li>
                         <li>ヒートマップやユーザーフローの可視化と分析</li>
@@ -185,7 +185,7 @@ export default function Feature() {
           </section>
           
           {/* 1-4 改良セクション */}
-          <section className="border-b border-white/7 md:pt-40 pt-20 md:pb-20 pb-10 relative overflow-visible overflow-x-hidden">
+          <section className="border-b border-white/10 md:pt-40 pt-20 md:pb-20 pb-10 relative overflow-visible overflow-x-hidden">
             {/* 背景テキスト */}
             <div className="absolute md:-top-20 -top-10 left-1/2 transform -translate-x-1/2 md:text-[250px] text-[100px] font-serif font-light z-0 select-none pointer-events-none text-center bg-clip-text text-transparent md:w-[200%] w-[220%]" style={{ backgroundImage: 'linear-gradient(to right, transparent 0%, transparent 25%, rgba(255,255,255,0.05) 50%, transparent 75%, transparent 100%)' }}>
               Improvement
@@ -213,7 +213,7 @@ export default function Feature() {
                     <p className="text-white/80 text-sm md:text-base font-light leading-relaxed mb-8">
                       検証フェーズで得られた知見をもとに、プロダクトの継続的な改良を行います。市場環境やユーザーニーズの変化に柔軟に対応し、常に最適な状態を維持するためのアップデートを提案・実施します。
                     </p>
-                    <div className="bg-white/4 rounded-2xl md:py-8 py-4 px-4 border border-white/6">
+                    <div className="bg-white/4 rounded-2xl md:py-8 py-4 px-4 border border-white/10">
                       <ul className="list-disc pl-6 space-y-4 text-sm md:text-base font-light">
                         <li>検証データに基づいた優先度の高い改善提案</li>
                         <li>ユーザーフィードバックを活かした機能拡張</li>
@@ -238,16 +238,16 @@ export default function Feature() {
           {/* 2 仕事の進め方 */}
           <section className="relative overflow-visible overflow-x-hidden">
             <div className="relative z-10">
-            <div className="mt-20 border-b border-white/7">
+            <div className="mt-20 border-b border-white/10">
           <h1 className="text-4xl font-thin mb-6">仕事の進め方</h1>
           <p className="mb-20 font-extralight text-sm md:text-base">クライアントの負担軽減に向け、コミュニケーションコストやヒューマンエラーを極力まで削るガイドラインを作成しています。</p>
         </div>
               
               {/* UIUXデザインの場合 */}
-              <div className="py-20 border-b border-white/7">
+                <div className="py-20 border-b border-white/10">
                 <h3 className="md:text-4xl text-2xl font-thin md:mb-12 mb-6">UIUXデザインの場合</h3>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
-                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
+                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/10">
                     <div className="text-xl font-thin text-white/70 mb-2 text-center">01</div>
                     <h4 className="text-xl font-thin mb-3 text-center">ユーザー調査と分析</h4>
                     <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
@@ -256,7 +256,7 @@ export default function Feature() {
                       <li>ユーザーインタビュー</li>
                     </ul>
                   </div>
-                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
+                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/10">
                     <div className="text-xl font-thin text-white/70 mb-2 text-center">02</div>
                     <h4 className="text-xl font-thin mb-3 text-center">設計と構築</h4>
                     <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
@@ -265,7 +265,7 @@ export default function Feature() {
                       <li>インタラクション設計</li>
                     </ul>
                   </div>
-                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
+                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/10">
                     <div className="text-xl font-thin text-white/70 mb-2 text-center">03</div>
                     <h4 className="text-xl font-thin mb-3 text-center">ビジュアルとプロトタイプ</h4>
                     <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
@@ -274,7 +274,7 @@ export default function Feature() {
                       <li>インタラクティブプロトタイプ作成</li>
                     </ul>
                   </div>
-                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
+                    <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/10">
                     <div className="text-xl font-thin text-white/70 mb-2 text-center">04</div>
                     <h4 className="text-xl font-thin mb-3 text-center">テストと改善</h4>
                     <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
@@ -287,10 +287,10 @@ export default function Feature() {
               </div>
 
              {/* コーポレートブランディングの場合 */}
-             <div className="py-20 border-b border-white/7">
+             <div className="py-20 border-b border-white/10">
                 <h3 className="md:text-4xl text-2xl font-thin md:mb-12 mb-6">コーポレートブランディングの場合</h3>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
-                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
+                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/10">
                     <div className="text-xl font-thin text-white/70 mb-2 text-center">01</div>
                     <h4 className="text-xl font-thin mb-3 text-center">ブランド戦略</h4>
                     <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
@@ -299,7 +299,7 @@ export default function Feature() {
                       <li>ブランドポジショニング</li>
                     </ul>
                   </div>
-                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
+                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/10">
                     <div className="text-xl font-thin text-white/70 mb-2 text-center">02</div>
                     <h4 className="text-xl font-thin mb-3 text-center">アイデンティティ構築</h4>
                     <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
@@ -308,7 +308,7 @@ export default function Feature() {
                       <li>ブランドガイドライン策定</li>
                     </ul>
                   </div>
-                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
+                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/10">
                     <div className="text-xl font-thin text-white/70 mb-2 text-center">03</div>
                     <h4 className="text-xl font-thin mb-3 text-center">ブランド表現</h4>
                     <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
@@ -317,7 +317,7 @@ export default function Feature() {
                       <li>マーケティング素材制作</li>
                     </ul>
                   </div>
-                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
+                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/10">
                     <div className="text-xl font-thin text-white/70 mb-2 text-center">04</div>
                     <h4 className="text-xl font-thin mb-3 text-center">浸透と維持</h4>
                     <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
@@ -330,10 +330,10 @@ export default function Feature() {
               </div>
 
                  {/* クラウドインフラ構築の場合 */}
-                 <div className="py-20 border-b border-white/7">
+                 <div className="py-20 border-b border-white/10">
                 <h3 className="md:text-4xl text-2xl font-thin md:mb-12 mb-6">クラウドインフラ構築の場合</h3>
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
-                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
+                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/10">
                     <div className="text-xl font-thin text-white/70 mb-2 text-center">01</div>
                     <h4 className="text-xl font-thin mb-3 text-center">要件定義と設計</h4>
                     <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
@@ -342,7 +342,7 @@ export default function Feature() {
                       <li>コスト分析と最適化計画</li>
                     </ul>
                   </div>
-                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
+                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/10">
                     <div className="text-xl font-thin text-white/70 mb-2 text-center">02</div>
                     <h4 className="text-xl font-thin mb-3 text-center">環境構築</h4>
                     <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
@@ -351,7 +351,7 @@ export default function Feature() {
                       <li>ネットワークとセキュリティ設定</li>
                     </ul>
                   </div>
-                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
+                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/10">
                     <div className="text-xl font-thin text-white/70 mb-2 text-center">03</div>
                     <h4 className="text-xl font-thin mb-3 text-center">実装とテスト</h4>
                     <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
@@ -360,7 +360,7 @@ export default function Feature() {
                       <li>パフォーマンスと負荷テスト</li>
                     </ul>
                   </div>
-                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/6">
+                  <div className="flex flex-col bg-white/5 p-10 rounded-lg border border-white/10">
                     <div className="text-xl font-thin text-white/70 mb-2 text-center">04</div>
                     <h4 className="text-xl font-thin mb-3 text-center">運用と最適化</h4>
                     <ul className="list-disc pl-6 space-y-2 text-sm md:text-base font-light text-white/80">
@@ -377,15 +377,15 @@ export default function Feature() {
           {/* 3 費用に関して */}
           <section className="md:pb-20 pb-10 relative overflow-visible overflow-x-hidden">
             <div className="relative z-10">
-            <div className="mt-20 border-b border-white/7">
+            <div className="mt-20 border-b border-white/10">
           <h1 className="text-4xl font-thin mb-6">費用に関して</h1>
           <p className="mb-20 font-extralight text-sm md:text-base">以下の料金はおおよその目安であり、プロジェクトの内容によって柔軟にカスタマイズ可能です。</p>
         </div>
               
               {/* UIUXデザインの場合 */}
-              <div className="py-20 border-b border-white/7">
+              <div className="py-20 border-b border-white/10">
                 <h3 className="md:text-4xl text-2xl font-thin md:mb-12 mb-6">UIUXデザインの場合</h3>
-                <div className="bg-white/5 p-10 rounded-lg border border-white/6 mb-6">
+                <div className="bg-white/5 p-10 rounded-lg border border-white/10 mb-6">
                   <ul className="list-none space-y-6 text-sm md:text-base font-light text-white/80">
                     <li className="flex items-center">
                       <span className="text-white/90 font-light flex-1">・準委任契約：月額60万円〜（週3日稼働の場合）</span>
@@ -398,13 +398,13 @@ export default function Feature() {
                     </li>
                   </ul>
                 </div>
-                <div className="bg-white/5 p-10 rounded-lg border border-white/6">
+                <div className="bg-white/5 p-10 rounded-lg border border-white/10">
                   <ul className="list-none space-y-6 text-sm md:text-base font-light text-white/80">
-                    <li className="flex items-center border-b border-white/6 pb-4">
+                    <li className="flex items-center border-b border-white/10 pb-4">
                       <span className="text-white/90 font-light flex-1">UI/UXデザインを準委任契約で提供する理由は、継続的な改善と柔軟な対応を実現するためです。
                       月額60万円〜100万円という費用には：</span>
                     </li>
-                    <li className="flex items-center border-b border-white/6 pb-4">
+                    <li className="flex items-center border-b border-white/10 pb-4">
                       <span className="text-white/90 font-light flex-1">・専門性の高いデザイナーの継続的な関与と柔軟な対応<br/>
 ・ユーザー行動分析に基づく継続的な改善設計<br/>
 ・ビジネス目標に即した体験設計と効果測定<br/>
@@ -420,21 +420,21 @@ export default function Feature() {
               </div>
               
               {/* コーポレートブランディングの場合 */}
-              <div className="py-20 border-b border-white/7">
+              <div className="py-20 border-b border-white/10">
                 <h3 className="md:text-4xl text-2xl font-thin md:mb-12 mb-6">コーポレートブランディングの場合</h3>
-                <div className="bg-white/5 p-10 rounded-lg border border-white/6 mb-6">
+                <div className="bg-white/5 p-10 rounded-lg border border-white/10 mb-6">
                   <ul className="list-none space-y-6 text-sm md:text-base font-light text-white/80">
                     <li className="flex items-center">
                       <span className="text-white/90 font-light flex-1">・コーポレートブランディング：80万円〜350万円</span>
                     </li>
                   </ul>
                 </div>
-                <div className="bg-white/5 p-10 rounded-lg border border-white/6">
+                <div className="bg-white/5 p-10 rounded-lg border border-white/10">
                   <ul className="list-none space-y-6 text-sm md:text-base font-light text-white/80">
-                    <li className="flex items-center border-b border-white/6 pb-4">
+                    <li className="flex items-center border-b border-white/10 pb-4">
                       <span className="text-white/90 font-light flex-1">80万円〜350万円というブランディング費用は、以下の価値を含んでいます：</span>
                     </li>
-                    <li className="flex items-center border-b border-white/6 pb-4">
+                    <li className="flex items-center border-b border-white/10 pb-4">
                       <span className="text-white/90 font-light flex-1">・市場調査と競合分析に基づいた戦略的なブランドポジショニング<br/>
 ・一貫性のあるビジュアルアイデンティティ設計<br/>
 ・顧客心理を考慮したブランドストーリーの構築<br/>
@@ -450,7 +450,7 @@ export default function Feature() {
                {/* クラウドインフラ構築の場合 */}
                <div className="pt-20">
                 <h3 className="md:text-4xl text-2xl font-thin md:mb-12 mb-6">クラウドインフラ構築の場合</h3>
-                <div className="bg-white/5 p-10 rounded-lg border border-white/6 mb-6">
+                <div className="bg-white/5 p-10 rounded-lg border border-white/10 mb-6">
                   <ul className="list-none space-y-6 text-sm md:text-base font-light text-white/80">
                     <li className="flex items-center">
                       <span className="text-white/90 font-light flex-1">・初期設定費：30万円〜100万円</span>
@@ -460,12 +460,12 @@ export default function Feature() {
                     </li>
                   </ul>
                 </div>
-                <div className="bg-white/5 p-10 rounded-lg border border-white/6">
+                <div className="bg-white/5 p-10 rounded-lg border border-white/10">
                   <ul className="list-none space-y-6 text-sm md:text-base font-light text-white/80">
-                    <li className="flex items-center border-b border-white/6 pb-4">
+                    <li className="flex items-center border-b border-white/10 pb-4">
                       <span className="text-white/90 font-light flex-1">初期設定費30万円〜、月額10万円〜の費用には：</span>
                     </li>
-                    <li className="flex items-center border-b border-white/6 pb-4">
+                    <li className="flex items-center border-b border-white/10 pb-4">
                       <span className="text-white/90 font-light flex-1">・ビジネス成長に合わせた柔軟なスケーラビリティの設計<br/>
 ・セキュリティリスクからの事業保護<br/>
 ・サービス安定性の確保によるビジネス機会損失の防止<br/>
