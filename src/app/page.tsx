@@ -3,7 +3,7 @@
 import Image from "next/image";
 // import StickyScenes from '@/components/StickyScenes'
 // import SceneSample from '@/components/sceneSample'
-import IntegratedScene3D from '@/components/sceneCube'
+import dynamic from 'next/dynamic'
 // import ScrollingTitle from '@/components/ScrollingTitle'
 // import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -11,12 +11,28 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import CubeInteractive from '@/components/CubeInteractive'
+
+// クライアントサイドでのみインポートするためにdynamic importを使用
+const IntegratedScene3D = dynamic(() => import('@/components/sceneCube'), { 
+  ssr: false,
+  loading: () => <div className="h-screen w-full"></div>
+})
+
+const CubeInteractive = dynamic(() => import('@/components/CubeInteractive'), {
+  ssr: false,
+  loading: () => <div></div>
+})
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll()
   const [hasReachedContent, setHasReachedContent] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
+  
+  // マウント後にクライアントサイドでのみレンダリングするためのフラグ
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
   
   // 3Dシーンとインタラクティブキューブのフェードアウト制御
   const sceneOpacity = useTransform(
@@ -55,9 +71,11 @@ export default function Home() {
         <div className="w-full max-w-[1440px] mx-auto h-full px-4 pt-40 md:px-8 flex items-start justify-center">
         </div>
       </div>
-      <motion.div style={{ opacity: sceneOpacity }}>
-        <IntegratedScene3D />
-      </motion.div>
+      {isMounted && (
+        <motion.div style={{ opacity: sceneOpacity }}>
+          <IntegratedScene3D />
+        </motion.div>
+      )}
       
       {/* スクロール領域を確保するための透明なスペーサー */}
       <div className="h-[600vh]" />
