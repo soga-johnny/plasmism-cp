@@ -191,7 +191,7 @@ export default function Header() {
             />
             
             <motion.div
-              className="fixed inset-x-4 bottom-17 h-[80vh] bg-[#1C1819] border border-white/10 rounded-lg overflow-hidden z-[70] flex flex-col"
+              className="fixed inset-x-4 bottom-16 h-[84vh] bg-[#1C1819] border border-white/10 rounded-lg overflow-hidden z-[70] flex flex-col"
               initial={{ opacity: 0, scale: 0.95, filter: "blur(8px)" }}
               animate={{ 
                 opacity: 1, 
