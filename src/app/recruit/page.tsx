@@ -18,7 +18,7 @@ export default function Recruit() {
         
         <div className="space-y-12 mb-16 md:mx-16 mx-4 pt-10">
           {/* 採用情報ヘッダーセクション */}
-          <section className="border-b border-white/7 pb-20">
+          <section className="border-b border-white/10 pb-20">
             <div className="flex flex-col md:flex-row justify-between">
               <div>
                 <div className="flex space-x-4 mb-8">

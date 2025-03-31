@@ -3,9 +3,9 @@
 "use client"
 
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { OrbitControls, Environment, useProgress, useTexture } from '@react-three/drei'
+import { OrbitControls, useProgress, useTexture } from '@react-three/drei'
 import { EffectComposer, Bloom } from '@react-three/postprocessing'
-import { Suspense, useRef, useEffect, useState, useMemo } from 'react'
+import { Suspense, useRef, useEffect, useState, useMemo, useCallback } from 'react'
 import { useScroll, motion, useTransform } from 'framer-motion'
 import { Mesh, Vector3, DoubleSide, MeshBasicMaterial } from 'three'
 import { useLoadingStore } from './LoadingScreen'
@@ -252,7 +252,7 @@ function SectionIndicator({ currentSection, progress }: { currentSection: number
           <div key={section.id} className="flex flex-col items-center">
             <div 
               className={`w-[3px] h-2 rounded-full flex items-center justify-center py-1 transition-all duration-300 relative overflow-hidden
-                ${isActive || isCompleted || isNext ? 'bg-white' : 'border border-white/30'}
+                ${isActive || isCompleted || isNext ? 'bg-white' : 'border border-white/20'}
                 ${isNext ? 'opacity-70' : ''}
               `}
             >
@@ -303,6 +303,8 @@ export default function IntegratedScene3D() {
   // SSRで実行されないようにするためのフラグ
   const [isBrowser, setIsBrowser] = useState(false)
   
+  const lastProgressRef = useRef(0)
+  
   useEffect(() => {
     setIsBrowser(true) 
     
@@ -343,7 +345,7 @@ export default function IntegratedScene3D() {
   }
 
   // リソース読み込み完了時の処理
-  const handleResourcesReady = () => {
+  const handleResourcesReady = useCallback(() => {
     if (typeof window === 'undefined') return
     
     setIsInitializing(false)
@@ -351,14 +353,18 @@ export default function IntegratedScene3D() {
       setIsInitialized(true)
       setLoading(false)
     }, 1000)
-  }
+  }, [setLoading])
 
   // Three.jsのプログレスを監視
   useEffect(() => {
     if (progress === 100) {
       handleResourcesReady()
     }
-    setProgress(progress)
+    // ここで無限ループが発生しているので、値が変わったときだけsetProgressを呼び出す
+    if (progress !== lastProgressRef.current) {
+      lastProgressRef.current = progress
+      setProgress(progress)
+    }
   }, [progress, setProgress, handleResourcesReady])
 
   // セクション位置の計算
@@ -646,7 +652,6 @@ function CanvasContent({
       <directionalLight position={[-10, -10, -5]} intensity={0.5} />
       <spotLight position={[0, 10, 0]} intensity={1.5} castShadow penumbra={1} distance={50} />
       <hemisphereLight intensity={0.5} groundColor="black" />
-      <Environment background={false} />
       
       {/* 現在のセクションの画像 - 閾値を下回った場合のみ表示 */}
       {showCurrentSection && (

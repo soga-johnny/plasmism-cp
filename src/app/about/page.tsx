@@ -17,7 +17,7 @@ export default function About() {
         />
         
         <div className="space-y-12 mb-16 md:mx-16 mx-4 pt-10 ">
-          <section className="border-b border-white/7 pb-10">
+          <section className="border-b border-white/10 pb-10">
             <div className="flex flex-col md:flex-row justify-between">
               <div>
                 <div className="flex space-x-4 mb-8">
@@ -48,7 +48,7 @@ export default function About() {
             </div>
           </section>
 
-          <section className="border-b border-white/7 pb-10">
+          <section className="border-b border-white/10 pb-10">
             <div className="flex flex-col md:flex-row justify-between">
               <div>
                 <div className="flex space-x-4 mb-8">
@@ -97,27 +97,27 @@ export default function About() {
                       <div className="text-lg font-thin text-white/50 mr-4">01</div>
                       <p className="font-thin text-2xl md:text-5xl">過去にはどうしても戻れない</p>
                     </div>
-                    <div className="border-t border-white/7 pt-6 flex items-center">
+                    <div className="border-t border-white/10 pt-6 flex items-center">
                       <div className="text-lg font-thin text-white/50 mr-4">02</div>
                       <p className="font-thin text-2xl md:text-5xl">どこにも敵はいない</p>
                     </div>
-                    <div className="border-t border-white/7 pt-6 flex items-center">
+                    <div className="border-t border-white/10 pt-6 flex items-center">
                       <div className="text-lg font-thin text-white/50 mr-4">03</div>
                       <p className="font-thin text-2xl md:text-5xl">意志は盗まれない</p>
                     </div>
-                    <div className="border-t border-white/7 pt-6 flex items-center">
+                    <div className="border-t border-white/10 pt-6 flex items-center">
                       <div className="text-lg font-thin text-white/50 mr-4">04</div>
                       <p className="font-thin text-2xl md:text-5xl">知識は裏切らない</p>
                     </div>
-                    <div className="border-t border-white/7 pt-6 flex items-center">
+                    <div className="border-t border-white/10 pt-6 flex items-center">
                       <div className="text-lg font-thin text-white/50 mr-4">05</div>
                       <p className="font-thin text-2xl md:text-5xl">ほとんどが伝わらない</p>
                     </div>
-                    <div className="border-t border-white/7 pt-6 flex items-center">
+                    <div className="border-t border-white/10 pt-6 flex items-center">
                       <div className="text-lg font-thin text-white/50 mr-4">06</div>
                       <p className="font-thin text-2xl md:text-5xl">良いものは多くない</p>
                     </div>
-                    <div className="border-t border-white/7 pt-6 flex items-center">
+                    <div className="border-t border-white/10 pt-6 flex items-center">
                       <div className="text-lg font-thin text-white/50 mr-4">07</div>
                       <p className="font-thin text-2xl md:text-5xl">可能性は尽きない</p>
                     </div>
@@ -137,7 +137,7 @@ export default function About() {
             </div>
           </section>
           
-          <section className="pb-10 bg-white/4 rounded-3xl md:p-20 p-6 border border-white/6 mb-20">
+          <section className="pb-10 bg-white/4 rounded-3xl md:p-20 p-6 border border-white/10 mb-20">
             <div className="flex flex-col md:flex-row justify-between">
               <div className="w-full">
                 <div className="flex flex-col">

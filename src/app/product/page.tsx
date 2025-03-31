@@ -92,8 +92,8 @@ export default function Product() {
 
         <div className="space-y-24 mb-16 md:mx-16 mx-4 pt-10">
           {/* Lean Designer */}
-          <section id="lean-designer" className="md:pb-20 pb-10 border-b border-white/7">
-            <div className="flex items-center group md:py-6 py-4 px-4 mb-8 rounded-lg sticky md:top-20 top-4 bg-[#251E1F]/90 border border-white/8 z-10 bg-[url('/background.png')] bg-cover bg-center">
+          <section id="lean-designer" className="md:pb-20 pb-10 border-b border-white/10">
+            <div className="flex items-center group md:py-6 py-4 px-4 mb-8 rounded-lg sticky md:top-20 top-4 bg-[#251E1F]/90 border border-white/10 z-10 bg-[url('/background.png')] bg-cover bg-center">
               <div className="w-12 md:w-16 text-right pr-4 md:pr-6">
                 <span className="text-lg md:text-2xl font-thin">01</span>
               </div>
@@ -110,7 +110,7 @@ export default function Product() {
               <p className="text-white/80 mb-8 font-light text-sm md:text-base">あなたの開発プロジェクトに最適したUI/UXの要件定義をまとめたデザイン計画書をAIを活用して生成</p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                <div className="w-full bg-white/5 p-6 rounded-lg border border-white/6">
+                <div className="w-full bg-white/5 p-6 rounded-lg border border-white/10">
                   <div className="text-center mb-3">
                     <span className="text-white/50 font-thin text-xl">01</span>
                   </div>
@@ -119,7 +119,7 @@ export default function Product() {
                   お客様の課題を洗い出し、最適なプランを提供するために設計された機能です。現状の課題やニーズを入力するだけで、プロジェクトに必要な要件を記載したデザイン計画書をAIが生成します。
                   </p>
                 </div>
-                <div className="w-full bg-white/5 p-6 rounded-lg border border-white/6">
+                <div className="w-full bg-white/5 p-6 rounded-lg border border-white/10">
                   <div className="text-center mb-3">
                     <span className="text-white/50 font-thin text-xl">02</span>
                   </div>
@@ -136,7 +136,7 @@ export default function Product() {
                   href="https://lean-designer.tech" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="group block w-full bg-white/5 rounded-lg border border-white/6 overflow-hidden hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+                  className="group block w-full bg-white/5 rounded-lg border border-white/10 overflow-hidden hover:bg-white/10 hover:border-white/20 transition-all duration-300"
                 >
                   <div className="relative w-full aspect-[16/9] overflow-hidden">
                     <Image
@@ -160,8 +160,8 @@ export default function Product() {
           </section>
           
          {/* Containeer */}
-         <section id="containeer" className="md:pb-20 pb-10 border-b border-white/7">
-            <div className="flex items-center group md:py-6 py-4 px-4 mb-8 rounded-lg sticky md:top-20 top-4 bg-[#251E1F]/90 border border-white/8 z-10 bg-[url('/background.png')] bg-cover bg-center">
+         <section id="containeer" className="md:pb-20 pb-10 border-b border-white/10">
+            <div className="flex items-center group md:py-6 py-4 px-4 mb-8 rounded-lg sticky md:top-20 top-4 bg-[#251E1F]/90 border border-white/10 z-10 bg-[url('/background.png')] bg-cover bg-center">
               <div className="w-12 md:w-16 text-right pr-4 md:pr-6">
                 <span className="text-lg md:text-2xl font-thin">02</span>
               </div>
@@ -178,7 +178,7 @@ export default function Product() {
               <p className="text-white/80 mb-8 font-light text-sm md:text-base">世界中からセレクトしたXRのコンテンツをバーチャルギャラリーとして展示するWEBメディアです。</p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                <div className="w-full bg-white/5 p-6 rounded-lg border border-white/6">
+                <div className="w-full bg-white/5 p-6 rounded-lg border border-white/10">
                   <div className="text-center mb-3">
                     <span className="text-white/50 font-thin text-xl">01</span>
                   </div>
@@ -187,7 +187,7 @@ export default function Product() {
                   従来は難易度の高いインタラクティブなコンテンツをWEB上でも十分に体験できるようにゼロベースでUXを設計し、新しいギャラリーメディアの形を確立しました。
                   </p>
                 </div>
-                <div className="w-full bg-white/5 p-6 rounded-lg border border-white/6">
+                <div className="w-full bg-white/5 p-6 rounded-lg border border-white/10">
                   <div className="text-center mb-3">
                     <span className="text-white/50 font-thin text-xl">02</span>
                   </div>
@@ -204,7 +204,7 @@ export default function Product() {
                   href="https://containeer.vercel.app/" 
                   target="_blank" 
                   rel="noopener noreferrer"
-                  className="group block w-full bg-white/5 rounded-lg border border-white/6 overflow-hidden hover:bg-white/10 hover:border-white/20 transition-all duration-300"
+                  className="group block w-full bg-white/5 rounded-lg border border-white/10 overflow-hidden hover:bg-white/10 hover:border-white/20 transition-all duration-300"
                 >
                   <div className="relative w-full aspect-[16/9] overflow-hidden">
                     <Image
