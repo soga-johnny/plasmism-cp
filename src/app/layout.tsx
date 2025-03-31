@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { Inter, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import LoadingScreen from "../components/LoadingScreen";
@@ -9,16 +8,6 @@ import NavigationEvents from "../components/NavigationEvents";
 import { Suspense } from "react";
 import ClientCursorWrapper from "../components/ClientCursorWrapper";
 import ScrollToTop from "../components/ScrollToTop";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 const inter = Inter({
   subsets: ["latin"],
@@ -43,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${notoSansJP.variable} antialiased`}
+        className={`${inter.variable} ${notoSansJP.variable} antialiased`}
       >
         <LoadingScreen />
         <Suspense fallback={null}>
