@@ -1,7 +1,7 @@
 "use client"
 
-import Footer from '@/components/Footer'
-import PageTitle from '@/components/PageTitle'
+import Footer from '../../components/Footer'
+import PageTitle from '../../components/PageTitle'
 import { useState } from 'react'
 
 export default function Download() {

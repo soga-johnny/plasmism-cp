@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { getAllAchievements } from '@/lib/notion';
-import Footer from '@/components/Footer';
-import PageTitle from '@/components/PageTitle';
+import Footer from '../../components/Footer';
+import PageTitle from '../../components/PageTitle';
 import React from 'react';
 
 // メタデータ

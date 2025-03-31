@@ -1,10 +1,11 @@
 "use client"
 
 // import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import Footer from '../../components/Footer'
 import Image from 'next/image'
-import CompanyOverview from '@/components/CompanyOverview'
-import PageTitle from '@/components/PageTitle'
+// import Link from 'next/link'
+import CompanyOverview from '../../components/CompanyOverview'
+import PageTitle from '../../components/PageTitle'
 
 export default function About() {
   return (

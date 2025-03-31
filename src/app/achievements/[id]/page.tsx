@@ -3,7 +3,7 @@ import { renderNotionBlock } from '@/lib/notion-renderer';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import Footer from '@/components/Footer';
+import Footer from '../../../components/Footer';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 

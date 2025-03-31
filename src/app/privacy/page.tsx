@@ -1,8 +1,8 @@
 "use client"
 
 // import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import PageTitle from '@/components/PageTitle'
+import Footer from '../../components/Footer'
+import PageTitle from '../../components/PageTitle'
 
 export default function Privacy() {
   return (

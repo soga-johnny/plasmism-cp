@@ -6,19 +6,19 @@ import Image from "next/image";
 import dynamic from 'next/dynamic'
 // import ScrollingTitle from '@/components/ScrollingTitle'
 // import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import { Button } from '@/components/ui/button'
+import Footer from '../components/Footer'
+import { Button } from '../components/ui/button'
 import Link from 'next/link'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 
 // クライアントサイドでのみインポートするためにdynamic importを使用
-const IntegratedScene3D = dynamic(() => import('@/components/sceneCube'), { 
+const IntegratedScene3D = dynamic(() => import('../components/sceneCube'), { 
   ssr: false,
   loading: () => <div className="h-screen w-full"></div>
 })
 
-const CubeInteractive = dynamic(() => import('@/components/CubeInteractive'), {
+const CubeInteractive = dynamic(() => import('../components/CubeInteractive'), {
   ssr: false,
   loading: () => <div></div>
 })

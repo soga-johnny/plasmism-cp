@@ -1,10 +1,10 @@
 "use client"
 
 // import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import CompanyOverview from '@/components/CompanyOverview'
-import RecruitInfo from '@/components/RecruitInfo'
-import PageTitle from '@/components/PageTitle'
+import Footer from '../../components/Footer'
+import CompanyOverview from '../../components/CompanyOverview'
+import RecruitInfo from '../../components/RecruitInfo'
+import PageTitle from '../../components/PageTitle'
 // import Image from 'next/image'
 
 export default function Company() {

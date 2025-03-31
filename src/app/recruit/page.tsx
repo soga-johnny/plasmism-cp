@@ -1,10 +1,10 @@
 "use client"
 
 // import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import RecruitInfo from '@/components/RecruitInfo'
+import Footer from '../../components/Footer'
+import RecruitInfo from '../../components/RecruitInfo'
 import Image from 'next/image'
-import PageTitle from '@/components/PageTitle'
+import PageTitle from '../../components/PageTitle'
 
 export default function Recruit() {
   return (

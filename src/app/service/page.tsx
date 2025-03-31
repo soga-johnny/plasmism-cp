@@ -1,7 +1,7 @@
 "use client"
 
-import Footer from '@/components/Footer'
-import PageTitle from '@/components/PageTitle'
+import Footer from '../../components/Footer'
+import PageTitle from '../../components/PageTitle'
 import Image from 'next/image'
 import Link from 'next/link'
 

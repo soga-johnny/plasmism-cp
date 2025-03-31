@@ -1,9 +1,9 @@
 "use client"
 
 // import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import Footer from '../../components/Footer'
 import Image from 'next/image'
-import PageTitle from '@/components/PageTitle'
+import PageTitle from '../../components/PageTitle'
 
 export default function Feature() {
   return (
